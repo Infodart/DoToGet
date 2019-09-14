@@ -1,0 +1,316 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{566DF0D7-21CE-4202-BDF3-94733844858C}</ProjectGuid>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TemplateGuid>{65C0771A-452F-423B-995C-F0AE46E643BA}</TemplateGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>DoToGet.iOS</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <AssemblyName>DoAndGet.iOS</AssemblyName>
+    <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
+    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchArch>x86_64</MtouchArch>
+    <MtouchLink>None</MtouchLink>
+    <MtouchDebug>true</MtouchDebug>
+    <CodesignKey>iPhone Developer</CodesignKey>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchLink>None</MtouchLink>
+    <MtouchArch>x86_64</MtouchArch>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchArch>ARM64</MtouchArch>
+    <CodesignKey>iPhone Developer: SIDDHARTHA SAMAL (N9482575XT)</CodesignKey>
+    <MtouchDebug>true</MtouchDebug>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <CodesignProvision>TestXamarinDev</CodesignProvision>
+    <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchArch>ARM64</MtouchArch>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignProvision>TestXamarinDev</CodesignProvision>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs" />
+    <Compile Include="AppDelegate.cs" />
+    <None Include="Entitlements.plist" />
+    <None Include="Info.plist" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Renderer\MyEntryRenderer.cs" />
+    <Compile Include="Renderer\MaterialFrameRenderer.cs" />
+    <Compile Include="Renderer\GradientViewRenderer.cs" />
+    <Compile Include="Renderer\MyPickerRenderer.cs" />
+    <Compile Include="Renderer\SpaceNavigationPageRenderer.cs" />
+    <Compile Include="Implementation\Toast_IOS.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon1024.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon167.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon152.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon87.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon80.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon76.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon60.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon58.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon29.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon20.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <BundleResource Include="Resources\tab_about.png" />
+    <BundleResource Include="Resources\tab_about%402x.png" />
+    <BundleResource Include="Resources\tab_about%403x.png" />
+    <BundleResource Include="Resources\tab_feed.png" />
+    <BundleResource Include="Resources\tab_feed%402x.png" />
+    <BundleResource Include="Resources\tab_feed%403x.png" />
+    <BundleResource Include="Resources\xamarin_logo.png" />
+    <BundleResource Include="Resources\xamarin_logo%402x.png" />
+    <BundleResource Include="Resources\xamarin_logo%403x.png" />
+    <BundleResource Include="Resources\pepsi.png" />
+    <BundleResource Include="Resources\user.png" />
+    <BundleResource Include="Resources\circle.png" />
+    <BundleResource Include="Resources\checked.png" />
+    <BundleResource Include="Resources\unchecked.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\Contents.json" />
+    <BundleResource Include="Resources\plus.png" />
+    <BundleResource Include="Resources\plus%402x.png" />
+    <BundleResource Include="Resources\plus%403x.png" />
+    <BundleResource Include="Resources\radiobtn.png" />
+    <BundleResource Include="Resources\radiobtn%402x.png" />
+    <BundleResource Include="Resources\radiobtn%403x.png" />
+    <BundleResource Include="Resources\Ellipse 10.png" />
+    <BundleResource Include="Resources\Ellipse 10%402x.png" />
+    <BundleResource Include="Resources\Ellipse 10%403x.png" />
+    <BundleResource Include="Resources\radiobtnblanck.png" />
+    <BundleResource Include="Resources\radiobtnblanck%402x.png" />
+    <BundleResource Include="Resources\radiobtnblanck%403x.png" />
+    <BundleResource Include="Resources\envelope.png" />
+    <BundleResource Include="Resources\envelope%402x.png" />
+    <BundleResource Include="Resources\envelope%403x.png" />
+    <BundleResource Include="Resources\child.png" />
+    <BundleResource Include="Resources\child%402x.png" />
+    <BundleResource Include="Resources\child%403x.png" />
+    <BundleResource Include="Resources\vsdjhdh.png" />
+    <BundleResource Include="Resources\vsdjhdh%402x.png" />
+    <BundleResource Include="Resources\vsdjhdh%403x.png" />
+    <BundleResource Include="Resources\password.png" />
+    <BundleResource Include="Resources\password%402x.png" />
+    <BundleResource Include="Resources\password%403x.png" />
+    <BundleResource Include="Resources\LaunchImages\Splash - 1242x2688.png" />
+    <BundleResource Include="Resources\LaunchImages\Splash –828x1792.png" />
+    <BundleResource Include="Resources\LaunchImages\Splash - 1125x2436.png" />
+    <BundleResource Include="Resources\email%403x.png" />
+    <BundleResource Include="Resources\email%402x.png" />
+    <BundleResource Include="Resources\email.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\Splash - 1242x2688.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\Splash –828x1792.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\Splash - 1125x2436.png" />
+    <BundleResource Include="Resources\user%402x.png" />
+    <BundleResource Include="Resources\user%403x.png" />
+    <BundleResource Include="Resources\logo.png" />
+    <BundleResource Include="Resources\main.png" />
+    <BundleResource Include="Resources\main%402x.png" />
+    <BundleResource Include="Resources\main%403x.png" />
+    <BundleResource Include="Resources\Group%402x.png" />
+    <BundleResource Include="Resources\Group.png" />
+    <BundleResource Include="Resources\Group%403x.png" />
+    <BundleResource Include="Resources\reward.png" />
+    <BundleResource Include="Resources\reward%402x.png" />
+    <BundleResource Include="Resources\reward%403x.png" />
+    <BundleResource Include="Resources\time.png" />
+    <BundleResource Include="Resources\time%402x.png" />
+    <BundleResource Include="Resources\time%403x.png" />
+    <BundleResource Include="Resources\cancle.png" />
+    <BundleResource Include="Resources\cancle%402x.png" />
+    <BundleResource Include="Resources\cancle%403x.png" />
+    <BundleResource Include="Resources\right.png" />
+    <BundleResource Include="Resources\right%402x.png" />
+    <BundleResource Include="Resources\right%403x.png" />
+    <BundleResource Include="Resources\girl.png" />
+    <BundleResource Include="Resources\girl%402x.png" />
+    <BundleResource Include="Resources\girl%403x.png" />
+    <BundleResource Include="Resources\boy.png" />
+    <BundleResource Include="Resources\boy%402x.png" />
+    <BundleResource Include="Resources\boy%403x.png" />
+    <BundleResource Include="Resources\history.png" />
+    <BundleResource Include="Resources\history%402x.png" />
+    <BundleResource Include="Resources\history%403x.png" />
+    <BundleResource Include="Resources\home.png" />
+    <BundleResource Include="Resources\home%402x.png" />
+    <BundleResource Include="Resources\home%403x.png" />
+    <BundleResource Include="Resources\logout.png" />
+    <BundleResource Include="Resources\logout%402x.png" />
+    <BundleResource Include="Resources\logout%403x.png" />
+    <BundleResource Include="Resources\review.png" />
+    <BundleResource Include="Resources\review%402x.png" />
+    <BundleResource Include="Resources\review%403x.png" />
+    <BundleResource Include="Resources\rewards.png" />
+    <BundleResource Include="Resources\rewards%402x.png" />
+    <BundleResource Include="Resources\rewards%403x.png" />
+    <BundleResource Include="Resources\earn.png" />
+    <BundleResource Include="Resources\earn%402x.png" />
+    <BundleResource Include="Resources\earn%403x.png" />
+    <BundleResource Include="Resources\add_task.png" />
+    <BundleResource Include="Resources\add_task%402x.png" />
+    <BundleResource Include="Resources\add_task%403x.png" />
+    <BundleResource Include="Resources\back.png" />
+    <BundleResource Include="Resources\back%402x.png" />
+    <BundleResource Include="Resources\back%403x.png" />
+    <BundleResource Include="Resources\download.png" />
+    <BundleResource Include="Resources\download%402x.png" />
+    <BundleResource Include="Resources\download%403x.png" />
+    <BundleResource Include="Resources\star%403x.png" />
+    <BundleResource Include="Resources\star%402x.png" />
+    <BundleResource Include="Resources\star.png" />
+    <BundleResource Include="Resources\myreward.png" />
+    <BundleResource Include="Resources\myreward%402x.png" />
+    <BundleResource Include="Resources\myreward%403x.png" />
+    <BundleResource Include="Resources\time1.png" />
+    <BundleResource Include="Resources\time1%402x.png" />
+    <BundleResource Include="Resources\time1%403x.png" />
+    <BundleResource Include="Resources\minus.png" />
+    <BundleResource Include="Resources\minus%402x.png" />
+    <BundleResource Include="Resources\minus%403x.png" />
+    <BundleResource Include="Resources\plus1.png" />
+    <BundleResource Include="Resources\plus1%402x.png" />
+    <BundleResource Include="Resources\plus1%403x.png" />
+    <BundleResource Include="Resources\down.png" />
+    <BundleResource Include="Resources\down%402x.png" />
+    <BundleResource Include="Resources\down%403x.png" />
+    <BundleResource Include="Resources\childactivity.png" />
+    <BundleResource Include="Resources\childactivity%402x.png" />
+    <BundleResource Include="Resources\childactivity%403x.png" />
+    <BundleResource Include="Resources\childlower.png" />
+    <BundleResource Include="Resources\childlower%402x.png" />
+    <BundleResource Include="Resources\childlower%403x.png" />
+    <BundleResource Include="Resources\childreward.png" />
+    <BundleResource Include="Resources\childreward%402x.png" />
+    <BundleResource Include="Resources\childreward%403x.png" />
+    <BundleResource Include="Resources\AppIcon\app-icon-180.png" />
+    <BundleResource Include="Resources\AppIcon\app-icon-60.png" />
+    <BundleResource Include="Resources\AppIcon\app-icon-80.png" />
+    <BundleResource Include="Resources\AppIcon\app-icon-40.png" />
+    <BundleResource Include="Resources\AppIcon\app-icon-120.png" />
+    <BundleResource Include="Resources\menu.png" />
+    <BundleResource Include="Resources\menu%402x.png" />
+    <BundleResource Include="Resources\menu%403x.png" />
+    <BundleResource Include="Resources\profile.png" />
+    <BundleResource Include="Resources\profile%402x.png" />
+    <BundleResource Include="Resources\profile%403x.png" />
+    <BundleResource Include="Resources\reward1.png" />
+    <BundleResource Include="Resources\reward1%402x.png" />
+    <BundleResource Include="Resources\reward1%403x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\app-icon-120.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\app-icon-180.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\Splash - 640x960.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\Splash –640x1136.png" />
+    <BundleResource Include="Resources\girlprofile.png" />
+    <BundleResource Include="Resources\girlprofile%402x.png" />
+    <BundleResource Include="Resources\girlprofile%403x.png" />
+    <BundleResource Include="Resources\coins%403x.png" />
+    <BundleResource Include="Resources\coins%402x.png" />
+    <BundleResource Include="Resources\coins.png" />
+    <BundleResource Include="Resources\sofiapro-light.otf" />
+    <BundleResource Include="Resources\selectRadio.png" />
+    <BundleResource Include="Resources\selectRadio%402x.png" />
+    <BundleResource Include="Resources\selectRadio%403x.png" />
+    <BundleResource Include="Resources\unselectRadio.png" />
+    <BundleResource Include="Resources\unselectRadio%402x.png" />
+    <BundleResource Include="Resources\unselectRadio%403x.png" />
+    <BundleResource Include="Resources\Cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.iOS" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="4.1.0.581479" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
+    <PackageReference Include="Refit">
+      <Version>4.7.51</Version>
+    </PackageReference>
+    <PackageReference Include="Acr.UserDialogs">
+      <Version>7.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Rg.Plugins.Popup">
+      <Version>1.1.5.188</Version>
+    </PackageReference>
+    <PackageReference Include="Realm">
+      <Version>4.1.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\DoAndGet\DoAndGet.csproj">
+      <Project>{8A02154D-766C-45D9-8BF0-4F0B67CE38CB}</Project>
+      <Name>DoAndGet</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Implementation\" />
+    <Folder Include="Renderer\" />
+    <Folder Include="Resources\AppIcon\" />
+    <Folder Include="Resources\LaunchImages\" />
+  </ItemGroup>
+</Project>

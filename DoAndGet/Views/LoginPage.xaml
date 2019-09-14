@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DoAndGet.LoginPage" xmlns:controls="clr-namespace:DoAndGet.Renderer" Title="Login">
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource topSacklayoutcolor}">
+
+                <Image HorizontalOptions="CenterAndExpand" Margin="0,60,0,0" HeightRequest="150" WidthRequest="150" VerticalOptions="CenterAndExpand" Source="logo" />
+
+            </StackLayout>
+
+            <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource lowerstacklayoutcolor}"> 
+            <StackLayout   Spacing="20" Padding="0,0,0,20" >
+                <StackLayout BackgroundColor="{StaticResource middlestacklayoutcolor}" HeightRequest="90" HorizontalOptions="Fill">
+                    <Label Text="Get more done." HorizontalOptions="Center" VerticalOptions="CenterAndExpand" FontAttributes="Bold" FontSize="Title" TextColor="White" />
+                </StackLayout>
+
+                <controls:MyFrame  CornerRadius="35" Margin="40,40,40,0">
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="vsdjhdh" HorizontalOptions="CenterAndExpand" HeightRequest="30" WidthRequest="30" />
+                        <Label Text="I am a Parent " HorizontalTextAlignment="Start" HorizontalOptions="StartAndExpand" TextColor="black" FontSize="Subtitle" BackgroundColor="white" FontFamily="{StaticResource RegularFontFamily}" />
+                    </StackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GotoParentLoginPage}"></TapGestureRecognizer>
+
+                    </Frame.GestureRecognizers>
+
+                </controls:MyFrame>
+                <controls:MyFrame CornerRadius="35" Margin="40,10,40,0" HeightRequest="30">
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="child" HorizontalOptions="CenterAndExpand" HeightRequest="30" WidthRequest="30" />
+                        <Label Text="I am a Child" HorizontalTextAlignment="Start" HorizontalOptions="StartAndExpand" BackgroundColor="white" TextColor="black" FontSize="Subtitle" />
+                    </StackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GotoChildLoginPage}"></TapGestureRecognizer>
+
+                    </Frame.GestureRecognizers>
+
+                </controls:MyFrame>
+
+            </StackLayout>
+                </ScrollView>
+        </StackLayout>
+
+
+    </ContentPage.Content>
+</ContentPage>

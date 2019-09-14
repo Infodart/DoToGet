@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DoAndGet.ChildMasterDetailPageMaster"
+               xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             Title="Master">
+  <StackLayout>
+
+       <Grid VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+             <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
+        <Frame Grid.Row="0">
+           
+                 <StackLayout>
+            <Image Source="girlprofile" HeightRequest="150" WidthRequest="150"/>
+            <Label Text="Child name" HorizontalTextAlignment="Center"/>
+       
+            </StackLayout>
+        </Frame>
+        <ListView x:Name="MenuItemsListView" Grid.Row="1" BackgroundColor="#F2F2F9"  SeparatorVisibility="None"
+                    HasUnevenRows="True">
+            
+          
+       
+           
+      <ListView.ItemTemplate>
+          
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                 <ColumnDefinition Width="8*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="{Binding Icon}" Grid.Column="0" HorizontalOptions="Start"/>
+                            <Label Grid.Column="1" Text="{Binding Title}"  FontSize="15" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"/>
+                        </Grid>
+                       
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+
+  
+  </StackLayout>
+</ContentPage>

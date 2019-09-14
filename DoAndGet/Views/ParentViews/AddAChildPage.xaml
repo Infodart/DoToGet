@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DoAndGet.AddAChildPage" xmlns:controls="clr-namespace:DoAndGet.Renderer" NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <StackLayout Spacing="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <controls:GradientView StartColor="#FEBA42" EndColor="#F5881B" HeightRequest="80" Spacing="0" Orientation="Horizontal">
+                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="6*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="Add Child" FontSize="Subtitle" Grid.Column="1" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" TextColor="white" Margin="0,20,0,0" />
+                    <ImageButton Source="back" Command="{Binding GoBackCommand}" HeightRequest="25" Grid.Column="0" WidthRequest="25" HorizontalOptions="CenterAndExpand" Aspect="AspectFit" VerticalOptions="CenterAndExpand" Margin="0,20,0,0" />
+                </Grid>
+            </controls:GradientView>
+            <ScrollView BackgroundColor="#F4F8FA" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="40" Margin="0,40,0,0">
+                    <controls:MyFrame CornerRadius="30" Padding="15" Margin="50,0,50,0">
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="user" HeightRequest="30" WidthRequest="30" />
+                            <controls:MyEntry x:Name="entryChildName" Placeholder="Name" HorizontalOptions="FillAndExpand" PlaceholderColor="#C1C1C1" Text="{Binding ChildName, Mode=OneWayToSource}" TextChanged="FullName_Handle_TextChanged">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="ValidityStates">
+                                        <VisualState x:Name="Valid">
+                                            <VisualState.Setters>
+                                                <Setter Property="TextColor" Value="Black" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="InValid">
+                                            <VisualState.Setters>
+                                                <Setter Property="TextColor" Value="Red" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+
+                            </controls:MyEntry>
+                        </StackLayout>
+                    </controls:MyFrame>
+                    <controls:MyFrame CornerRadius="30" Padding="15" Margin="50,0,50,0">
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="user" HeightRequest="30" WidthRequest="30" />
+                            <controls:MyEntry x:Name="entryChildAge" Placeholder="Age" Keyboard="Telephone" HorizontalOptions="FillAndExpand" PlaceholderColor="#C1C1C1" Text="{Binding ChildAge, Mode=OneWayToSource}" MaxLength="2" TextChanged="Child_Age_TextChanged">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="ValidityStates">
+                                        <VisualState x:Name="Valid">
+                                            <VisualState.Setters>
+                                                <Setter Property="TextColor" Value="Black" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="InValid">
+                                            <VisualState.Setters>
+                                                <Setter Property="TextColor" Value="Red" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+
+                            </controls:MyEntry>
+                        </StackLayout>
+                    </controls:MyFrame>
+                    <Label Text="Gender" TextColor="#C1C1C1" FontAttributes="Bold" Margin="50,0,50,0" />
+                    <StackLayout Orientation="Horizontal" Margin="50,0,50,0">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10">
+                            <ImageButton Source="{Binding CheckedImage}" HeightRequest="20" WidthRequest="20" Command="{Binding Checkedcommand}" />
+                            <Label Text="Boy" TextColor="#C1C1C1" VerticalTextAlignment="Center" FontSize="20" />
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10">
+                            <ImageButton Source="{Binding Uncheckedimage}" HeightRequest="20" WidthRequest="20" Command="{Binding Uncheckedcommand}" />
+                            <Label Text="Girl" FontSize="20" TextColor="#C1C1C1" VerticalTextAlignment="Center" />
+                        </StackLayout>
+                    </StackLayout>
+                    <controls:MyFrame CornerRadius="30" Padding="15" Margin="50,0,50,0">
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="user" HeightRequest="30" WidthRequest="30" />
+                            <Label Text="{Binding ImageUploadedText}" TextColor="{Binding ImageTextColor}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontFamily="{StaticResource RegularFontFamily}" />
+                        </StackLayout>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Uploadprofilepic}">
+                            </TapGestureRecognizer>
+                        </Frame.GestureRecognizers>
+                    </controls:MyFrame>
+                    <controls:MyFrame CornerRadius="30" Padding="15" Margin="50,0,50,0">
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="user" HeightRequest="30" WidthRequest="30" />
+                            <controls:MyEntry x:Name="entryChildUserName" Placeholder="Username" HorizontalOptions="FillAndExpand" PlaceholderColor="#C1C1C1" Text="{Binding UserName, Mode=OneWayToSource}" TextChanged="User_Handle_TextChanged">
+
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="ValidityStates">
+                                        <VisualState x:Name="Valid">
+                                            <VisualState.Setters>
+                                                <Setter Property="TextColor" Value="Black" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="InValid">
+                                            <VisualState.Setters>
+                                                <Setter Property="TextColor" Value="Red" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                            </controls:MyEntry>
+                        </StackLayout>
+                    </controls:MyFrame>
+                    <controls:MyFrame Padding="15" CornerRadius="30" Margin="50,0,50,0">
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="password" HeightRequest="30" WidthRequest="30" />
+                            <controls:MyEntry x:Name="entryChildPassword" IsPassword="True" Placeholder="Password" HorizontalOptions="FillAndExpand" PlaceholderColor="#C1C1C1" Text="{Binding Password, Mode=OneWayToSource}" TextChanged="Password_Handle_TextChanged">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="ValidityStates">
+                                        <VisualState x:Name="Valid">
+                                            <VisualState.Setters>
+                                                <Setter Property="TextColor" Value="Black" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="InValid">
+                                            <VisualState.Setters>
+                                                <Setter Property="TextColor" Value="Red" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                            </controls:MyEntry>
+                        </StackLayout>
+                    </controls:MyFrame>
+                    <Button  x:Name="submitbutton" Text="Add Child" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand" Margin="50,-10,50,0" Command="{Binding AddChildCommand}" Style="{StaticResource BaseButtonStyle}" />
+
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

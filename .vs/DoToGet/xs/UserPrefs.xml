@@ -1,0 +1,39 @@
+﻿<Properties StartupConfiguration="{BDA5874B-EBD8-49D2-AB0E-C49A81DEFE64}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="DoAndGet/Renderer/MyEntry.cs">
+    <Files>
+      <File FileName="DoAndGet/Views/ParentLoginPage.xaml" Line="67" Column="73" />
+      <File FileName="DoAndGet/Views/ParentRegistationPage.xaml" Line="77" Column="138" />
+      <File FileName="DoAndGet/ViewModels/ParentRegistationPageModel.cs" />
+      <File FileName="DoAndGet/App.xaml" Line="7" Column="37" />
+      <File FileName="DoAndGet/Views/ParentLoginPage.xaml.cs" Line="1" Column="1" />
+      <File FileName="DoAndGet/ViewModels/ParentLoginPageModel.cs" />
+      <File FileName="DoAndGet.iOS/Info.plist" />
+      <File FileName="DoAndGet/Views/LoginPage.xaml" Line="58" Column="43" />
+      <File FileName="DoAndGet.Android/Renderer/MyEntryRenderer.cs" Line="36" Column="22" />
+      <File FileName="DoAndGet.Android/Resources/values/styles.xml" Line="23" Column="54" />
+      <File FileName="DoAndGet/Renderer/MyEntry.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="DoToGet" expanded="True" selected="True">
+            <Node name="DoAndGet" expanded="True">
+              <Node name="Renderer" expanded="True" />
+            </Node>
+            <Node name="DoAndGet.Android" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.DoAndGet.iOS automaticSigning="False" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.05561F36-B65A-4117-B4C0-630DC3E011AA" />
+  <MonoDevelop.Ide.ItemProperties.DoAndGet.Android AndroidDesignerPreferredTheme="Theme.AppCompat.Light.NoActionBar" PreferredExecutionTarget="Android.2d396c0c" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/krishnakumar/Projects/DoAndGet/DoAndGet/ViewModels/LoginPageModel.cs" relfile="DoAndGet/ViewModels/LoginPageModel.cs" line="33" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

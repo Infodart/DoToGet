@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DoAndGet.RewardsPage" xmlns:controls="clr-namespace:DoAndGet.Renderer" NavigationPage.HasNavigationBar="False" xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" ios:Page.UseSafeArea="True">
+
+    <ContentPage.Content>
+
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#F2F2F9">
+            <controls:GradientView StartColor="#FEBA42" EndColor="#F5881B" HeightRequest="50" Spacing="0" Orientation="Horizontal">
+                <ImageButton Source="menu" HeightRequest="20" WidthRequest="20" HorizontalOptions="StartAndExpand" Aspect="AspectFit" Margin="15,0,0,0" Clicked="OnButtonClicked" VerticalOptions="CenterAndExpand" />
+                <Label Text="Rewards" FontSize="Subtitle" Margin="15,0,0,0" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" TextColor="white" />
+                <ImageButton Source="plus" HeightRequest="80" WidthRequest="80" HorizontalOptions="EndAndExpand" Aspect="AspectFit"  VerticalOptions="CenterAndExpand" Command="{Binding GotoNextPage}" />
+            </controls:GradientView>
+
+            <ListView x:Name="list" VerticalOptions="FillAndExpand" SelectionMode="None" BackgroundColor="#F2F2F9" HorizontalOptions="FillAndExpand" HasUnevenRows="True" SeparatorVisibility="None" ItemsSource="{Binding RewardsData}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout  Orientation="Horizontal" Margin="10,0,10,10" Spacing="0">
+                                <BoxView VerticalOptions="FillAndExpand" WidthRequest="1.5" Margin="0,10,0,10" BackgroundColor="{Binding BoxViewColor}" />
+
+                                <controls:MyFrame BorderColor="gray" CornerRadius="10" Padding="0,10,0,10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ColumnSpacing="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="6*" />
+                                            <ColumnDefinition Width="2*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="reward1" Grid.Row="0" HeightRequest="25" WidthRequest="25" VerticalOptions="CenterAndExpand" Aspect="AspectFit" />
+                                        <StackLayout Grid.Row="0" Grid.Column="1">
+                                            <Label Text="{Binding name}" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" TextColor="{Binding RewardsNameTextColor}" FontSize="Medium" />
+                                            <Label Text="{Binding RewaardsDescription}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Micro" />
+                                        </StackLayout>
+
+                                        <Image Grid.Row="0" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Source="earn" />
+                                        <Label Text="{Binding points}" Grid.Row="0" Grid.Column="2" FontSize="Micro" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+
+                                    </Grid>
+
+
+                                </controls:MyFrame>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackLayout>
+    </ContentPage.Content>
+
+   
+</ContentPage>

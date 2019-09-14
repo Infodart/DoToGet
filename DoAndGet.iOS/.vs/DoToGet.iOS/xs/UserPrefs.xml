@@ -1,0 +1,25 @@
+﻿<Properties StartupConfiguration="{566DF0D7-21CE-4202-BDF3-94733844858C}|Default">
+  <MonoDevelop.Ide.ItemProperties.DoToGet.iOS automaticSigning="False" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.05561F36-B65A-4117-B4C0-630DC3E011AA" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Info.plist">
+    <Files>
+      <File FileName="Info.plist" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="DoToGet.iOS" expanded="True">
+            <Node name="DoToGet.iOS" expanded="True">
+              <Node name="Info.plist" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

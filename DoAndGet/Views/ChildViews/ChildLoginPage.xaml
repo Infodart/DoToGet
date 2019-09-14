@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DoAndGet.ChildLoginPage" NavigationPage.HasNavigationBar="False" xmlns:controls="clr-namespace:DoAndGet.Renderer">
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="FillAndExpand" Spacing="0" VerticalOptions="FillAndExpand">
+            <controls:GradientView StartColor="#FEBA42" EndColor="#F5881B" HeightRequest="80" Spacing="0" Orientation="Horizontal">
+                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="6*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="Child Login" FontSize="Subtitle" Grid.Column="1" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" TextColor="white" Margin="0,0,0,10" />
+                    <ImageButton Source="back" Command="{Binding GoBackCommand}" HeightRequest="25" Grid.Column="0" WidthRequest="25" HorizontalOptions="CenterAndExpand" Aspect="AspectFit" VerticalOptions="EndAndExpand" Margin="0,20,0,10" />
+                </Grid>
+            </controls:GradientView>
+            <ScrollView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource topSacklayoutcolor}" VerticalScrollBarVisibility="Never">
+                <StackLayout HorizontalOptions="FillAndExpand" Spacing="0" VerticalOptions="FillAndExpand">
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource topSacklayoutcolor}">
+
+                        <Image HorizontalOptions="Center" HeightRequest="150" WidthRequest="150" Margin="0,20,0,0" VerticalOptions="Center" Source="logo" />
+
+                    </StackLayout>
+                    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="40" BackgroundColor="{StaticResource lowerstacklayoutcolor}">
+                        <StackLayout BackgroundColor="{StaticResource middlestacklayoutcolor}" HeightRequest="70" HorizontalOptions="FillAndExpand">
+                            <Label Text="LOGIN" FontAttributes="Bold" TextColor="White" FontSize="Subtitle" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" FontFamily="{StaticResource RegularFontFamily}" />
+                        </StackLayout>
+                        <controls:MyFrame Margin="35,0,35,0" CornerRadius="30" Padding="15">
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="user" HeightRequest="30" WidthRequest="30" />
+                                <controls:MyEntry x:Name="mailEntry" TextChanged="Mail_TextChanged" PlaceholderColor="#CCCCCC" Placeholder="User name" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="ValidityStates">
+                                            <VisualState x:Name="Valid">
+                                                <VisualState.Setters>
+                                                    <Setter Property="TextColor" Value="Black" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                            <VisualState x:Name="InValid">
+                                                <VisualState.Setters>
+                                                    <Setter Property="TextColor" Value="Red" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                </controls:MyEntry>
+                            </StackLayout>
+                        </controls:MyFrame>
+                        <controls:MyFrame Margin="35,0,35,0" CornerRadius="30" Padding="15">
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="password" HeightRequest="30" WidthRequest="30" />
+                                <controls:MyEntry x:Name="passwordEntry" TextChanged="Password_TextChanged" IsPassword="True" PlaceholderColor="#CCCCCC" Placeholder="Password" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="ValidityStates">
+                                            <VisualState x:Name="Valid">
+                                                <VisualState.Setters>
+                                                    <Setter Property="TextColor" Value="Black" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                            <VisualState x:Name="InValid">
+                                                <VisualState.Setters>
+                                                    <Setter Property="TextColor" Value="Red" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                </controls:MyEntry>
+                            </StackLayout>
+                        </controls:MyFrame>
+
+                        <Button Text="Sign In" Margin="35,0,35,0" Style="{StaticResource BaseButtonStyle}" Command="{Binding Login}" />
+
+                    </StackLayout>
+
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

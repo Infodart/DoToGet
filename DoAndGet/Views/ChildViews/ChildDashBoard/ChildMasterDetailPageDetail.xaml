@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DoAndGet.ChildMasterDetailPageDetail" xmlns:controls="clr-namespace:DoAndGet.Renderer" NavigationPage.HasNavigationBar="False" xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" ios:Page.UseSafeArea="True" Title="Detail">
+    <ContentPage.Content>
+
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="2.5*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="5.5*" />
+            </Grid.RowDefinitions>
+            <Image Source="main" Grid.Row="0" Grid.RowSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill" />
+            <ImageButton Source="menu" HeightRequest="20" WidthRequest="20" HorizontalOptions="StartAndExpand" Aspect="AspectFit" Margin="15,10,0,0" Clicked="OnButtonClicked" VerticalOptions="StartAndExpand" Grid.Row="0" />
+            <Frame Margin="0" HasShadow="False" Padding="10" Grid.Row="2" Grid.RowSpan="2" HorizontalOptions="FillAndExpand" BackgroundColor="#F2F2F9" VerticalOptions="FillAndExpand" CornerRadius="30">
+                <ScrollView VerticalScrollBarVisibility="Never">
+                <StackLayout VerticalOptions="FillAndExpand">
+                    <Label Text="Dashboard" TextColor="#3139BD" HorizontalTextAlignment="Center"  FontSize="Title" />
+                    <Frame HeightRequest="90" WidthRequest="90" HasShadow="False" CornerRadius="45" HorizontalOptions="CenterAndExpand" Padding="0" BackgroundColor="#F42B1B">
+                        <Frame CornerRadius="35" HasShadow="False" Padding="0" HeightRequest="70" WidthRequest="70" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" BackgroundColor="#FB3C27">
+                            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Spacing="0">
+                                <Label Text="20"  TextColor="White" FontSize="30" FontAttributes="Bold" />
+                                <StackLayout Orientation="Horizontal" Spacing="2">
+                                    <Image Source="coins"/>
+                                     <Label Text="Points"  FontSize="Micro" Margin="0,3,0,0" TextColor="White"  />
+                                </StackLayout>
+                               
+                            </StackLayout>
+
+                        </Frame>
+                    </Frame>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Spacing="50" VerticalOptions="Center" Margin="20">
+                        <ImageButton Source="childactivity" Command="{Binding GotoChildActivitypage}"></ImageButton>
+                        <ImageButton Source="childreward" Command="{Binding GotoChildRewardpage}"></ImageButton>
+                    </StackLayout>
+                    <Image Source="childlower" Aspect="AspectFit" HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+                    </ScrollView>
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

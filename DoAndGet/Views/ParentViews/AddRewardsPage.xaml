@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DoAndGet.AddRewardsPage" xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" ios:Page.UseSafeArea="True" NavigationPage.HasNavigationBar="False" xmlns:controls="clr-namespace:DoAndGet.Renderer">
+    <ContentPage.Content>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="2.5*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="5.5*" />
+            </Grid.RowDefinitions>
+            <Image Source="main" Grid.Row="0" Grid.RowSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill" />
+            <ImageButton Source="back" HeightRequest="20" WidthRequest="20" HorizontalOptions="StartAndExpand" Aspect="AspectFit" Margin="15,10,0,0" VerticalOptions="StartAndExpand" Clicked="OnBackPress" Grid.Row="0" />
+
+                <Frame Grid.Row="2" Grid.RowSpan="2" Margin="0" Padding="10" HorizontalOptions="FillAndExpand" BackgroundColor="#F2F2F9" BorderColor="Gray" VerticalOptions="FillAndExpand" CornerRadius="30">
+                    <StackLayout>
+                        <Label Text="Add Rewards" TextColor="#3139BD" VerticalTextAlignment="Center" Grid.Row="0" FontSize="Large" Grid.Column="0" FontAttributes="Bold" />
+                    <ScrollView VerticalScrollBarVisibility="Never">
+                    <Grid HorizontalOptions="FillAndExpand" Padding="10" VerticalOptions="FillAndExpand" RowSpacing="20">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <!--<Label Text="Add Rewards" TextColor="#3139BD" VerticalTextAlignment="Center" Grid.Row="0" FontSize="Large" Grid.Column="0" FontAttributes="Bold" />-->
+
+                        <controls:MyFrame Margin="0" HorizontalOptions="FillAndExpand" CornerRadius="30" Padding="15" Grid.Row="1">
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="myreward" HeightRequest="30" WidthRequest="30" />
+                                <controls:MyEntry PlaceholderColor="#CCCCCC" Placeholder="Reward Name " HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+
+                                </controls:MyEntry>
+                            </StackLayout>
+                        </controls:MyFrame>
+                        <controls:MyFrame Margin="0" CornerRadius="30" Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Grid.Row="2">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="35">
+                                <Image Source="star" HeightRequest="30" WidthRequest="30" />
+                                <Button ImageSource="minus" Command="{Binding minusbuttonCommand}" FontSize="20" />
+                                <Label VerticalTextAlignment="Center" Text="{Binding AddPoint}" FontSize="20" />
+                                <ImageButton Source="plus1" Command="{Binding addbuttonCommand}" />
+                            </StackLayout>
+                        </controls:MyFrame>
+                        <controls:MyFrame Margin="0" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" CornerRadius="30" Padding="15" Grid.Row="3">
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="time1" HeightRequest="30" WidthRequest="30" />
+                                <controls:MyPicker HorizontalOptions="FillAndExpand" VerticalOptions="Center" Title="Time Duration" Image="down.png">
+                                    <controls:MyPicker.Items>
+
+                                        <x:String>10 Minutes</x:String>
+                                        <x:String>20 Minutes</x:String>
+                                        <x:String>30 Minutes</x:String>
+                                        <x:String>40 Minutes</x:String>
+                                        <x:String>50 Minutes</x:String>
+                                    </controls:MyPicker.Items>
+                                </controls:MyPicker>
+
+
+                            </StackLayout>
+                        </controls:MyFrame>
+
+                        <Button Text="Add Reward" Margin="0" Padding="15" Grid.Row="4" VerticalOptions="CenterAndExpand" BackgroundColor="#FEBA09" TextColor="white" CornerRadius="20" FontSize="Body" Command="{Binding AddRewards}" />
+
+                    </Grid>
+                        </ScrollView>
+
+                        </StackLayout>
+
+
+
+                </Frame>
+            
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

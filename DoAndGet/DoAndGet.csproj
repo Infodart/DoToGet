@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="4.1.0.581479" />  
+    <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
+    <PackageReference Include="Realm" Version="4.1.0" />
+    <PackageReference Include="Xam.Plugin.Media" Version="4.0.1.5" />
+    <PackageReference Include="Refit" Version="4.7.51" />
+    <PackageReference Include="modernhttpclient" Version="2.4.2" />
+    <PackageReference Include="Acr.UserDialogs" Version="7.0.0" />
+    <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="1.1.5.188" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="ORM\" />
+    <Folder Include="Renderer\" />
+    <Folder Include="Behaviors\" />
+    <Folder Include="Utils\" />
+    <Folder Include="Controls\" />
+    <Folder Include="Views\ParentViews\" />
+    <Folder Include="Views\ChildViews\" />
+    <Folder Include="ViewModels\ChildPageModel\" />
+    <Folder Include="Views\PoupupPages\" />
+    <Folder Include="Views\ChildViews\ChildDashBoard\" />
+    <Folder Include="RequestModels\" />
+    <Folder Include="ResponceModels\" />
+  </ItemGroup>
+</Project>
