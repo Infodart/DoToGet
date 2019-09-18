@@ -29,7 +29,7 @@
                         <controls:MyFrame Margin="0" HorizontalOptions="FillAndExpand" CornerRadius="30" Padding="15" Grid.Row="1">
                             <StackLayout Orientation="Horizontal">
                                 <Image Source="myreward" HeightRequest="30" WidthRequest="30" />
-                                <controls:MyEntry PlaceholderColor="#CCCCCC" Placeholder="Reward Name " HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                <controls:MyEntry PlaceholderColor="#CCCCCC" Placeholder="Reward Name " Text="{Binding RewardName}" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
 
                                 </controls:MyEntry>
                             </StackLayout>
@@ -45,15 +45,14 @@
                         <controls:MyFrame Margin="0" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" CornerRadius="30" Padding="15" Grid.Row="3">
                             <StackLayout Orientation="Horizontal">
                                 <Image Source="time1" HeightRequest="30" WidthRequest="30" />
-                                <controls:MyPicker HorizontalOptions="FillAndExpand" VerticalOptions="Center" Title="Time Duration" Image="down.png">
-                                    <controls:MyPicker.Items>
-
+                                <controls:MyPicker HorizontalOptions="FillAndExpand" VerticalOptions="Center" Title="Time Duration" Image="down.png" ItemsSource="{Binding DurationDetails}" SelectedItem="{Binding SelectedSlot}">
+                                    <!--<controls:MyPicker.Items>
                                         <x:String>10 Minutes</x:String>
                                         <x:String>20 Minutes</x:String>
                                         <x:String>30 Minutes</x:String>
                                         <x:String>40 Minutes</x:String>
                                         <x:String>50 Minutes</x:String>
-                                    </controls:MyPicker.Items>
+                                    </controls:MyPicker.Items>-->
                                 </controls:MyPicker>
 
 

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Acr.UserDialogs;
 using DoAndGet.Interfaces;
+using DoAndGet.Models;
 using DoAndGet.Utils;
 
 using Refit;
@@ -64,12 +65,12 @@ namespace DoAndGet.Helpers
             }
         }
 
-        public static void DeleteLocalData()
+        public  static void DeleteLocalData()
         {
             try
             {
                // DB.DeleteAll<LoginCredential>();
-               // DB.DeleteAll<UserDetail>();
+                DB.DeleteAll<UserDetails>();
             }
             catch (Exception ex) { }
         }

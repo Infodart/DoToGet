@@ -36,7 +36,7 @@
                     <Label FontSize="8" Grid.Column="2" Grid.Row="1" Text="Add points" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center" />
                       
                        
-                    <ListView x:Name="list" VerticalOptions="FillAndExpand"  BackgroundColor="#F2F2F9" HorizontalOptions="FillAndExpand" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HasUnevenRows="True" SeparatorVisibility="None" ItemsSource="{Binding RewardsData}" VerticalScrollBarVisibility="Never" SelectedItem="{Binding OpenPoupupPage}">
+                    <ListView x:Name="list" VerticalOptions="FillAndExpand"  BackgroundColor="#F2F2F9" HorizontalOptions="FillAndExpand" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HasUnevenRows="True" SeparatorVisibility="None" ItemsSource="{Binding Data}" VerticalScrollBarVisibility="Never" SelectedItem="{Binding OpenPoupupPage}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
@@ -55,12 +55,12 @@
                                                 </Grid.ColumnDefinitions>
                                                 <Image Source="reward1" Grid.Row="0" HeightRequest="25" WidthRequest="25" VerticalOptions="CenterAndExpand" Aspect="AspectFit" />
                                                 <StackLayout Grid.Row="0" Grid.Column="1">
-                                                    <Label Text="{Binding RewardsName}" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" TextColor="{Binding RewardsNameTextColor}" FontSize="Medium" />
-                                                    <Label Text="{Binding RewaardsDescription}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Micro" />
+                                                    <Label Text="{Binding name}" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" TextColor="{Binding RewardsNameTextColor}" FontSize="Medium" />
+                                                    <Label Text="{Binding points}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Micro" />
                                                 </StackLayout>
 
                                                 <Image Grid.Row="0" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" Source="earn" />
-                                                <Label Text="50" Grid.Row="0" Grid.Column="2" FontSize="Micro" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                                                <Label Text="{Binding points}" Grid.Row="0" Grid.Column="2" FontSize="Micro" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
 
                                             </Grid>
 

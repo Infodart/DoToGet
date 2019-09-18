@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using DoAndGet.Helpers;
+using DoAndGet.Interfaces;
 using DoAndGet.Models;
 using DoAndGet.ResponceModels.GetActivity;
 using DoAndGet.ResponceModels.RewardModel;
@@ -38,12 +39,17 @@ namespace DoAndGet
             {
                 Helper.ShowLoader("Loding");
                 var getAllreward = await Helper.WebServices.GetAllActivity("Bearer " + Global.UserDetails.Token);
+                if (getAllreward.data.Count > 0)
+                {
 
 
-                if (getAllreward.error == false)
-                    Data = new ObservableCollection<Datum>(getAllreward.data);
+                    if (getAllreward.error == false)
+                        Data = new ObservableCollection<Datum>(getAllreward.data);
+                    else
+                        DependencyService.Get<Toasts>().Show(getAllreward.message);
+                }
                 else
-                    Helper.ShowAlert("Alert", getAllreward.message);
+                    DependencyService.Get<Toasts>().Show("No data found.");
             }
             catch (Exception ex)
             {
@@ -56,80 +62,16 @@ namespace DoAndGet
         }
 
 
-        //public async Task<ObservableCollection<ReviewAndActivityModel>> GetData()
-        //{
-
-
-        //    try
-        //    {
-        //        var model = new ReviewAndActivityModel
-        //        {
-        //            ActivityName = "Cleaning your room",
-        //            ChildName = "Tousif Raza",
-        //            ActivityNameTextColor = Color.FromRgb(39, 194, 181),
-        //            BoxViewColor = Color.Red
-                   
-        //        };
-        //        Data.Add(model);
-        //        var model2 = new ReviewAndActivityModel
-        //        {
-        //            ActivityName = "Watching TV",
-        //            ChildName = "Sam Karan",
-        //            ActivityNameTextColor=Color.FromRgb(251,60,39),
-        //            BoxViewColor= Color.FromRgb(39, 194, 181),
-
-
-        //        };
-        //        Data.Add(model2);
-        //        var model1 = new ReviewAndActivityModel
-        //        {
-        //            ActivityName = "Play Music",
-        //            ChildName = "Rishi Lohani",
-        //            ActivityNameTextColor = Color.FromRgb(39, 194, 181),
-        //            BoxViewColor = Color.Red
-
-        //        };
-        //        Data.Add(model1);
-        //        var model3 = new ReviewAndActivityModel
-        //        {
-        //            ActivityName = "Take care pats",
-        //            ChildName = "Krishna Sharma",
-        //            ActivityNameTextColor = Color.FromRgb(251, 60, 39),
-        //            BoxViewColor = Color.FromRgb(39, 194, 181),
-
-        //        };
-        //        Data.Add(model3);
-        //        var model4 = new ReviewAndActivityModel
-        //        {
-        //            ActivityName = "Finish home work",
-        //            ChildName = "Tousif",
-        //            ActivityNameTextColor = Color.FromRgb(39, 194, 181),
-        //            BoxViewColor = Color.Red
-
-        //        };
-                
-        //        if (Data != null)
-
-        //            return new ObservableCollection<ReviewAndActivityModel>(Data);
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //    }
-        //    finally
-        //    {
-
-        //    }
-        //    return new ObservableCollection<ReviewAndActivityModel>();
-
-        //}
+      
         public Command OkButtonButtonCommand
         {
             get
             {
-                return new Command(async () =>
+                return new Command(async (obj) =>
                 {
-                    await PopupNavigation.Instance.PushAsync(new RewardpopupPage("Are you sure to give him 10 Reward points?", "Child has done Cleaning Room", false));
+                    var data = obj as Datum;
+                   
+                    await PopupNavigation.Instance.PushAsync(new RewardpopupPage(data.id,"Are you sure to give him 10 Reward points?", "Child has done Cleaning Room", false));
                 });
             }
         }
@@ -139,9 +81,10 @@ namespace DoAndGet
         {
             get
             {
-                return new Command(async () =>
+                return new Command(async (obj) =>
                 {
-                    await PopupNavigation.Instance.PushAsync(new RewardpopupPage("Are you sure don't want to give him 10 Reward points?", "Child has done Cleaning Room", true));
+                    var data = obj as Datum;
+                    await PopupNavigation.Instance.PushAsync(new RewardpopupPage(data.id,"Are you sure don't want to give him 10 Reward points?", "Child has done Cleaning Room", true));
                 });
             }
         }

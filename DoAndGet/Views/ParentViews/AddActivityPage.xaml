@@ -9,7 +9,7 @@
                 <RowDefinition Height="5.5*" />
             </Grid.RowDefinitions>
             <Image Source="main" Grid.Row="0" Grid.RowSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill" />
-            <ImageButton Source="back" HeightRequest="20" WidthRequest="20" HorizontalOptions="StartAndExpand" Aspect="AspectFit" Margin="15,10,0,0" VerticalOptions="StartAndExpand" Grid.Row="0" Command="{Binding AddActivity}"/>
+            <ImageButton Source="back" HeightRequest="20" WidthRequest="20" HorizontalOptions="StartAndExpand" Aspect="AspectFit" Margin="15,10,0,0" VerticalOptions="StartAndExpand" Grid.Row="0" Clicked="OnBackPress"/>
             <Frame Margin="0" HasShadow="True" Padding="10" Grid.Row="2" Grid.RowSpan="2" HorizontalOptions="FillAndExpand" BackgroundColor="#F2F2F9" VerticalOptions="FillAndExpand" CornerRadius="30">
                 <StackLayout>
                       <Label Text="Activity Form" TextColor="#3139BD" VerticalTextAlignment="Center" Grid.Row="0" FontSize="Large" Grid.Column="0" FontAttributes="Bold" />
@@ -30,7 +30,7 @@
                         <controls:MyFrame Margin="0" HorizontalOptions="FillAndExpand"  VerticalOptions="CenterAndExpand" CornerRadius="30" Padding="20" Grid.Row="1">
                             <StackLayout Orientation="Horizontal">
                                 <Image Source="download" HeightRequest="20" WidthRequest="20" />
-                                <controls:MyEntry x:Name="mailEntry" PlaceholderColor="#CCCCCC" Placeholder="Activity Name " HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                <controls:MyEntry x:Name="mailEntry" PlaceholderColor="#CCCCCC" Placeholder="Activity Name " Text="{Binding ActivityName}" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
 
                                 </controls:MyEntry>
                             </StackLayout>
@@ -38,14 +38,8 @@
                         <controls:MyFrame Margin="0" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" CornerRadius="30" Padding="15" Grid.Row="2">
                             <StackLayout Orientation="Horizontal">
                                 <Image Source="myreward" HeightRequest="30" WidthRequest="30" />
-                                <controls:MyPicker HorizontalOptions="FillAndExpand" VerticalOptions="Center" Title="Add child" Image="down.png">
-                                    <controls:MyPicker.Items>
-
-                                        <x:String>Tousif Raza</x:String>
-                                        <x:String>Rishi Lohani</x:String>
-                                         <x:String>Sam </x:String>
-                                         <x:String>Peter</x:String>
-                                    </controls:MyPicker.Items>
+                                <controls:MyPicker HorizontalOptions="FillAndExpand" VerticalOptions="Center" Title="Add child" Image="down.png" ItemsSource="{Binding ChilDetails}"  SelectedItem="{Binding ChildId}"  >
+                                   
                                 </controls:MyPicker>
 
 

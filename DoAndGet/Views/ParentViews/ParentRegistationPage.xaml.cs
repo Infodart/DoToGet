@@ -47,7 +47,7 @@ namespace DoAndGet
 
         void FullName_Handle_TextChanged(object sender, Xamarin.Forms.TextChangedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(e.NewTextValue) && Validations.IsValidName(e.NewTextValue))
+            if (!string.IsNullOrEmpty(e.NewTextValue))
             {
                 VisualStateManager.GoToState(entryFullName, "Valid");
                 VisualStateManager.GoToState(entryEmail, "Valid");

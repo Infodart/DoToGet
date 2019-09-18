@@ -4,17 +4,26 @@ using System;
 using System.ComponentModel;
 using System.Windows.Input;
 using DoAndGet.Helpers;
+using DoAndGet.Interfaces;
 using DoAndGet.Models;
+using DoAndGet.RequestModels;
 using DoAndGet.Utils;
 using Xamarin.Forms;
 
 namespace DoAndGet
 {
-    public class ChildLoginPageModel: INotifyPropertyChanged
+    public class ChildLoginPageModel : INotifyPropertyChanged
     {
         public ICommand GoBackCommand { get; private set; }
         public ChildLoginPageModel()
         {
+#if DEBUG
+            UserName = "temp123";
+
+            Password = "123456";
+#endif
+
+
             GoBackCommand = new Command(GoBackCommandHandler);
         }
 
@@ -25,7 +34,7 @@ namespace DoAndGet
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-       
+
 
         public Command Login
         {
@@ -34,13 +43,57 @@ namespace DoAndGet
                 return new Command(async () =>
                 {
 
-
-                    var mainPage = new ChildMasterDetailPage();
-                    Application.Current.MainPage = new NavigationPage(mainPage);
-                    NavigationPage.SetHasNavigationBar(mainPage, false);
+                    DoLogin(UserName, Password);
+                    //  var mainPage = new ChildMasterDetailPage();
+                    //  Application.Current.MainPage = new NavigationPage(mainPage);
+                    //  NavigationPage.SetHasNavigationBar(mainPage, false);
 
 
                 });
+            }
+        }
+
+
+
+
+
+        private string _username;
+        public string UserName
+        {
+            get
+            {
+                return _username;
+            }
+            set
+            {
+                if (_username != value)
+                {
+                    _username = value;
+                    PropertyChanged?.Invoke(
+                        this,
+                        new PropertyChangedEventArgs(nameof(UserName)));
+                }
+            }
+        }
+
+        string _password = string.Empty;
+
+
+        public string Password
+        {
+            get
+            {
+                return _password;
+            }
+            set
+            {
+                if (_password != value)
+                {
+                    _password = value;
+                    PropertyChanged?.Invoke(
+                         this,
+                         new PropertyChangedEventArgs(nameof(Password)));
+                }
             }
         }
 
@@ -49,29 +102,51 @@ namespace DoAndGet
             ResponseBaseObject loginResponceModel;
             try
             {
-                Helper.ShowLoader("Loding");
-                var loginRequest = new LoginRequest { email = Email, password = Password };
-                loginResponceModel = await Helper.WebServices.Login(loginRequest);
-                if (loginResponceModel.error == false)
+
+                if (!string.IsNullOrEmpty(Email))
                 {
-
-                    Global.UserDetails = new UserDetails
+                    if (!string.IsNullOrEmpty(Password))
                     {
-                        UserName = loginResponceModel.data.fullName,
-                        Email = loginResponceModel.data.email,
-                        Token = loginResponceModel.data.token,
-                        Gemder = loginResponceModel.data.gender,
-                        Image = loginResponceModel.data.image,
-                    };
+                        Helper.ShowLoader("Loding");
+                        var loginRequest = new ChildLoginRequest { username = Email, password = Password };
+                        loginResponceModel = await Helper.WebServices.ChildLogin(loginRequest);
+                        if (loginResponceModel != null)
+                        {
+                            if (loginResponceModel.error == false)
+                            {
 
-                    DB.Insert<UserDetails>(Global.UserDetails);
+                                Global.UserDetails = new UserDetails
+                                {
+                                    UserName = loginResponceModel.data.fullName,
+                                    Email = loginResponceModel.data.email,
+                                    Token = loginResponceModel.data.token,
+                                    Gemder = loginResponceModel.data.gender,
+                                    Image = loginResponceModel.data.image,
+                                    IsParent = false
 
-                    var mainPage = new ChildMasterDetailPage();
-                    Application.Current.MainPage = new NavigationPage(mainPage);
-                    NavigationPage.SetHasNavigationBar(mainPage, false);
-                    Helper.ShowAlert("Alert", loginResponceModel.message);
+                                };
 
-                    Helper.ShowLoader("Loding");
+                                DB.Insert<UserDetails>(Global.UserDetails);
+
+                                var mainPage = new ChildMasterDetailPage();
+                                Application.Current.MainPage = new NavigationPage(mainPage);
+                                NavigationPage.SetHasNavigationBar(mainPage, false);
+                                DependencyService.Get<Toasts>().Show(loginResponceModel.message);
+
+                                Helper.ShowLoader("Loding");
+                            }
+                            else
+                                DependencyService.Get<Toasts>().Show(loginResponceModel.message);
+                        }
+                    }
+                    else
+                    {
+                        DependencyService.Get<Toasts>().Show("Please enter password");
+                    }
+                }
+                else
+                {
+                    DependencyService.Get<Toasts>().Show("Please enter valid user name");
                 }
 
 

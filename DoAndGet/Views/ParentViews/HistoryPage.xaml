@@ -10,8 +10,8 @@
 
             </controls:GradientView>
 
-            <StackLayout BackgroundColor="#F2F2F9">
-                <ListView x:Name="list" Margin="0,10,0,0" BackgroundColor="#F2F2F9" VerticalOptions="FillAndExpand" SelectionMode="None" HorizontalOptions="FillAndExpand" HasUnevenRows="True" SeparatorVisibility="None" ItemsSource="{Binding HistoryData}">
+            <!--<StackLayout BackgroundColor="#F2F2F9">-->
+                <ListView x:Name="list"  BackgroundColor="#F2F2F9" VerticalOptions="FillAndExpand" SelectionMode="None" HorizontalOptions="FillAndExpand" HasUnevenRows="True" SeparatorVisibility="None" ItemsSource="{Binding Data}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -30,8 +30,8 @@
                                             </Grid.ColumnDefinitions>
                                             <Image Source="{Binding Icon}" Grid.Row="0" Grid.Column="0" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Aspect="AspectFill" />
                                             <StackLayout Grid.Row="0" Grid.Column="1">
-                                                <Label Text="{Binding ActivityName}" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" TextColor="{Binding ActivityNameTextColor}" FontSize="Small" />
-                                                <Label Text="{Binding ChildName}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Small" />
+                                                <Label Text="{Binding name}" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" TextColor="{Binding ActivityNameTextColor}" FontSize="Small" />
+                                                <Label Text="{Binding childId.fullName}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Small" />
                                             </StackLayout>
 
                                             <StackLayout Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
@@ -40,7 +40,7 @@
                                                     <Label TextColor="#FC8D56" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding ActivityDay}" FontSize="10" />
 
                                                 </StackLayout>
-                                                <Label HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Start" Text="{Binding ActivityDateTime}" FontSize="10" />
+                                                <Label HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Start" Text="{Binding createdAt}" FontSize="10" />
 
                                             </StackLayout>
                                           
@@ -51,7 +51,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-            </StackLayout>
+           
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

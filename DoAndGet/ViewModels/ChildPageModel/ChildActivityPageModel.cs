@@ -1,92 +1,85 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using DoAndGet.Helpers;
+using DoAndGet.Interfaces;
 using DoAndGet.Models;
-
+using DoAndGet.ResponceModels;
+using DoAndGet.Utils;
 using Xamarin.Forms;
 
 namespace DoAndGet
 {
-    public class ChildActivityPageModel: INotifyPropertyChanged
+    public class ChildActivityPageModel : INotifyPropertyChanged
     {
-        public ObservableCollection<MyActivityModel> Data { get; set; }
-        private MyActivityModel _gotoNextPage;
+
+       
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        public MyActivityModel GotoNextPage
+        private ChildListModel _selectItem;
+        public ChildListModel SelectItem
         {
-            get { return _gotoNextPage; }
+            get { return _selectItem; }
             set
             {
-                _gotoNextPage = value;
-                if (_gotoNextPage != null)
+                _selectItem = value;
+                if (_selectItem != null)
                 {
-                     Application.Current.MainPage.Navigation.PushAsync(new ActivityStatusPage());
+                    Application.Current.MainPage.Navigation.PushAsync(new ActivityStatusPage(SelectItem.id));
                 }
             }
         }
         public ChildActivityPageModel()
         {
-            Data = new ObservableCollection<MyActivityModel>();
-            GetData();
+
+
         }
-       
-
-
-        public async Task<ObservableCollection<MyActivityModel>> GetData()
+        private ObservableCollection<ChildListModel> _data;
+        public ObservableCollection<ChildListModel> Data
         {
+            get { return _data; }
+            set
+            {
+                _data = value;
+                OnPropertyChanged(nameof(Data));
+            }
+        }
 
 
+        public async void GetData()
+        {
             try
             {
-                var model = new MyActivityModel
+                Helper.ShowLoader("Loding");
+                var getAllActivity = await Helper.WebServices.GetAllChildActivity("Bearer " + Global.UserDetails.Token);
+                if (getAllActivity.data != null)
                 {
-                    ActivityName = "Cleaning Your Room",
-                    ChildName = "Tousif Raza",
-                    Time = "10:10-10:30 AM",
-                    Revards = "20",
-                    RewardsNameTextColor= Color.FromRgb(39, 194, 181),
-                    BoxViewColor = Color.Red
-                };
-                Data.Add(model);
-                var model2 = new MyActivityModel
-                {
-                    ActivityName = "Play Video Game",
-                    ChildName = "Rishi Lohani",
-                    Time = "10:10-10:30 AM",
-                    Revards = "20",
-                    RewardsNameTextColor = Color.FromRgb(251, 60, 39),
-                    BoxViewColor = Color.FromRgb(39, 194, 181),
-                };
-                Data.Add(model2);
-                var model1 = new MyActivityModel
-                {
-                    ActivityName = "Watching The Movie",
-                    ChildName = "Nathan Tom",
-                    Time = "10:10-10:30 AM",
-                    Revards = "20",
-                    RewardsNameTextColor = Color.FromRgb(39, 194, 181),
-                    BoxViewColor = Color.Red
-                };
-                Data.Add(model1);
-                if (Data != null)
-
-                    return new ObservableCollection<MyActivityModel>(Data);
+                    if (getAllActivity.error == false)
+                        Data = new ObservableCollection<ChildListModel>(getAllActivity.data);
+                    else
+                        DependencyService.Get<Toasts>().Show(getAllActivity.message);
+                }
+                else
+                    DependencyService.Get<Toasts>().Show("No data found");
             }
             catch (Exception ex)
             {
-
+                DependencyService.Get<Toasts>().Show(ex.Message);
             }
             finally
             {
-
+                Helper.HideLoader();
             }
-            return new ObservableCollection<MyActivityModel>();
-
         }
 
-        
+
+
+        protected virtual void OnPropertyChanged([CallerMemberName]string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs((propertyName)));
+        }
+
     }
 }

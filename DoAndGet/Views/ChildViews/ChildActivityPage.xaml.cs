@@ -7,10 +7,11 @@ namespace DoAndGet
 {
     public partial class ChildActivityPage : ContentPage
     {
+        ChildActivityPageModel childActivityPageModel;
         public ChildActivityPage()
         {
             InitializeComponent();
-            BindingContext  = new ChildActivityPageModel();
+            BindingContext = childActivityPageModel = new ChildActivityPageModel();
             list.ItemSelected += (sender, e) =>
             {
                 ((ListView)sender).SelectedItem = null;
@@ -20,6 +21,11 @@ namespace DoAndGet
         {
 
             await Application.Current.MainPage.Navigation.PopAsync(true);
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            childActivityPageModel.GetData();
         }
     }
 }

@@ -34,8 +34,8 @@
                                     </StackLayout>
                                
                                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Orientation="Horizontal">
-                                    <Button BackgroundColor="#3AC93D" TextColor="White" Text="Done" Padding="20,0,20,0" HeightRequest="30" Clicked="OnbackClicked" />
-                                    <Button BackgroundColor="red" TextColor="White" Text="Can't Do" Padding="10,0,10,0" HeightRequest="30" Clicked="OnbackClicked"  />
+                                    <Button BackgroundColor="#3AC93D" TextColor="White" Text="Done" Padding="20,0,20,0" HeightRequest="30" Command="{Binding Donebuttonclick}"/>
+                                    <Button BackgroundColor="red" TextColor="White" Text="Can't Do" Padding="10,0,10,0" HeightRequest="30" Command="{Binding NotDonebuttonclick}"  />
                                 </StackLayout>
                             </StackLayout>
 

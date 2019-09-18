@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using DoAndGet.Helpers;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -36,7 +36,7 @@ namespace DoAndGet
                    
 
                     case (int)ChildMenuItemType.Logout:
-                        Application.Current.MainPage = new NavigationPage(new LoginPage());
+                        Logout();
                         break;
                 }
             }
@@ -54,6 +54,19 @@ namespace DoAndGet
                     await Task.Delay(100);
 
                 IsPresented = false;
+            }
+        }
+
+
+        private async void Logout()
+        {
+            var result = await Helpers.Helper.ShowConfirmAlert("Logout", "Are you sure, you want to logout?");
+            if (result)
+            {
+                Helper.ShowLoader("Please wait");
+                Helper.DeleteLocalData();
+                Application.Current.MainPage = new NavigationPage(new LoginPage());
+                Helper.HideLoader();
             }
         }
     }

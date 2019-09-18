@@ -7,6 +7,7 @@ using Xamarin.Forms.Xaml;
 
 using DoAndGet.Models;
 using DoAndGet.Helpers;
+using DoAndGet.Utils;
 
 namespace DoAndGet
 {
@@ -55,7 +56,7 @@ namespace DoAndGet
 
                     case (int)MenuItemType.Logout:
 
-                        Application.Current.MainPage =new NavigationPage( new LoginPage());
+                        Logout();
                         break;
                 }
             }
@@ -77,6 +78,20 @@ namespace DoAndGet
                     await Task.Delay(100);
 
                 IsPresented = false;
+            }
+        }
+
+
+        private async void Logout()
+        {
+            IsPresented = false;
+            var result = await Helper.ShowConfirmAlert("Logout", "Are you sure, you want to logout?");
+            if (result)
+            {
+                Helper.ShowLoader("Please wait");
+                Helper.DeleteLocalData();
+                Application.Current.MainPage = new NavigationPage(new LoginPage());
+                Helper.HideLoader();
             }
         }
     }

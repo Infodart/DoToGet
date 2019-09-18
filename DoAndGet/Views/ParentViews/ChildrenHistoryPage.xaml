@@ -9,7 +9,7 @@
                 <ImageButton Source="plus" HeightRequest="80" WidthRequest="80" HorizontalOptions="EndAndExpand" Aspect="AspectFit" VerticalOptions="CenterAndExpand" Command="{Binding GotoNextPage}" />
             </controls:GradientView>
 
-            <ListView x:Name="list" VerticalOptions="FillAndExpand" BackgroundColor="#F2F2F9" HorizontalOptions="FillAndExpand" HasUnevenRows="True" SeparatorVisibility="None" ItemsSource="{Binding GetAllChild}">
+            <ListView x:Name="list" VerticalOptions="FillAndExpand" BackgroundColor="#F2F2F9" HorizontalOptions="FillAndExpand" HasUnevenRows="True" SeparatorVisibility="None" ItemsSource="{Binding ChildData}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         

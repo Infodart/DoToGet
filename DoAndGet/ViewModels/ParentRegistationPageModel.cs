@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
+using System.Net.Http;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using DoAndGet.Helpers;
 using DoAndGet.Interfaces;
@@ -10,21 +13,23 @@ using DoAndGet.Models;
 using DoAndGet.RequestModels;
 using DoAndGet.Utils;
 using Plugin.Media;
+using Plugin.Media.Abstractions;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
+using Refit;
 using Xamarin.Forms;
 
 namespace DoAndGet
 {
     public class ParentRegistationPageModel : INotifyPropertyChanged
     {
-
+        MediaFile mediaFile;
         //  private string _uncheckedimage = "unchecked";
         // private string _checkedimage = "checked";
         private string _uncheckedimage = "unselectRadio";
         private string _checkedimage = "selectRadio";
         private string _imageUploadedText = "Upload your image";
-        private Color _imageTextColor=Color.FromHex("#C1C1C1");
+        private Color _imageTextColor = Color.FromHex("#C1C1C1");
         public ICommand AddChildCommand { get; private set; }
         public ICommand GoBackCommand { get; private set; }
         private bool _childListVisible = false;
@@ -76,10 +81,11 @@ namespace DoAndGet
 
         private async void AddChildHandler(object obj)
         {
-            await Application.Current.MainPage.Navigation.PushAsync(new AddAChildPage());
+            await Application.Current.MainPage.Navigation.PushAsync(new AddAChildPage(false));
         }
 
-        public ICommand DeleteCommand {
+        public ICommand DeleteCommand
+        {
             get { return new Command(DelteHandler); }
         }
 
@@ -87,7 +93,7 @@ namespace DoAndGet
         {
             var childDataModel = obj as ChildDataModel;
             ChildDetailList.Remove(childDataModel);
-            ListHeight = ChildDetailList.Count*100;
+            ListHeight = ChildDetailList.Count * 100;
             if (ChildDetailList.Count == 0)
             {
                 ChildListVisible = false;
@@ -230,7 +236,7 @@ namespace DoAndGet
         }
 
 
-       
+
 
 
 
@@ -267,40 +273,49 @@ namespace DoAndGet
                 {
                     try
                     {
-                        Helper.ShowLoader("Loding");
-                       
-                        var request = new ParentRegistationRequest { email = Email, gender = Gender, image = filename, fullName = UserName, password = Password};
-
-                        var response = await Helper.WebServices.ParentRegistation(request);
-                        if (!response.error)
+                        if (!string.IsNullOrEmpty(filename))
                         {
+                            Helper.ShowLoader("Loding");
 
-                            Global.UserDetails = new UserDetails
+                            var request = new ParentRegistationRequest { email = Email, gender = Gender, image = filename, fullName = UserName, password = Password };
+
+                            var response = await Helper.WebServices.ParentRegistation(request);
+                            if (!response.error)
                             {
-                                UserName = response.data.fullName,
-                                Email = response.data.email,
-                                Token = response.data.token,
-                                Gemder = response.data.gender,
-                                Image = response.data.image,
-                            };
 
-                            DB.Insert<UserDetails>(Global.UserDetails);
-                            DependencyService.Get<Toasts>().Show(response.message);
-                            var mainPage = new MainPage();
-                            Application.Current.MainPage = new NavigationPage(mainPage);
-                            NavigationPage.SetHasNavigationBar(mainPage, false);
-                            Helper.HideLoader();
+                                Global.UserDetails = new UserDetails
+                                {
+                                    UserName = response.data.fullName,
+                                    Email = response.data.email,
+                                    Token = response.data.token,
+                                    Gemder = response.data.gender,
+                                    Image = response.data.image,
+                                    IsParent = true
+                                };
+
+                                DB.Insert<UserDetails>(Global.UserDetails);
+                                await UploadImage(mediaFile);
+                                DependencyService.Get<Toasts>().Show(response.message);
+                                var mainPage = new MainPage();
+                                Application.Current.MainPage = new NavigationPage(mainPage);
+                                NavigationPage.SetHasNavigationBar(mainPage, false);
+                                Helper.HideLoader();
+                            }
+                        }
+                        else
+                        {
+                            DependencyService.Get<Toasts>().Show("Please upload a image");
                         }
                     }
                     catch (Exception ex)
                     {
-                        Helper.ShowAlert("Alert", ex.Message);
+                        DependencyService.Get<Toasts>().Show(ex.Message);
                     }
                     finally
                     {
                         Helper.HideLoader();
                     }
-                  
+
                 });
             }
         }
@@ -328,56 +343,43 @@ namespace DoAndGet
 
 
 
-                            //var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Plugin.Permissions.Abstractions.Permission.Camera);
 
 
-                            //if (cameraStatus != PermissionStatus.Granted)
-                            //{
-                            //    cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Plugin.Permissions.Abstractions.Permission.Camera);
+                            await CrossMedia.Current.Initialize();
 
-                            //}
+                            if (!CrossMedia.Current.IsTakePhotoSupported)
+                            {
+                                await Application.Current.MainPage.DisplayAlert("No libraru", ":( No library available.", "OK");
+                                return;
+                            }
 
-                            //if (cameraStatus == PermissionStatus.Granted)
-                            //{
+                            mediaFile = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+                            {
+                                CompressionQuality = 70,
+
+                            });
+
+                            if (mediaFile == null)
+                                return;
+
+                            try
+                            {
+
+                                var a = ImageSource.FromFile(mediaFile.Path);
+                                var stream = mediaFile.GetStream();
+                                var bytes = GetByteArrayFromStream(stream);
+                                filename = Path.GetFileName(mediaFile.Path);
+                               // UploadImage(mediaFile);
+                               
+                                ImageUploadedText = "Image uploaded";
+                                ImageTextColor = Color.Blue;
+                            }
+                            catch (Exception ex)
+                            {
+
+                            }
 
 
-                                await CrossMedia.Current.Initialize();
-
-                                if (!CrossMedia.Current.IsTakePhotoSupported)
-                                {
-                                    await Application.Current.MainPage.DisplayAlert("No libraru", ":( No library available.", "OK");
-                                    return;
-                                }
-
-                                var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
-                                {
-                                    CompressionQuality = 70,
-
-                                });
-
-                                if (file == null)
-                                    return;
-
-                                try
-                                {
-                                    //Profile.Image = ImageSource.FromFile(file.Path);
-                                    var a = ImageSource.FromFile(file.Path);
-                                    var stream = file.GetStream();
-                                    var bytes = GetByteArrayFromStream(stream);
-
-
-                                    filename = Path.GetFileName(file.Path);
-                                    ImageUploadedText = "Image uploaded";
-                                    ImageTextColor = Color.Blue;
-                                }
-                                catch (Exception ex)
-                                {
-
-                                }
-
-                           // }
-                           // else
-                               // await App.Current.MainPage.DisplayAlert("Permissions Denied", "Unable to take photos.", "OK");
                             break;
                         //Pick from Gallary
                         case "Pick from Gallary":
@@ -403,18 +405,16 @@ namespace DoAndGet
                                     return;
                                 }
 
-                                var mediafile = await CrossMedia.Current.PickPhotoAsync();
-                                if (mediafile == null)
+                                mediaFile = await CrossMedia.Current.PickPhotoAsync();
+                                if (mediaFile == null)
                                     return;
                                 try
                                 {
-                                    //Profile.Image = ImageSource.FromFile(file.Path);
-                                    var a = ImageSource.FromFile(mediafile.Path);
-                                    var stream = mediafile.GetStream();
+                                    var a = ImageSource.FromFile(mediaFile.Path);
+                                    var stream = mediaFile.GetStream();
                                     var bytes = GetByteArrayFromStream(stream);
-
-                                    // objImage.ImageName = "sample";
-                                     filename = Path.GetFileName(mediafile.Path);
+                                    filename = Path.GetFileName(mediaFile.Path);
+                                  //  UploadImage(mediaFile);
                                     ImageUploadedText = "Image uploaded";
                                     ImageTextColor = Color.Blue;
                                 }
@@ -452,13 +452,45 @@ namespace DoAndGet
             }
         }
 
-        
+
 
         protected virtual void OnPropertyChanged([CallerMemberName]string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs((propertyName)));
         }
 
+        private async Task UploadImage(MediaFile file)
+        {
+            try
+            {
+                var stream = file.GetStream();
+           
+                var result = await Helper.WebServices.UploadProfileImage(new StreamPart(stream, filename),"Bearer " + Global.UserDetails.Token );
+                if (result != null)
+                {
+                    App.Current.Properties["ParentProfileImage"] = result.data.imageUrl;
+                }
+              
+            }
+            catch (Exception ex)
+            {
+                DependencyService.Get<Toasts>().Show(ex.Message);
+            }
+        }
 
+
+        //public async Task UploadImageAsync(Stream image, string fileName)
+        //{
+        //    HttpContent fileStreamContent = new StreamContent(image);
+        //    fileStreamContent.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("form-data") { Name = "image", FileName = fileName };
+        //    fileStreamContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
+        //    using (var client = new HttpClient())
+        //    using (var formData = new MultipartFormDataContent())
+        //    {
+        //        formData.Add(fileStreamContent);
+        //        var response = await client.PostAsync(AppConst.BaseAddress+ "/uploadFile", formData);
+        //        return response.IsSuccessStatusCode;
+        //    }
+        //}
     }
 }

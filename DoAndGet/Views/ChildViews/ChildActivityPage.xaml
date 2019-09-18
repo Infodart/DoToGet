@@ -18,11 +18,11 @@
 
 
 
-                    <ListView x:Name="list" VerticalScrollBarVisibility="Never" Margin="0,10,0,0" VerticalOptions="FillAndExpand" BackgroundColor="#F2F2F9" HorizontalOptions="FillAndExpand" HasUnevenRows="True" SeparatorVisibility="None" ItemsSource="{Binding Data}" SelectedItem="{Binding GotoNextPage}">
+                    <ListView x:Name="list" VerticalScrollBarVisibility="Never" Margin="0,10,0,0" VerticalOptions="FillAndExpand" BackgroundColor="#F2F2F9" HorizontalOptions="FillAndExpand" HasUnevenRows="True" SeparatorVisibility="None" ItemsSource="{Binding Data}" SelectedItem="{Binding SelectItem}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <ViewCell>   
-                                   
+                                <ViewCell>
+
                                     <StackLayout Margin="0,0,0,10" Orientation="Horizontal" VerticalOptions="Fill" Spacing="0" IsClippedToBounds="True">
                                         <BoxView WidthRequest="1.5" VerticalOptions="Fill" Color="Red" Margin="0,10,0,10" />
 
@@ -38,7 +38,7 @@
                                                     <ColumnDefinition Width="7.5*" />
                                                 </Grid.ColumnDefinitions>
                                                 <Label Text="{Binding ActivityName}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="Medium" TextColor="#19BFB0" />
-                                                <Image Source="user" Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" HeightRequest="40" WidthRequest="40" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Aspect="AspectFill"  />
+                                                <Image Source="user" Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" HeightRequest="40" WidthRequest="40" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Aspect="AspectFill" />
                                                 <Label Text="{Binding ChildName}" Grid.Row="1" Grid.Column="1" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FC4B35" />
                                                 <StackLayout Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="5">
                                                     <StackLayout Orientation="Horizontal" Spacing="5">

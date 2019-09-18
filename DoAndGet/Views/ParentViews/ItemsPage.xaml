@@ -51,20 +51,20 @@
                                                     <ColumnDefinition Width="2*" />
                                                     <ColumnDefinition Width="8*" />
                                                 </Grid.ColumnDefinitions>
-                                                <Label Text="{Binding name}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="Medium" TextColor="#19BFB0" />
+                                                <Label Text="{Binding name}" x:Name="lblActivityName" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="Medium" TextColor="#19BFB0" />
                                                 <Image Source="user" Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" HeightRequest="50" WidthRequest="50" VerticalOptions="CenterAndExpand" Aspect="AspectFit" />
                                                 <Label Text="{Binding childId.fullName}" Grid.Row="1" Grid.Column="1" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FC4B35" />
                                                 <StackLayout Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="5">
                                                     <StackLayout Orientation="Horizontal" Spacing="1">
                                                         <Image Source="reward" VerticalOptions="CenterAndExpand" />
-                                                        <Label Text="10" VerticalOptions="CenterAndExpand" TextColor="#545DCA" FontSize="10" />
+                                                        <Label Text="{Binding points}" VerticalOptions="CenterAndExpand" TextColor="#545DCA" FontSize="10" />
                                                         <Label Text="Rewards" VerticalOptions="CenterAndExpand" TextColor="Black" FontSize="8" />
                                                     </StackLayout>
                                                     <BoxView HeightRequest="5" WidthRequest="0.3" Color="Silver" />
                                                     <StackLayout Orientation="Horizontal" Spacing="1">
                                                         <Image Source="time" VerticalOptions="CenterAndExpand" />
                                                         <Label Text="Today" VerticalOptions="CenterAndExpand" TextColor="#545DCA" FontSize="10" />
-                                                        <Label Text="{Binding Time}" VerticalOptions="CenterAndExpand" TextColor="Black" FontSize="8" />
+                                                        <Label Text="{Binding createdAt}" VerticalOptions="CenterAndExpand" TextColor="Black" FontSize="8" />
                                                     </StackLayout>
                                                 </StackLayout>
 

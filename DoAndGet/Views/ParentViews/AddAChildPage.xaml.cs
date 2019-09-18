@@ -7,17 +7,24 @@ namespace DoAndGet
 {
     public partial class AddAChildPage : ContentPage
     {
-        public AddAChildPage()
+        AddAChildPageModel addAChildPageModel;
+        bool Iscall;
+        public AddAChildPage( bool IscallfromMenu)
         {
             InitializeComponent();
-            BindingContext = new AddAChildPageModel(this);
-
+            BindingContext= addAChildPageModel = new AddAChildPageModel(this);
+            Iscall = IscallfromMenu;
             VisualStateManager.GoToState(entryChildAge, "InValid");
             entryChildAge.IsEnabled = false;
             entryChildUserName.IsEnabled = false;
             
             entryChildPassword.IsEnabled = false;
             submitbutton.IsEnabled = false;
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            addAChildPageModel.IscallfromMenmu = Iscall;
         }
 
         void FullName_Handle_TextChanged(object sender, Xamarin.Forms.TextChangedEventArgs e)

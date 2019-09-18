@@ -110,36 +110,43 @@ namespace DoAndGet
             try
             {
 
-                Helper.ShowLoader("Loding");
+
                 if (!string.IsNullOrEmpty(Email) && Validations.IsValidEmail(Email))
                 {
                     if (!string.IsNullOrEmpty(Password))
+
                     {
+                        Helper.ShowLoader("Loding");
                         var loginRequest = new LoginRequest { email = Email, password = Password };
                         loginResponceModel = await Helper.WebServices.Login(loginRequest);
-                        if (loginResponceModel.error == false)
+                        if (loginResponceModel != null)
                         {
-
-                            Global.UserDetails = new UserDetails
+                            if (loginResponceModel.error == false)
                             {
-                                UserName = loginResponceModel.data.fullName,
-                                Email = loginResponceModel.data.email,
-                                Token = loginResponceModel.data.token,
-                                Gemder = loginResponceModel.data.gender,
-                                Image = loginResponceModel.data.image,
-                            };
 
-                            DB.Insert<UserDetails>(Global.UserDetails);
+                                Global.UserDetails = new UserDetails
+                                {
+                                    UserName = loginResponceModel.data.fullName,
+                                    Email = loginResponceModel.data.email,
+                                    Token = loginResponceModel.data.token,
+                                    Gemder = loginResponceModel.data.gender,
+                                    Image = loginResponceModel.data.image,
+                                    IsParent=true
+                                };
 
-                            var mainPage = new MainPage();
-                            Application.Current.MainPage = new NavigationPage(mainPage);
-                            NavigationPage.SetHasNavigationBar(mainPage, false);
-                            DependencyService.Get<Toasts>().Show("You are successfully logged In");
-                            Helper.HideLoader();
-                        }
-                        else
-                        {
-                            DependencyService.Get<Toasts>().Show(loginResponceModel.message);
+
+                                DB.Insert<UserDetails>(Global.UserDetails);
+                                App.Current.Properties["ParentProfileImage"] = loginResponceModel.data.image;
+                                var mainPage = new MainPage();
+                                Application.Current.MainPage = new NavigationPage(mainPage);
+                                NavigationPage.SetHasNavigationBar(mainPage, false);
+                                DependencyService.Get<Toasts>().Show("You are successfully logged In");
+                                Helper.HideLoader();
+                            }
+                            else
+                            {
+                                DependencyService.Get<Toasts>().Show(loginResponceModel.message);
+                            }
                         }
                     }
                     else

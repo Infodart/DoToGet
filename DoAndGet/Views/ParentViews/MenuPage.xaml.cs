@@ -22,8 +22,13 @@ namespace DoAndGet
         public MenuPage()
         {
             InitializeComponent();
+            if (App.Current.Properties.ContainsKey("ParentProfileImage"))
+                ProfileImage.Source = App.Current.Properties["ParentProfileImage"].ToString();
+            else
+                ProfileImage.Source = "profile";
             if (Global.UserDetails != null)
                 lblParentName.Text = Global.UserDetails.UserName;
+                
             else
                 lblParentName.Text = "Parewnt Name";
            menuItems = new List<HomeMenuItem>
@@ -38,14 +43,7 @@ namespace DoAndGet
 
             ListViewMenu.ItemsSource = menuItems;
 
-            //ListViewMenu.SelectedItem = menuItems[0];
-            //ListViewMenu.ItemSelected += async (sender, e) =>
-            //{
-            //    if (e.SelectedItem == null)
-            //        return;
-
-            //    var id = (int)((HomeMenuItem)e.SelectedItem).Id;
-            //    NavigateFromMenu(id);
+           
 
 
             ListViewMenu.ItemsSource = menuItems;
@@ -64,65 +62,6 @@ namespace DoAndGet
             };
         }
 
-        //public void NavigateFromMenu(int id)
-        //{
-        //    if (!MenuPages.ContainsKey(id))
-        //    {
-        //        switch (id)
-        //        {
-        //            case (int)MenuItemType.Home:
-        //                MenuPages.Add(id, new NavigationPage(new ItemsPage()));
-        //                SetMenu(id);
-        //                break;
-        //            case (int)MenuItemType.History:
-        //                MenuPages.Add(id, new NavigationPage(new HistoryPage()));
-        //                SetMenu(id);
-                      
-        //                break;
-        //            case (int)MenuItemType.Review:
-        //                MenuPages.Add(id, new NavigationPage(new ReviewAndActivityPage()));
-        //                SetMenu(id);
-        //                break;
-
-        //            case (int)MenuItemType.Rewards:
-        //                MenuPages.Add(id, new NavigationPage(new RewardsPage()));
-        //                SetMenu(id);
-        //                break;
-
-        //            case (int)MenuItemType.Logout:
-        //               // var page = FreshPageModelResolver.ResolvePageModel<LoginPageModel>();
-        //               // var basicNavContainer = new FreshNavigationContainer(page);
-        //              //  Application.Current.MainPage = basicNavContainer;
-        //                break;
-        //        }
-        //    }
-        //    else
-        //        if (id != 4)
-        //            SetMenu(id);
-
-        //}
-
-        //private async void SetMenu(int id)
-        //{
-        //    var newPage = MenuPages[id];
-
-        //    var detail = GetDetailPage();
-        //    if (newPage != null && detail != newPage)
-        //    {
-        //       // var mainPage = Application.Current.MainPage as CustomFreshMasterDetailNavigationContainer;
-        //      //  mainPage.Detail = newPage;
-
-        //       // if (Device.RuntimePlatform == Device.Android)
-        //        //    await Task.Delay(100);
-        //       // mainPage.IsPresented = false;
-              
-        //    }
-        //}
-
-        //private Page GetDetailPage()
-        //{
-        //    var mainPage = Application.Current.MainPage as CustomFreshMasterDetailNavigationContainer;
-        //    return mainPage.Detail;
-        //}
+     
     }
 }

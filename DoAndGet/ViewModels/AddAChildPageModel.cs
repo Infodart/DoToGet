@@ -6,7 +6,10 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Acr.UserDialogs;
 using DoAndGet.Helpers;
+using DoAndGet.Interfaces;
 using DoAndGet.Models;
+using DoAndGet.RequestModels;
+using DoAndGet.Utils;
 using Plugin.Media;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
@@ -16,6 +19,7 @@ namespace DoAndGet
 {
     public class AddAChildPageModel : INotifyPropertyChanged
     {
+        public bool IscallfromMenmu;
         private string _uncheckedimage = "unselectRadio";
         private string _checkedimage = "selectRadio";
         private string _imageUploadedText = "Upload your image";
@@ -27,6 +31,7 @@ namespace DoAndGet
         private string _userName;
         private string _Password;
         private bool _childListVisible = false;
+        private string filename;
         private ObservableCollection<ChildDataModel> _childDetailList;
         public string Gender="Boy";
         AddAChildPage _Page;
@@ -100,7 +105,7 @@ namespace DoAndGet
             if (ChildName != null && ChildAge != null && UserName != null && Password != null)
             {
 
-                //UserDialogs.Instance.Alert("Child added successfully", "Sucess", "OK");
+              
                 Util.ChildName = ChildName;
                 Util.ChildAge = ChildAge;
                 Util.UserName = UserName;
@@ -128,7 +133,33 @@ namespace DoAndGet
             {
                 return new Command(async () =>
                 {
-                    // await CoreMethods.PushPageModel<ParentRegistationPageModel>();
+                    if (IscallfromMenmu)
+                    {
+                        try
+                        {
+                            Helper.ShowLoader("Loding...");
+                            var request = new AddSingleChildRequest { fullName = ChildName, gender = Gender, image = filename, username = UserName, password = Password };
+                            var response = await Helper.WebServices.AddSingleChild(("Bearer " + Global.UserDetails.Token), request);
+                            if (!response.error)
+                            {
+                                await Application.Current.MainPage.Navigation.PopAsync();
+                                DependencyService.Get<Toasts>().Show(response.message);
+                            }
+                            else
+                                DependencyService.Get<Toasts>().Show(response.message);
+                        }
+                        catch (Exception ex)
+                        {
+                            DependencyService.Get<Toasts>().Show(ex.Message);
+                        }
+                        finally
+                        {
+                            Helper.ShowLoader("Loding...");
+                        }
+
+                    }
+                    else
+                         
                     await Application.Current.MainPage.Navigation.PushAsync(new NavigationPage(new ParentRegistationPage()));
                 });
             }
@@ -198,19 +229,19 @@ namespace DoAndGet
             }
         }
 
-        public Command GotoAddaChildPage
-        {
-            get
-            {
-                return new Command(async () =>
-                {
-                    // await CoreMethods.PushPageModel<AddAChildPageModel>();
-                    await Application.Current.MainPage.Navigation.PushAsync(new NavigationPage(new AddAChildPage()));
-                });
-            }
+        //public Command GotoAddaChildPage
+        //{
+        //    get
+        //    {
+        //        return new Command(async () =>
+        //        {
+                   
+        //            await Application.Current.MainPage.Navigation.PushAsync(new NavigationPage(new AddAChildPage()));
+        //        });
+        //    }
 
 
-        }
+        //}
         public Command Gotonextpage
         {
             get
@@ -329,7 +360,7 @@ namespace DoAndGet
                                     var bytes = GetByteArrayFromStream(stream);
 
 
-                                    string filename = Path.GetFileName(file.Path);
+                                    filename = Path.GetFileName(file.Path);
                                     ImageUploadedText = "Image uploaded";
                                     ImageTextColor = Color.Blue;
                                 }
@@ -377,7 +408,7 @@ namespace DoAndGet
                                     var bytes = GetByteArrayFromStream(stream);
 
                                     // objImage.ImageName = "sample";
-                                    string filename = Path.GetFileName(mediafile.Path);
+                                     filename = Path.GetFileName(mediafile.Path);
                                     ImageUploadedText = "Image uploaded";
                                     ImageTextColor = Color.Blue;
                                 }

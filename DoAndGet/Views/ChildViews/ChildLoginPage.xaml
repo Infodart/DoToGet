@@ -27,8 +27,8 @@
                         <controls:MyFrame Margin="35,0,35,0" CornerRadius="30" Padding="15">
                             <StackLayout Orientation="Horizontal">
                                 <Image Source="user" HeightRequest="30" WidthRequest="30" />
-                                <controls:MyEntry x:Name="mailEntry" TextChanged="Mail_TextChanged" PlaceholderColor="#CCCCCC" Placeholder="User name" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
-                                    <VisualStateManager.VisualStateGroups>
+                                <controls:MyEntry x:Name="mailEntry" TextChanged="Mail_TextChanged" Text="{Binding UserName}" PlaceholderColor="#CCCCCC" Placeholder="User name" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                    <!--<VisualStateManager.VisualStateGroups>
                                         <VisualStateGroup x:Name="ValidityStates">
                                             <VisualState x:Name="Valid">
                                                 <VisualState.Setters>
@@ -41,15 +41,15 @@
                                                 </VisualState.Setters>
                                             </VisualState>
                                         </VisualStateGroup>
-                                    </VisualStateManager.VisualStateGroups>
+                                    </VisualStateManager.VisualStateGroups>-->
                                 </controls:MyEntry>
                             </StackLayout>
                         </controls:MyFrame>
                         <controls:MyFrame Margin="35,0,35,0" CornerRadius="30" Padding="15">
                             <StackLayout Orientation="Horizontal">
                                 <Image Source="password" HeightRequest="30" WidthRequest="30" />
-                                <controls:MyEntry x:Name="passwordEntry" TextChanged="Password_TextChanged" IsPassword="True" PlaceholderColor="#CCCCCC" Placeholder="Password" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
-                                    <VisualStateManager.VisualStateGroups>
+                                <controls:MyEntry x:Name="passwordEntry" Text="{Binding Password}" TextChanged="Password_TextChanged" IsPassword="True" PlaceholderColor="#CCCCCC" Placeholder="Password" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                    <!--<VisualStateManager.VisualStateGroups>
                                         <VisualStateGroup x:Name="ValidityStates">
                                             <VisualState x:Name="Valid">
                                                 <VisualState.Setters>
@@ -62,7 +62,7 @@
                                                 </VisualState.Setters>
                                             </VisualState>
                                         </VisualStateGroup>
-                                    </VisualStateManager.VisualStateGroups>
+                                    </VisualStateManager.VisualStateGroups>-->
                                 </controls:MyEntry>
                             </StackLayout>
                         </controls:MyFrame>

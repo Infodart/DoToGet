@@ -7,16 +7,23 @@ namespace DoAndGet
 {
     public partial class RewardsPage : ContentPage
     {
+        RewardsPageModel rewardsPageModel;
         public RewardsPage()
         {
             InitializeComponent();
-            BindingContext = new RewardsPageModel();
+            BindingContext = rewardsPageModel = new RewardsPageModel();
         }
         async void OnButtonClicked(object sender, EventArgs args)
         {
             //var masterPage = Application.Current.MainPage as MainPage;
             // masterPage.IsPresented = !masterPage.IsPresented;
             Helper.IsMaster();
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            rewardsPageModel.GetData();
+
         }
     }
 }

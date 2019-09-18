@@ -11,8 +11,8 @@
                 <Label x:Name="lblTitle" FontSize="Header" HorizontalTextAlignment="Center" LineBreakMode="WordWrap" />
                 <Label x:Name="lblDescription" TextColor="blue" FontSize="Micro" LineBreakMode="WordWrap" />
                 <StackLayout Orientation="Horizontal" Margin="0,30,0,0">
-                    <Button Text="Ok" BackgroundColor="#FEBA09" HorizontalOptions="FillAndExpand" FontAttributes="Bold" CornerRadius="10" TextColor="white" Clicked="OnClose" />
-                    <Button Text="Cancel" TextColor="white" BackgroundColor="#FA3C27" FontAttributes="Bold" HorizontalOptions="FillAndExpand" CornerRadius="10" Clicked="OnClose" />
+                    <Button Text="Ok" BackgroundColor="#FEBA09" HorizontalOptions="FillAndExpand" FontAttributes="Bold" CornerRadius="10" TextColor="white"  Command="{Binding StatustUpdate}"/>
+                    <Button Text="Cancel" TextColor="white" BackgroundColor="#FA3C27" FontAttributes="Bold" HorizontalOptions="FillAndExpand" CornerRadius="10"   Clicked="OnClose"/>
                 </StackLayout>
             </StackLayout>
         </controls:MyFrame>

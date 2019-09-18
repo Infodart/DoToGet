@@ -19,6 +19,8 @@
     <PackageReference Include="Acr.UserDialogs" Version="7.0.0" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.2.0" />
     <PackageReference Include="Rg.Plugins.Popup" Version="1.1.5.188" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
@@ -35,5 +37,6 @@
     <Folder Include="Views\ChildViews\ChildDashBoard\" />
     <Folder Include="RequestModels\" />
     <Folder Include="ResponceModels\" />
+    <Folder Include="ViewModels\PopupPageViewModel\" />
   </ItemGroup>
 </Project>

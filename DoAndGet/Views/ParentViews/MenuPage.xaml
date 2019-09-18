@@ -1,13 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="DoAndGet.MenuPage"
-             Title="Menu"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             ios:Page.UseSafeArea="True">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="DoAndGet.MenuPage" Title="Menu" xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:transform="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations" xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" ios:Page.UseSafeArea="True">
 
     <Grid VerticalOptions="FillAndExpand">
         <Grid.RowDefinitions>
@@ -17,19 +9,19 @@
         <Frame Grid.Row="0">
 
             <StackLayout>
-                <Image Source="profile"
-                       HeightRequest="150"
-                       WidthRequest="150" />
-                <Label x:Name="lblParentName"
-                       HorizontalTextAlignment="Center" />
+                <ffimage:CachedImage   Source="profile" x:Name="ProfileImage" HeightRequest="150" WidthRequest="150" Aspect="AspectFit" DownsampleToViewSize="True">
+
+                    <ffimage:CachedImage.Transformations>
+
+                        <transform:CircleTransformation />
+                    </ffimage:CachedImage.Transformations>
+
+                </ffimage:CachedImage>
+                <Label x:Name="lblParentName" HorizontalTextAlignment="Center" />
 
             </StackLayout>
         </Frame>
-        <ListView Grid.Row="1"
-                  BackgroundColor="#F2F2F9"
-                  x:Name="ListViewMenu"
-                  SeparatorVisibility="None"
-                  HasUnevenRows="True">
+        <ListView Grid.Row="1" BackgroundColor="#F2F2F9" x:Name="ListViewMenu" SeparatorVisibility="None" HasUnevenRows="True">
 
 
 
@@ -43,14 +35,8 @@
                                 <ColumnDefinition Width="2*" />
                                 <ColumnDefinition Width="8*" />
                             </Grid.ColumnDefinitions>
-                            <Image Source="{Binding Icon}"
-                                   Grid.Column="0"
-                                   HorizontalOptions="Start" />
-                            <Label Grid.Column="1"
-                                   Text="{Binding Title}"
-                                   FontSize="15"
-                                   HorizontalTextAlignment="Start"
-                                   VerticalOptions="CenterAndExpand" />
+                            <Image Source="{Binding Icon}" Grid.Column="0" HorizontalOptions="Start" />
+                            <Label Grid.Column="1" Text="{Binding Title}" FontSize="15" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand" />
                         </Grid>
 
                     </ViewCell>

@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using DoAndGet.Models;
 using Realms;
 
 namespace DoAndGet
@@ -68,10 +71,25 @@ namespace DoAndGet
             return null;
         }
 
+
+        public static void DeleteLocalData()
+        {
+            try
+            {
+                DB.DeleteAll<UserDetails>();
+               
+            }
+            catch (Exception ex) { }
+        }
         public static List<T> GetAll<T>() where T : RealmObject
         {
             Realm realmDB = Realm.GetInstance();
             return realmDB.All<T>().ToList();
+        }
+
+        internal static Task Delete<T>(object global)
+        {
+            throw new NotImplementedException();
         }
     }
 }

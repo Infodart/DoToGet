@@ -8,6 +8,7 @@ namespace DoAndGet.Models
         public string Gemder { get; set; }
         public string Image { get; set; }
         public string Token { get; set; }
+       public bool IsParent { set; get; }
 
     }
 }

@@ -7,10 +7,13 @@ namespace DoAndGet
 {
     public partial class ActivityStatusPage : ContentPage
     {
-        public ActivityStatusPage()
+        ActivityStatusPageModel activityStatusPageModel;
+         
+        public ActivityStatusPage(string activityId)
         {
             InitializeComponent();
-            BindingContext = new ActivityStatusPageModel();
+            BindingContext = activityStatusPageModel = new ActivityStatusPageModel();
+            activityStatusPageModel.activityId = activityId;
         }
         async void OnButtonClicked(object sender, EventArgs args)
         {

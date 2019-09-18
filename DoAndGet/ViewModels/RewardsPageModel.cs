@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using DoAndGet.Helpers;
+using DoAndGet.Interfaces;
 using DoAndGet.Models;
 using DoAndGet.ResponceModels.RewardModel;
 using DoAndGet.Utils;
@@ -26,26 +27,30 @@ namespace DoAndGet
         public RewardsPageModel()
         {
 
-            GetData();
+           // GetData();
 
         }
 
-        private async void GetData()
+        public async void GetData()
         {
             try
             {
                 Helper.ShowLoader("Loding");
                 var getAllreward = await Helper.WebServices.GetAllReward("Bearer " + Global.UserDetails.Token);
+                if (getAllreward.data.Count>0)
+                {
 
-
-                if (getAllreward.error == false)
-                    RewardsData = new ObservableCollection<RewardDatum>(getAllreward.data);
+                    if (getAllreward.error == false)
+                        RewardsData = new ObservableCollection<RewardDatum>(getAllreward.data);
+                    else
+                        DependencyService.Get<Toasts>().Show(getAllreward.message);
+                }
                 else
-                    Helper.ShowAlert("Alert", getAllreward.message);
+                    DependencyService.Get<Toasts>().Show("No data found");
             }
             catch (Exception ex)
             {
-                var msg = ex.Message;
+                DependencyService.Get<Toasts>().Show(ex.Message);
             }
             finally
             {
@@ -67,11 +72,10 @@ namespace DoAndGet
             {
                 return new Command(async () =>
                 {
-                    // await CoreMethods.PushPageModel<AddRewardsPageModel>();
-                    // await  Application.Current.MainPage.Navigation.PushAsync(new AddRewardsPage());
+
                     try
                     {
-                        //  await CoreMethods.PushPageModel<AddRewardsPageModel>();
+                       
                         await Application.Current.MainPage.Navigation.PushAsync(new AddRewardsPage());
                     }
                     catch (Exception ex)

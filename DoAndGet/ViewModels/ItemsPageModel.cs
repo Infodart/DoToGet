@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using DoAndGet.Helpers;
+using DoAndGet.Interfaces;
 using DoAndGet.ResponceModels.GetActivity;
 using DoAndGet.Utils;
 using Xamarin.Forms;
@@ -31,21 +32,41 @@ namespace DoAndGet
         public ItemsPageModel()
         {
 
-            GetData();
+            // GetData();
         }
 
-        private async void GetData()
+        public async void GetData()
         {
             try
             {
                 Helper.ShowLoader("Loding");
                 var getAllActivity = await Helper.WebServices.GetAllActivity("Bearer " + Global.UserDetails.Token);
-                if (getAllActivity.error == false)
-                    Data = new ObservableCollection<Datum>(getAllActivity.data);
+                if (getAllActivity != null)
+                {
+                    if (getAllActivity.error == false)
+
+                    {
+
+                        var data = getAllActivity.data;
+                        data.ForEach(x =>
+                        {
+                            var ct = Convert.ToInt64(x.createdAt);
+                            var dt = new DateTime(ct).ToString("hh:mm tt");
+                            x.createdAt = dt;
+                        });
+
+                        Data = new ObservableCollection<Datum>(data);
+                    }
+
+
+                    else
+                        DependencyService.Get<Toasts>().Show(getAllActivity.message);
+                }
                 else
-                    Helper.ShowAlert("Alert", getAllActivity.message);
+                    DependencyService.Get<Toasts>().Show("No data found.");
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 var msg = ex.Message;
             }
@@ -53,13 +74,13 @@ namespace DoAndGet
             {
                 Helper.HideLoader();
             }
-          
+
         }
 
         private async void AddTaskHandler(object obj)
         {
             await Application.Current.MainPage.Navigation.PushAsync(new AddActivityPage());
-            
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

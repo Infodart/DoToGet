@@ -22,9 +22,8 @@ namespace DoAndGet
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-        var data=await childrenHistoryPageModel.GetData();
-            list.ItemsSource = data;
-
+            childrenHistoryPageModel.GetData();
+       
         }
     }
 }

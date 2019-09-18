@@ -19,7 +19,7 @@ namespace DoAndGet.ResponceModels.GetActivity
         public string parentId { get; set; }
         public object createdAt { get; set; }
         public string id { get; set; }
-    }
+}
     public class ChildId
     {
         public string fullName { get; set; }
