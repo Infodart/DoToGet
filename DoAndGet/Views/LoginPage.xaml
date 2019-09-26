@@ -4,7 +4,7 @@
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
             <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource topSacklayoutcolor}">
 
-                <Image HorizontalOptions="CenterAndExpand" Margin="0,60,0,0" HeightRequest="150" WidthRequest="150" VerticalOptions="CenterAndExpand" Source="logo" />
+                <Image HorizontalOptions="CenterAndExpand" Margin="0,60,0,0" HeightRequest="150" WidthRequest="150" VerticalOptions="CenterAndExpand" Source="logo1" />
 
             </StackLayout>
 

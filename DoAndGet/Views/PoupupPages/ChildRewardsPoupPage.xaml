@@ -12,7 +12,7 @@
                 <Label x:Name="lblTitle" FontSize="Medium" HorizontalTextAlignment="Center" LineBreakMode="WordWrap" />
                 <Label x:Name="lblDescription" TextColor="blue" FontSize="Micro" LineBreakMode="WordWrap" HorizontalTextAlignment="Center"/>
                 <StackLayout Orientation="Horizontal" Margin="0,30,0,20">
-                    <Button Text="Ok" BackgroundColor="#FEBA09" HorizontalOptions="FillAndExpand" FontAttributes="Bold" CornerRadius="10" TextColor="white" Clicked="OnClose" />
+                    <Button Text="Ok" BackgroundColor="#FEBA09" HorizontalOptions="FillAndExpand" FontAttributes="Bold" CornerRadius="10" TextColor="white" Command="{Binding PointRedeem}" />
                     <Button Text="Cancel" TextColor="white" BackgroundColor="#FA3C27" FontAttributes="Bold" HorizontalOptions="FillAndExpand" CornerRadius="10" Clicked="OnClose" />
                 </StackLayout>
             </StackLayout>

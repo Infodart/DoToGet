@@ -32,7 +32,7 @@ namespace DoAndGet
             //else
             //    VisualStateManager.GoToState(passwordEntry, "InValid");
 
-            if (!string.IsNullOrEmpty(e.NewTextValue) && e.NewTextValue.Length >= 7)
+            if (!string.IsNullOrEmpty(e.NewTextValue) && e.NewTextValue.Length >= 6)
             {
 
                 VisualStateManager.GoToState(passwordEntry, "Valid");

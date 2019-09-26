@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 using DoAndGet.Helpers;
@@ -8,14 +9,15 @@ using DoAndGet.Interfaces;
 using DoAndGet.ResponceModels.GetActivity;
 using DoAndGet.Utils;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace DoAndGet
 {
     public class HistoryPageModel : INotifyPropertyChanged
     {
-
-        private ObservableCollection<Datum> _data;
-        public ObservableCollection<Datum> Data
+        private static readonly DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        private ObservableCollection<ChildList> _data;
+        public ObservableCollection<ChildList> Data
         {
             get { return _data; }
             set
@@ -28,148 +30,64 @@ namespace DoAndGet
         public HistoryPageModel()
         {
 
-            GetData();
+            // GetData();
         }
-        private async void GetData()
+        public async void GetData()
         {
             try
             {
-                Helper.ShowLoader("Loding");
+                Helper.ShowLoader("Loading data");
                 var getData = await Helper.WebServices.GetAllActivity("Bearer " + Global.UserDetails.Token);
-                if (getData.data.Count > 0)
+                if (getData.error == false)
                 {
-
-
-                    if (getData.error == false)
+                    if (getData.data != null)
                     {
-                        var data = getData.data;
-                        data.ForEach(x =>
-                        {
+
+                        getData.data.list.ForEach(x => { x.childId.image = getData.data.imageUrl + x.childId.image;
                             var ct = Convert.ToInt64(x.createdAt);
-                            var dt = new DateTime(ct).ToString("hh:mm tt");
-                            x.createdAt = dt;
-                        });
+                            var dt = FromUnixTime(ct);//1568965147);
+                            var createdTime = dt.ToString("hh:mm tt");
+                            x.createdAt = createdTime;
+                        }) ;
 
-                        Data = new ObservableCollection<Datum>(data);
+                        var listdata = getData.data.list.ToList().FindAll(x => x.status == 3);
+                        
+                        //listdata.ForEach(x =>
+                        //{
+                        //    var ct = Convert.ToInt64(x.createdAt);
+                        //    var dt = new DateTime(ct).ToString("hh:mm tt");
+                        //    x.createdAt = dt;
 
+                        //});
+
+                        Data = new ObservableCollection<ChildList>(listdata);
+
+                        Helper.HideLoader();
 
                     }
-
-
                     else
-                        DependencyService.Get<Toasts>().Show(getData.message);
+                        DependencyService.Get<Toasts>().Show("No data found");
                 }
+
+
                 else
-                    DependencyService.Get<Toasts>().Show("No data found");
+                    DependencyService.Get<Toasts>().Show(getData.message);
             }
+
             catch (Exception ex)
             {
-                var msg = ex.Message;
+                DependencyService.Get<Toasts>().Show(ex.Message);
             }
             finally
             {
                 Helper.HideLoader();
             }
         }
+        public static DateTime FromUnixTime(long unixTime)
+        {
+            return epoch.AddMilliseconds(unixTime);
+        }
 
-        //public async Task<ObservableCollection<HistoryDataModel>> GetData()
-        //{
-
-
-        //    try
-        //    {
-        //        var model = new HistoryDataModel
-        //        {
-        //            ActivityName = "Cleaning  room",
-        //            ChildName = "Tousif Raza",
-        //            ActivityDateTime = "10:30AM-12:00AM",
-        //            ActivityDay = DateTime.Now.DayOfWeek.ToString(),
-        //            Icon = "boy",
-        //             ActivityNameTextColor = Color.FromRgb(39, 194, 181),
-        //            BoxViewColor = Color.Red
-
-
-        //        };
-        //        HistoryData.Add(model);
-
-        //        var model1 = new HistoryDataModel
-        //        {
-        //            ActivityName = "Finish your homework",
-        //            ChildName = "Tom Mody",
-        //            ActivityDateTime = "10:30AM-12:00AM",
-        //            ActivityDay = DateTime.Now.DayOfWeek.ToString(),
-        //            Icon = "girl",
-        //            ActivityNameTextColor = Color.FromRgb(251, 60, 39),
-        //            BoxViewColor = Color.FromRgb(39, 194, 181),
-
-        //        };
-        //        HistoryData.Add(model1);
-        //        var model2 = new HistoryDataModel
-        //        {
-        //            ActivityName = "Finish your lunch",
-        //            ChildName = "Rishi Lohani",
-        //            ActivityDateTime = "10:30AM-12:00AM",
-        //            ActivityDay = DateTime.Now.DayOfWeek.ToString(),
-        //            Icon = "boy",
-        //            ActivityNameTextColor = Color.FromRgb(39, 194, 181),
-        //            BoxViewColor = Color.Red
-
-        //        };
-        //        HistoryData.Add(model2);
-
-        //        var model3 = new HistoryDataModel
-        //        {
-        //            ActivityName = "Clean your room",
-        //            ChildName = "Sam Peter",
-        //            ActivityDateTime = "10:30AM-12:00AM",
-        //            ActivityDay = DateTime.Now.DayOfWeek.ToString(),
-        //            Icon = "girl",
-        //            ActivityNameTextColor = Color.FromRgb(251, 60, 39),
-        //            BoxViewColor = Color.FromRgb(39, 194, 181),
-
-
-
-        //        };
-        //        HistoryData.Add(model3);
-        //        var model4 = new HistoryDataModel
-        //        {
-        //            ActivityName = "Finish your homework",
-        //            ChildName = "Tom Mody",
-        //            ActivityDateTime = "10:30AM-12:00AM",
-        //            ActivityDay = DateTime.Now.DayOfWeek.ToString(),
-        //            Icon = "boy",
-        //            ActivityNameTextColor = Color.FromRgb(39, 194, 181),
-        //            BoxViewColor = Color.Red
-
-        //        };
-        //        HistoryData.Add(model4);
-        //        var model5 = new HistoryDataModel
-        //        {
-        //            ActivityName = "Finish your lunch",
-        //            ChildName = "Rishi Lohani",
-        //            ActivityDateTime = "10:30AM-12:00AM",
-        //            ActivityDay = DateTime.Now.DayOfWeek.ToString(),
-        //            Icon = "girl",
-        //            ActivityNameTextColor = Color.FromRgb(251, 60, 39),
-        //            BoxViewColor = Color.FromRgb(39, 194, 181),
-
-        //        };
-        //        HistoryData.Add(model5);
-        //        if (HistoryData != null)
-
-        //            return new ObservableCollection<HistoryDataModel>(HistoryData);
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //    }
-        //    finally
-        //    {
-
-        //    }
-        //    return new ObservableCollection<HistoryDataModel>();
-
-        //}
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName]string propertyName = null)

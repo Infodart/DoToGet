@@ -32,7 +32,7 @@ namespace DoAndGet
             try
             {
 
-                Helper.ShowLoader("Loding");
+                Helper.ShowLoader("Please wait");
                 getAllChild = await Helper.WebServices.GetAllChild("Bearer " + Global.UserDetails.Token);
 
                 if (getAllChild.error == false)
@@ -46,7 +46,7 @@ namespace DoAndGet
             }
             finally
             {
-                Helper.ShowLoader("Loding");
+                Helper.HideLoader();
             }
 
             return new ObservableCollection<Datum>(getAllChild.data);
@@ -173,7 +173,7 @@ namespace DoAndGet
                         {
                             if (null != ChildId)
                             {
-                                Helper.ShowLoader("Loading...");
+                                Helper.ShowLoader("PLease wait");
                                 var request = new AddActivityRequest { name = ActivityName, points = AddPoint.ToString(), childId = ChildId.id };
                                 var addActivityresponse = await Helper.WebServices.AddActivity(("Bearer " + Global.UserDetails.Token), request);
                                 if (!addActivityresponse.error)

@@ -16,7 +16,7 @@
             <ScrollView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource topSacklayoutcolor}" VerticalScrollBarVisibility="Never">
                 <StackLayout HorizontalOptions="FillAndExpand" Spacing="0" VerticalOptions="FillAndExpand">
                     <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" BackgroundColor="{StaticResource topSacklayoutcolor}">
-                        <Image HorizontalOptions="Center" HeightRequest="150" WidthRequest="150" Margin="0,10,0,0" VerticalOptions="Center" Source="logo" />
+                        <Image HorizontalOptions="Center" HeightRequest="150" WidthRequest="150" Margin="0,10,0,0" VerticalOptions="Center" Source="logo1" />
                     </StackLayout>
                     <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="40" BackgroundColor="{StaticResource lowerstacklayoutcolor}">
                         <StackLayout BackgroundColor="{StaticResource middlestacklayoutcolor}" HeightRequest="70" HorizontalOptions="FillAndExpand">

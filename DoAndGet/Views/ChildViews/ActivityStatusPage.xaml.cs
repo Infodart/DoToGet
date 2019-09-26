@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using DoAndGet.Helpers;
+using DoAndGet.ResponceModels;
 using Xamarin.Forms;
 
 namespace DoAndGet
@@ -9,22 +8,21 @@ namespace DoAndGet
     {
         ActivityStatusPageModel activityStatusPageModel;
          
-        public ActivityStatusPage(string activityId)
+        public ActivityStatusPage(ActiviyList activiyList)
         {
             InitializeComponent();
             BindingContext = activityStatusPageModel = new ActivityStatusPageModel();
-            activityStatusPageModel.activityId = activityId;
+            activityStatusPageModel.activityId = activiyList.id;
+            lblName.Text = activiyList.childId.fullName;
+            lblDescription.Text = activiyList.name;
+            ImgChild.Source = activiyList.childId.image;
         }
-        async void OnButtonClicked(object sender, EventArgs args)
-        {
-
-            Helper.IsMaster();
-        }
+       
 
         async void OnbackClicked(object sender, EventArgs args)
         {
 
-            await Application.Current.MainPage.Navigation.PopAsync(true);
+            await Application.Current.MainPage.Navigation.PopAsync();
         }
     }
 }

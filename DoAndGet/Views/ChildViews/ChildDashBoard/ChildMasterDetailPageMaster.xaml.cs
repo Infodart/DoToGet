@@ -8,12 +8,12 @@ namespace DoAndGet
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ChildMasterDetailPageMaster : ContentPage
     {
-
+        ChildMasterDetailPageModel childMasterDetailPageModel;
         public List<ChildMasterDetailPageMenuItem> menuItems { get; set; }
         public ChildMasterDetailPageMaster()
         {
             InitializeComponent();
-
+            BindingContext = childMasterDetailPageModel = new ChildMasterDetailPageModel();
             menuItems = new List<ChildMasterDetailPageMenuItem>
             {
                 new ChildMasterDetailPageMenuItem {Id = ChildMenuItemType.Home, Title="Home",Icon="home" },
@@ -35,7 +35,11 @@ namespace DoAndGet
                 await mainPage.NavigateFromMenu(id);
             };
         }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            childMasterDetailPageModel.GetProfileData();
+        }
 
-        
     }
 }

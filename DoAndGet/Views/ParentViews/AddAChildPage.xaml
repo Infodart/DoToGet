@@ -124,7 +124,7 @@
                             </controls:MyEntry>
                         </StackLayout>
                     </controls:MyFrame>
-                    <Button  x:Name="submitbutton" Text="Add Child" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand" Margin="50,-10,50,0" Command="{Binding GotoChildPage}" Style="{StaticResource BaseButtonStyle}" />
+                    <Button  x:Name="submitbutton" Text="Add Child" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand" Margin="50,-10,50,0" Command="{Binding AddChildCommand}" Style="{StaticResource BaseButtonStyle}" />
 
                 </StackLayout>
             </ScrollView>

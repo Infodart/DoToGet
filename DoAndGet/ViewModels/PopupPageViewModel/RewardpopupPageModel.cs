@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using DoAndGet.Helpers;
 using DoAndGet.Interfaces;
 using DoAndGet.RequestModels;
@@ -8,11 +9,13 @@ using Xamarin.Forms;
 
 namespace DoAndGet.ViewModels.PopupPageViewModel
 {
-    public class RewardpopupPageModel
+    public class RewardpopupPageModel : INotifyPropertyChanged
     {
         public bool Isflag;
         public string ActivityId;
-        private string status;
+        private int status;
+       // RewardpopupPage rewardpopupPage;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public Command StatustUpdate
         {
@@ -26,22 +29,26 @@ namespace DoAndGet.ViewModels.PopupPageViewModel
 
                        if(!Isflag)
                         {
-                            status = "3";
-                            Helper.ShowLoader("Loding...");
+                            status = 3;
+                            Helper.ShowLoader("Please wait");
                             var request = new UpdateActivityStatusRequest { id = ActivityId, status = status };
                             var response =  await   Helper.WebServices.UpdateActivityStatus(("Bearer " + Global.UserDetails.Token),request);
                             if (!response.error)
                             {
                                 await PopupNavigation.Instance.PopAsync();
+                                // await PopupNavigation.Instance.PushAsync(rewardpopupPage,true);
                                 DependencyService.Get<Toasts>().Show(response.message);
                             }
                             else
+                            {
+                                 await PopupNavigation.Instance.PopAsync();
                                 DependencyService.Get<Toasts>().Show(response.message);
+                            }
                         }
                        else
                         {
-                            status = "4";
-                            Helper.ShowLoader("Loding...");
+                            status = 4;
+                            Helper.ShowLoader("Please wait");
                             var request = new UpdateActivityStatusRequest { id = ActivityId, status = status };
                             var response = await Helper.WebServices.UpdateActivityStatus(("Bearer " + Global.UserDetails.Token), request);
                             if (!response.error)
@@ -50,12 +57,16 @@ namespace DoAndGet.ViewModels.PopupPageViewModel
                                 DependencyService.Get<Toasts>().Show(response.message);
                             }
                             else
+                            {
+                                await PopupNavigation.Instance.PopAsync();
                                 DependencyService.Get<Toasts>().Show(response.message);
+                            }
                         }
                     }
                     catch (Exception ex)
                     {
-
+                        await PopupNavigation.Instance.PopAsync();
+                        DependencyService.Get<Toasts>().Show(ex.Message);
                     }
                     finally
                     {
@@ -69,6 +80,7 @@ namespace DoAndGet.ViewModels.PopupPageViewModel
 
         public RewardpopupPageModel()
         {
+           // rewardpopupPage = new RewardpopupPage(ActivityId, "", "", false);
         }
     }
 }

@@ -153,8 +153,8 @@ namespace DoAndGet
                         {
                             if (null != SelectedSlot)
                             {
-                                Helper.ShowLoader("Loading...");
-                                var request = new AddRewardRequest { name = RewardName, points = AddPoint.ToString()};
+                                Helper.ShowLoader("Please wait");
+                                var request = new AddRewardRequest { name = RewardName, points = AddPoint.ToString(),duration=SelectedSlot.Name};
                                 var addActivityresponse = await Helper.WebServices.AddReward(("Bearer " + Global.UserDetails.Token), request);
                                 if (!addActivityresponse.error)
                                 {

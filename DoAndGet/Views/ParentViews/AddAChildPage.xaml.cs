@@ -9,11 +9,11 @@ namespace DoAndGet
     {
         AddAChildPageModel addAChildPageModel;
         bool Iscall;
-        public AddAChildPage( bool IscallfromMenu)
+        public AddAChildPage( )
         {
             InitializeComponent();
             BindingContext= addAChildPageModel = new AddAChildPageModel(this);
-            Iscall = IscallfromMenu;
+           
             VisualStateManager.GoToState(entryChildAge, "InValid");
             entryChildAge.IsEnabled = false;
             entryChildUserName.IsEnabled = false;
@@ -24,12 +24,12 @@ namespace DoAndGet
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            addAChildPageModel.IscallfromMenmu = Iscall;
+            
         }
 
         void FullName_Handle_TextChanged(object sender, Xamarin.Forms.TextChangedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(e.NewTextValue) && Validations.IsValidName(e.NewTextValue))
+            if (!string.IsNullOrEmpty(e.NewTextValue))
             {
                 VisualStateManager.GoToState(entryChildName, "Valid");
                 VisualStateManager.GoToState(entryChildAge, "Valid");
@@ -54,7 +54,7 @@ namespace DoAndGet
 
         void Child_Age_TextChanged(object sender, Xamarin.Forms.TextChangedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(e.NewTextValue) && e.NewTextValue.Length >= 2)
+            if (!string.IsNullOrEmpty(e.NewTextValue) && e.NewTextValue.Length >= 1)
             {
 
                 VisualStateManager.GoToState(entryChildAge, "Valid");

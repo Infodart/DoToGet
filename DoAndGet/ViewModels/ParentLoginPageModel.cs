@@ -20,11 +20,11 @@ namespace DoAndGet
         {
 
 #if DEBUG
-            UserName = "test@gmail.com";
+            UserName = "k@gmail.com";
 
             Password = "123456";
 #endif
-            //_userDialogs = userDialogs;
+            
             GoBackCommand = new Command(GoBackCommandHandler);
         }
 
@@ -116,8 +116,8 @@ namespace DoAndGet
                     if (!string.IsNullOrEmpty(Password))
 
                     {
-                        Helper.ShowLoader("Loding");
-                        var loginRequest = new LoginRequest { email = Email, password = Password };
+                        Helper.ShowLoader("Please wait");
+                        var loginRequest = new LoginRequest { email = Email.ToLower().Trim(), password = Password };
                         loginResponceModel = await Helper.WebServices.Login(loginRequest);
                         if (loginResponceModel != null)
                         {
@@ -136,7 +136,7 @@ namespace DoAndGet
 
 
                                 DB.Insert<UserDetails>(Global.UserDetails);
-                                App.Current.Properties["ParentProfileImage"] = loginResponceModel.data.image;
+                               // App.Current.Properties["ParentProfileImage"] = loginResponceModel.data.image;
                                 var mainPage = new MainPage();
                                 Application.Current.MainPage = new NavigationPage(mainPage);
                                 NavigationPage.SetHasNavigationBar(mainPage, false);

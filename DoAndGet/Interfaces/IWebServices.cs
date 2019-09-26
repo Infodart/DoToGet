@@ -28,6 +28,14 @@ namespace DoAndGet.Interfaces
         [Post("/getAllActivity")]
         Task<GetActivityModel> GetAllActivity([Header("Authorization")] string token);
 
+        //  addMultiChild
+
+        [Post("/addMultiChild")]
+        Task<ResponseBaseObject> AddMultipleChild([Header("Authorization")] string token,[Body] AddMultipleChildRequest childData);
+
+        [Post("/getProfile")]
+        Task<ParentProfileResponceModel> GetParentProfile([Header("Authorization")] string token);
+
         [Post("/getAllReward")]
         Task<GetRewardModel> GetAllReward([Header("Authorization")] string token);
 
@@ -68,10 +76,20 @@ namespace DoAndGet.Interfaces
         [Post("/child/updateActivityStatus")]
         Task<ResponseBaseObject> UpdateChildActivityStatus([Header("Authorization")] string token, [Body] ChildActivityStatusRequest Request);
 
+        //ChildGetProfileResponceModel
+
+        [Post("/child/getProfile")]
+        Task<ChildGetProfileResponceModel> GetChildGetProfile([Header("Authorization")] string token);
+
+        // child/redeemPoint
+
+        [Post("/child/redeemPoint")]
+        Task<ChildGetProfileResponceModel> ChildpointRedeem([Header("Authorization")] string token,[Body] ChildPointRedeemRequest childPointRedeemRequest);
+
         //Upload Image
         [Multipart]
         [Post("/uploadFile")]
-        Task<ImageResponce> UploadProfileImage( [AliasAs("image")] StreamPart stream, [Header("Authorization")] string token);
+        Task<ImageResponce> UploadProfileImage( [AliasAs("image")] StreamPart stream);
         //Task<string> UploadProfileImage([Header("Authorization")] string token,[AttachmentName("image")]Stream stream);
 
     }

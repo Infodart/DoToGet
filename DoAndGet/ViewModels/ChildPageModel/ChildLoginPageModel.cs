@@ -18,7 +18,7 @@ namespace DoAndGet
         public ChildLoginPageModel()
         {
 #if DEBUG
-            UserName = "temp123";
+            UserName = "ttraza";
 
             Password = "123456";
 #endif
@@ -44,9 +44,7 @@ namespace DoAndGet
                 {
 
                     DoLogin(UserName, Password);
-                    //  var mainPage = new ChildMasterDetailPage();
-                    //  Application.Current.MainPage = new NavigationPage(mainPage);
-                    //  NavigationPage.SetHasNavigationBar(mainPage, false);
+                  
 
 
                 });
@@ -107,8 +105,8 @@ namespace DoAndGet
                 {
                     if (!string.IsNullOrEmpty(Password))
                     {
-                        Helper.ShowLoader("Loding");
-                        var loginRequest = new ChildLoginRequest { username = Email, password = Password };
+                        Helper.ShowLoader("Please wait");
+                        var loginRequest = new ChildLoginRequest { username = Email.ToLower().Trim(), password = Password };
                         loginResponceModel = await Helper.WebServices.ChildLogin(loginRequest);
                         if (loginResponceModel != null)
                         {
@@ -125,7 +123,7 @@ namespace DoAndGet
                                     IsParent = false
 
                                 };
-
+                               // Console.WriteLine(loginResponceModel.data.token);
                                 DB.Insert<UserDetails>(Global.UserDetails);
 
                                 var mainPage = new ChildMasterDetailPage();
@@ -133,7 +131,7 @@ namespace DoAndGet
                                 NavigationPage.SetHasNavigationBar(mainPage, false);
                                 DependencyService.Get<Toasts>().Show(loginResponceModel.message);
 
-                                Helper.ShowLoader("Loding");
+                                Helper.HideLoader();
                             }
                             else
                                 DependencyService.Get<Toasts>().Show(loginResponceModel.message);
@@ -153,7 +151,7 @@ namespace DoAndGet
             }
             catch (Exception ex)
             {
-                Helper.ShowAlert("Alert", ex.Message);
+                DependencyService.Get<Toasts>().Show(ex.Message);
             }
 
             finally

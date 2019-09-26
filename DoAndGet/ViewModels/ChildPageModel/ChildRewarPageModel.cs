@@ -23,8 +23,8 @@ namespace DoAndGet
 
         }
 
-        private ChildReward _gotoNextPage;
-        public ChildReward OpenPoupupPage
+        private DataList _gotoNextPage;
+        public DataList OpenPoupupPage
         {
             get { return _gotoNextPage; }
             set
@@ -33,14 +33,22 @@ namespace DoAndGet
                 PropertyChanged?.Invoke(nameof(OpenPoupupPage), new PropertyChangedEventArgs(null));
                 if (_gotoNextPage != null)
                 {
-                    PopupNavigation.Instance.PushAsync(new ChildRewardsPoupPage("Are you sure you want redeem your points for Video Game?", "(10 Points will be redeemed from your reward balance)", true));
+                    var childpopuppage = new ChildRewardsPoupPage(OpenPoupupPage.id, "Are you sure you want redeem your points for " + OpenPoupupPage.name, "(" + OpenPoupupPage.points + " points will be redeemed from your reward balance)", true);
+                    childpopuppage.Disappearing += Childpopuppage_Disappearing;
+                    PopupNavigation.Instance.PushAsync(childpopuppage);
                 }
             }
         }
+
+        private void Childpopuppage_Disappearing(object sender, EventArgs e)
+        {
+            GetData();
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private ObservableCollection<ChildReward> _data;
-        public ObservableCollection<ChildReward> Data
+        private ObservableCollection<DataList> _data;
+        public ObservableCollection<DataList> Data
         {
             get { return _data; }
             set
@@ -54,17 +62,23 @@ namespace DoAndGet
         {
             try
             {
-                Helper.ShowLoader("Loding");
+                Helper.ShowLoader("Loading data");
                 var getAllActivity = await Helper.WebServices.GetAllChildReward("Bearer " + Global.UserDetails.Token);
-                if (getAllActivity.data != null)
+                if (getAllActivity.error == false)
                 {
+                    if (getAllActivity.data.list.Count > 0)
+                    {
 
-                    if (getAllActivity.error == false)
-                        Data = new ObservableCollection<ChildReward>(getAllActivity.data);
+
+                        Data = new ObservableCollection<DataList>(getAllActivity.data.list);
+                        EarnedPoints = getAllActivity.data.childDetails.points != 0 ? getAllActivity.data.childDetails.points: 0;
+
+                    }
                     else
-                        DependencyService.Get<Toasts>().Show(getAllActivity.message);
+                        DependencyService.Get<Toasts>().Show("No data found");
                 }
-                DependencyService.Get<Toasts>().Show("No data found");
+                else
+                    DependencyService.Get<Toasts>().Show(getAllActivity.message);
             }
             catch (Exception ex)
             {
@@ -76,6 +90,25 @@ namespace DoAndGet
             }
         }
 
+        private int _earnedpoints;
+        public int EarnedPoints
+        {
+            get
+            {
+                return _earnedpoints;
+            }
+            set
+            {
+                if (_earnedpoints != value)
+                {
+                    _earnedpoints = value;
+                    PropertyChanged?.Invoke(
+                        this,
+                        new PropertyChangedEventArgs(nameof(EarnedPoints)));
+                }
+            }
+        }
+       
         public Command GotoNextPage
         {
             get

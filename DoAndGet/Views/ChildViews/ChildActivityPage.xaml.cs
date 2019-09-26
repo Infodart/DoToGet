@@ -20,7 +20,7 @@ namespace DoAndGet
         async void OnButtonClicked(object sender, EventArgs args)
         {
 
-            await Application.Current.MainPage.Navigation.PopAsync(true);
+            await Application.Current.MainPage.Navigation.PopAsync();
         }
         protected override void OnAppearing()
         {

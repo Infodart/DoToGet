@@ -1,7 +1,7 @@
 ﻿
 using System.ComponentModel;
 using Acr.UserDialogs;
-
+using DoAndGet.Helpers;
 using Xamarin.Forms;
 
 namespace DoAndGet
@@ -22,10 +22,10 @@ namespace DoAndGet
             {
                 return new Command(async () =>
                 {
-                     UserDialogs.Instance.ShowLoading("Loding");
+                   Helper.ShowLoader("Please wait");
                     //  await CoreMethods.PushPageModel<ParentLoginPageModel>();
                     await Application.Current.MainPage.Navigation.PushAsync(new ParentLoginPage());
-                    UserDialogs.Instance.HideLoading();
+                    Helper.HideLoader();
 
                 });
             }

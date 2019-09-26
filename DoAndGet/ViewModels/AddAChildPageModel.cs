@@ -11,6 +11,7 @@ using DoAndGet.Models;
 using DoAndGet.RequestModels;
 using DoAndGet.Utils;
 using Plugin.Media;
+using Plugin.Media.Abstractions;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 using Xamarin.Forms;
@@ -19,7 +20,7 @@ namespace DoAndGet
 {
     public class AddAChildPageModel : INotifyPropertyChanged
     {
-        public bool IscallfromMenmu;
+       
         private string _uncheckedimage = "unselectRadio";
         private string _checkedimage = "selectRadio";
         private string _imageUploadedText = "Upload your image";
@@ -35,7 +36,8 @@ namespace DoAndGet
         private ObservableCollection<ChildDataModel> _childDetailList;
         public string Gender="Boy";
         AddAChildPage _Page;
-
+        MediaFile mediaFile;
+       
         public ObservableCollection<ChildDataModel> ChildDetailList
         {
             get { return _childDetailList; }
@@ -102,20 +104,23 @@ namespace DoAndGet
 
         private async void AddChildCommandHandler(object obj)
         {
-            if (ChildName != null && ChildAge != null && UserName != null && Password != null)
+            if (ChildName != null && ChildAge != null && UserName != null && Password != null && filename!=null )
             {
 
-              
+                Util.Password = Password;
                 Util.ChildName = ChildName;
                 Util.ChildAge = ChildAge;
                 Util.UserName = UserName;
                 Util.Gender = Gender;
+                Util.Media = mediaFile;
                 await Application.Current.MainPage.Navigation.PopAsync();
              
 
             }
             else
             {
+                ImageUploadedText = "Please upload the image";
+                ImageTextColor = Color.Red;
                 UserDialogs.Instance.Alert("Please fill all the required details", "Alert", "OK");
             }
         }
@@ -127,43 +132,7 @@ namespace DoAndGet
 
         }
 
-        public Command GotoChildPage
-        {
-            get
-            {
-                return new Command(async () =>
-                {
-                    if (IscallfromMenmu)
-                    {
-                        try
-                        {
-                            Helper.ShowLoader("Loding...");
-                            var request = new AddSingleChildRequest { fullName = ChildName, gender = Gender, image = filename, username = UserName, password = Password };
-                            var response = await Helper.WebServices.AddSingleChild(("Bearer " + Global.UserDetails.Token), request);
-                            if (!response.error)
-                            {
-                                await Application.Current.MainPage.Navigation.PopAsync();
-                                DependencyService.Get<Toasts>().Show(response.message);
-                            }
-                            else
-                                DependencyService.Get<Toasts>().Show(response.message);
-                        }
-                        catch (Exception ex)
-                        {
-                            DependencyService.Get<Toasts>().Show(ex.Message);
-                        }
-                        finally
-                        {
-                            Helper.ShowLoader("Loding...");
-                        }
-
-                    }
-                    else
-                         
-                    await Application.Current.MainPage.Navigation.PushAsync(new NavigationPage(new ParentRegistationPage()));
-                });
-            }
-        }
+     
 
 
 
@@ -343,24 +312,24 @@ namespace DoAndGet
                                     return;
                                 }
 
-                                var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+                            mediaFile = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
                                 {
-                                    CompressionQuality = 70,
+                                    CompressionQuality = 20,
 
                                 });
 
-                                if (file == null)
+                                if (mediaFile == null)
                                     return;
 
                                 try
                                 {
                                     //Profile.Image = ImageSource.FromFile(file.Path);
-                                    var a = ImageSource.FromFile(file.Path);
-                                    var stream = file.GetStream();
-                                    var bytes = GetByteArrayFromStream(stream);
+                                    //var a = ImageSource.FromFile(mediaFile.Path);
+                                    //var stream = mediaFile.GetStream();
+                                    //var bytes = GetByteArrayFromStream(stream);
 
 
-                                    filename = Path.GetFileName(file.Path);
+                                    filename = Path.GetFileName(mediaFile.Path);
                                     ImageUploadedText = "Image uploaded";
                                     ImageTextColor = Color.Blue;
                                 }
@@ -397,18 +366,29 @@ namespace DoAndGet
                                     return;
                                 }
 
-                                var mediafile = await CrossMedia.Current.PickPhotoAsync();
-                                if (mediafile == null)
+
+                                //var file = await Plugin.Media.CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions
+                                //{
+                                //    PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium
+                                //});
+
+
+                                mediaFile = await CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions
+                                {
+                                    CompressionQuality = 20
+                                }); 
+
+                                if (mediaFile == null)
                                     return;
                                 try
                                 {
                                     //Profile.Image = ImageSource.FromFile(file.Path);
-                                    var a = ImageSource.FromFile(mediafile.Path);
-                                    var stream = mediafile.GetStream();
-                                    var bytes = GetByteArrayFromStream(stream);
+                                    /*var a = ImageSource.FromFile(mediaFile.Path);
+                                    var stream = mediaFile.GetStream();
+                                    var bytes = GetByteArrayFromStream(stream);*/
 
                                     // objImage.ImageName = "sample";
-                                     filename = Path.GetFileName(mediafile.Path);
+                                     filename = Path.GetFileName(mediaFile.Path);
                                     ImageUploadedText = "Image uploaded";
                                     ImageTextColor = Color.Blue;
                                 }
@@ -421,8 +401,6 @@ namespace DoAndGet
                                 await App.Current.MainPage.DisplayAlert("Permissions Denied", "Unable to take photos.", "OK");
 
                             break;
-
-
                     }
                 });
 

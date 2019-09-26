@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DoAndGet.HistoryPage" xmlns:controls="clr-namespace:DoAndGet.Renderer" NavigationPage.HasNavigationBar="False" xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" ios:Page.UseSafeArea="True">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DoAndGet.HistoryPage" xmlns:controls="clr-namespace:DoAndGet.Renderer" xmlns:transform="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations" xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" NavigationPage.HasNavigationBar="False" xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" ios:Page.UseSafeArea="True">
     <ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
@@ -11,47 +11,53 @@
             </controls:GradientView>
 
             <!--<StackLayout BackgroundColor="#F2F2F9">-->
-                <ListView x:Name="list"  BackgroundColor="#F2F2F9" VerticalOptions="FillAndExpand" SelectionMode="None" HorizontalOptions="FillAndExpand" HasUnevenRows="True" SeparatorVisibility="None" ItemsSource="{Binding Data}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <StackLayout  Orientation="Horizontal" Padding="10,0,10,10" Spacing="0">
-                                    <BoxView VerticalOptions="FillAndExpand" WidthRequest="1.5" BackgroundColor="{Binding BoxViewColor}" Margin="0,10,0,10" />
+            <ListView x:Name="list" BackgroundColor="#F2F2F9" VerticalOptions="FillAndExpand" SelectionMode="None" HorizontalOptions="FillAndExpand" HasUnevenRows="True" SeparatorVisibility="None" ItemsSource="{Binding Data}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell Appearing="Cell_OnAppearing">
+                            <StackLayout  Orientation="Horizontal" Padding="10,0,10,10" Spacing="0">
+                                <BoxView x:Name="BoxView" VerticalOptions="FillAndExpand" WidthRequest="1.5" BackgroundColor="{Binding BoxViewColor}" Margin="0,10,0,10" />
 
-                                    <controls:MyFrame BorderColor="gray" CornerRadius="10" Padding="10,10,5,2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                                        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="Auto" />
-                                            </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="2*" />
-                                                <ColumnDefinition Width="4.5*" />
-                                                <ColumnDefinition Width="3.5*" />
-                                            </Grid.ColumnDefinitions>
-                                            <Image Source="{Binding Icon}" Grid.Row="0" Grid.Column="0" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Aspect="AspectFill" />
-                                            <StackLayout Grid.Row="0" Grid.Column="1">
-                                                <Label Text="{Binding name}" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" TextColor="{Binding ActivityNameTextColor}" FontSize="Small" />
-                                                <Label Text="{Binding childId.fullName}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Small" />
+                                <controls:MyFrame BorderColor="gray" CornerRadius="10" Padding="10,10,5,2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="4.5*" />
+                                            <ColumnDefinition Width="3.5*" />
+                                        </Grid.ColumnDefinitions>
+                                        <ffimage:CachedImage Source="{Binding childId.image}" Grid.Row="0" Grid.Column="0" HeightRequest="40" WidthRequest="40" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Aspect="AspectFill">
+                                            <ffimage:CachedImage.Transformations>
+
+                                                <transform:CircleTransformation />
+                                            </ffimage:CachedImage.Transformations>
+                                        </ffimage:CachedImage>
+
+                                        <StackLayout Grid.Row="0" Grid.Column="1">
+                                            <Label Text="{Binding name}" x:Name="lblActivityName" LineBreakMode="TailTruncation" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" TextColor="{Binding ActivityNameTextColor}" FontSize="Small" />
+                                            <Label Text="{Binding childId.fullName}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Small" />
+                                        </StackLayout>
+
+                                        <StackLayout Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                            <StackLayout Orientation="Horizontal">
+                                                <Image Aspect="AspectFit" Source="time" />
+                                                <Label TextColor="#FC8D56" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding ActivityDay}" FontSize="10" />
+
                                             </StackLayout>
+                                            <Label HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Start" Text="{Binding createdAt}" FontSize="10" />
 
-                                            <StackLayout Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                                                <StackLayout Orientation="Horizontal">
-                                                    <Image Aspect="AspectFit" Source="time" />
-                                                    <Label TextColor="#FC8D56" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding ActivityDay}" FontSize="10" />
+                                        </StackLayout>
 
-                                                </StackLayout>
-                                                <Label HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Start" Text="{Binding createdAt}" FontSize="10" />
+                                    </Grid>
+                                </controls:MyFrame>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
-                                            </StackLayout>
-                                          
-                                        </Grid>
-                                    </controls:MyFrame>
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-           
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

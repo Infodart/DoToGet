@@ -41,20 +41,8 @@ namespace DoAndGet
         }
 
 
-        //private bool isRowEven;
+        private bool isRowEven;
 
-        //private void Cell_OnAppearing(object sender, EventArgs e)
-        //{
-        //    if (this.isRowEven)
-        //    {
-        //        var viewCell = (ViewCell)sender;
-        //        if (viewCell.View != null)
-        //        {
-        //            viewCell.View.BackgroundColor = Color.Gray;
-        //        }
-        //    }
-
-        //    this.isRowEven = !this.isRowEven;
-        //}
+       
     }
 }

@@ -23,7 +23,7 @@ namespace DoAndGet
         }
         protected override void OnAppearing()
         {
-            if (Util.ChildAge != null && Util.ChildName != null && Util.Gender != null && Util.UserName != null)
+            if (Util.ChildAge != null && Util.ChildName != null && Util.Gender != null && Util.UserName != null && !string.IsNullOrEmpty(Util.Password))
             {
                 _viewModel.ChildListVisible = true;
                 var childData = new ChildDataModel
@@ -32,7 +32,9 @@ namespace DoAndGet
                     ChildDataUserName = Util.UserName,
                     ChildDataAge = Util.ChildAge,
                     ChildDataGender = Util.Gender,
-
+                    ChildDataPassword=Util.Password,
+                    MediaFile = Util.Media,
+                    ChildAge=Util.ChildAge
                 };
                 if (Equals(_viewModel.ChildDetailList, null))
                     _viewModel.ChildDetailList = new ObservableCollection<ChildDataModel>();
@@ -41,7 +43,7 @@ namespace DoAndGet
                 var listcount = _viewModel.ChildDetailList.Count;
                 _viewModel.ListHeight = listcount * 100;
 
-
+                Util.ChildName = null; 
             }
         }
 

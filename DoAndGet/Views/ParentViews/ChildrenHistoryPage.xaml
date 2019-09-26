@@ -1,12 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DoAndGet.ChildrenHistoryPage" xmlns:controls="clr-namespace:DoAndGet.Renderer" NavigationPage.HasNavigationBar="False" xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" ios:Page.UseSafeArea="True">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DoAndGet.ChildrenHistoryPage" xmlns:controls="clr-namespace:DoAndGet.Renderer" NavigationPage.HasNavigationBar="False"
+              xmlns:transform="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" ios:Page.UseSafeArea="True">
     <ContentPage.Content>
 
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#F2F2F9">
             <controls:GradientView StartColor="#FEBA42" EndColor="#F5881B" HeightRequest="50" Spacing="0" Orientation="Horizontal">
                 <ImageButton Source="menu" HeightRequest="20" WidthRequest="20" HorizontalOptions="StartAndExpand" Aspect="AspectFit" Margin="15,0,0,0" Clicked="OnButtonClicked" VerticalOptions="CenterAndExpand" />
                 <Label Text="Children Details" FontSize="Subtitle" Margin="15,0,0,0" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" TextColor="white" />
-                <ImageButton Source="plus" HeightRequest="80" WidthRequest="80" HorizontalOptions="EndAndExpand" Aspect="AspectFit" VerticalOptions="CenterAndExpand" Command="{Binding GotoNextPage}" />
+                <ImageButton Source="plus" HeightRequest="80" WidthRequest="80" HorizontalOptions="EndAndExpand" Aspect="AspectFit" VerticalOptions="CenterAndExpand" Command="{Binding GotoAddChildPage}" />
             </controls:GradientView>
 
             <ListView x:Name="list" VerticalOptions="FillAndExpand" BackgroundColor="#F2F2F9" HorizontalOptions="FillAndExpand" HasUnevenRows="True" SeparatorVisibility="None" ItemsSource="{Binding ChildData}">
@@ -26,10 +30,14 @@
                                             <ColumnDefinition Width="4*" />
 
                                         </Grid.ColumnDefinitions>
-                                        <Image Source="boy" Grid.Row="0" HeightRequest="30" WidthRequest="30" VerticalOptions="CenterAndExpand" Aspect="AspectFit" />
+                                        <ffimage:CachedImage Source="{Binding image}" ErrorPlaceholder="boy" LoadingPlaceholder="loader" Grid.Row="0" HeightRequest="30" WidthRequest="30" VerticalOptions="CenterAndExpand" Aspect="AspectFit" >
+                                             <ffimage:CachedImage.Transformations>
+                                                        <transform:CircleTransformation />
+                                                    </ffimage:CachedImage.Transformations>
+                                        </ffimage:CachedImage>
                                         <StackLayout Grid.Row="0" Grid.Column="1">
                                             <Label Text="{Binding fullName}" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" FontSize="Medium" />
-                                            <Label Text="20" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Micro" />
+                                            <Label Text="{Binding gender}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="Micro" />
                                         </StackLayout>
                                         <StackLayout Grid.Row="0" Grid.Column="2">
                                             <Label Text="Earned points" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" FontSize="Medium" />

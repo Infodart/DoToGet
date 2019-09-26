@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DoAndGet.ChildActivityPage" xmlns:controls="clr-namespace:DoAndGet.Renderer" NavigationPage.HasNavigationBar="False" xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" ios:Page.UseSafeArea="True">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DoAndGet.ChildActivityPage" xmlns:controls="clr-namespace:DoAndGet.Renderer" NavigationPage.HasNavigationBar="False" xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:transform="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations" xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" ios:Page.UseSafeArea="True">
     <ContentPage.Content>
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="0">
             <Grid.RowDefinitions>
@@ -8,7 +8,7 @@
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="5.5*" />
             </Grid.RowDefinitions>
-            <Image Source="main" Grid.Row="0" Grid.RowSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill" />
+            <Image Source="img" Grid.Row="0" Grid.RowSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill" />
             <ImageButton Source="back" HeightRequest="20" WidthRequest="20" HorizontalOptions="StartAndExpand" Aspect="AspectFit" Margin="15,10,0,0" VerticalOptions="StartAndExpand" Clicked="OnButtonClicked" Grid.Row="0" />
             <Frame Margin="0" Padding="10" Grid.Row="2" Grid.RowSpan="2" HorizontalOptions="FillAndExpand" BackgroundColor="#F2F2F9" BorderColor="Gray" VerticalOptions="FillAndExpand" CornerRadius="30">
                 <StackLayout Padding="10">
@@ -27,30 +27,37 @@
                                         <BoxView WidthRequest="1.5" VerticalOptions="Fill" Color="Red" Margin="0,10,0,10" />
 
                                         <controls:MyFrame HasShadow="False" CornerRadius="10" Padding="10,20,2,20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                                            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="10" ColumnSpacing="0">
+                                            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="5" ColumnSpacing="30" Padding="10,0,10,0">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="Auto" />
                                                     <RowDefinition Height="Auto" />
                                                     <RowDefinition Height="Auto" />
                                                 </Grid.RowDefinitions>
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="2.5*" />
-                                                    <ColumnDefinition Width="7.5*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
                                                 </Grid.ColumnDefinitions>
-                                                <Label Text="{Binding ActivityName}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="Medium" TextColor="#19BFB0" />
-                                                <Image Source="user" Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" HeightRequest="40" WidthRequest="40" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Aspect="AspectFill" />
-                                                <Label Text="{Binding ChildName}" Grid.Row="1" Grid.Column="1" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FC4B35" />
-                                                <StackLayout Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="5">
-                                                    <StackLayout Orientation="Horizontal" Spacing="5">
-                                                        <Image Source="reward" VerticalOptions="CenterAndExpand" />
-                                                        <Label Text="10" VerticalOptions="CenterAndExpand" TextColor="#545DCA" FontSize="10" />
-                                                        <Label Text="Rewards" VerticalOptions="CenterAndExpand" TextColor="Black" FontSize="8" />
-                                                    </StackLayout>
+                                                <Label Text="{Binding name}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="Medium" TextColor="#19BFB0" />
+
+                                                <StackLayout Orientation="Horizontal" Spacing="5" Grid.Row="0" Grid.Column="1" HorizontalOptions="EndAndExpand">
+                                                    <Image Source="reward" VerticalOptions="CenterAndExpand" />
+                                                    <Label Text="{Binding points}" VerticalOptions="CenterAndExpand" TextColor="#545DCA" FontSize="10" />
+                                                    <Label Text="Rewards" VerticalOptions="CenterAndExpand" TextColor="Black" FontSize="8" />
+                                                </StackLayout>
+
+                                                <ffimage:CachedImage LoadingPlaceholder="user" ErrorPlaceholder="user" Source="{Binding childId.image}" Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" HeightRequest="40" WidthRequest="40" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Aspect="AspectFill">
+                                                    <ffimage:CachedImage.Transformations>
+                                                        <transform:CircleTransformation />
+                                                    </ffimage:CachedImage.Transformations>
+                                                </ffimage:CachedImage>
+                                                <Label Text="{Binding childId.fullName}" Grid.Row="1" Grid.Column="1" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FC4B35" />
+                                                <StackLayout Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="StartAndExpand" Spacing="5">
+
                                                     <!--<BoxView HeightRequest="5" WidthRequest="0.5" Color="Silver" />-->
                                                     <StackLayout Orientation="Horizontal" Spacing="2">
                                                         <Image Source="time" VerticalOptions="CenterAndExpand" />
-                                                        <Label Text="Today" VerticalOptions="CenterAndExpand" TextColor="#545DCA" FontSize="10" />
-                                                        <Label Text="{Binding Time}" VerticalOptions="Center" TextColor="Black" FontSize="8" />
+                                                        <Label Text="{Binding dateTime}" VerticalOptions="CenterAndExpand" TextColor="#545DCA" FontSize="10" />
+                                                        <Label Text="{Binding createdAt}" VerticalOptions="Center" TextColor="Black" FontSize="8" />
                                                     </StackLayout>
                                                 </StackLayout>
 

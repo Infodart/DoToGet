@@ -27,7 +27,7 @@ namespace DoAndGet
         public RewardsPageModel()
         {
 
-           // GetData();
+            // GetData();
 
         }
 
@@ -35,18 +35,22 @@ namespace DoAndGet
         {
             try
             {
-                Helper.ShowLoader("Loding");
+                Helper.ShowLoader("Loading data");
                 var getAllreward = await Helper.WebServices.GetAllReward("Bearer " + Global.UserDetails.Token);
-                if (getAllreward.data.Count>0)
+                if (getAllreward.error == false)
                 {
 
-                    if (getAllreward.error == false)
+                    if (getAllreward.data.Count > 0)
+                    {
+
                         RewardsData = new ObservableCollection<RewardDatum>(getAllreward.data);
+
+                    }
                     else
-                        DependencyService.Get<Toasts>().Show(getAllreward.message);
+                        DependencyService.Get<Toasts>().Show("No data found");
                 }
                 else
-                    DependencyService.Get<Toasts>().Show("No data found");
+                    DependencyService.Get<Toasts>().Show(getAllreward.message);
             }
             catch (Exception ex)
             {
@@ -56,7 +60,7 @@ namespace DoAndGet
             {
                 Helper.HideLoader();
             }
-           
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -75,7 +79,7 @@ namespace DoAndGet
 
                     try
                     {
-                       
+
                         await Application.Current.MainPage.Navigation.PushAsync(new AddRewardsPage());
                     }
                     catch (Exception ex)

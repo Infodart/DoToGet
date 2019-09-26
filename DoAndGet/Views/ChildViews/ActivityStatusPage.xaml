@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DoAndGet.ActivityStatusPage" xmlns:controls="clr-namespace:DoAndGet.Renderer" NavigationPage.HasNavigationBar="False" xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" ios:Page.UseSafeArea="True">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DoAndGet.ActivityStatusPage" xmlns:controls="clr-namespace:DoAndGet.Renderer" xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:transform="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations" NavigationPage.HasNavigationBar="False" xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" ios:Page.UseSafeArea="True">
     <ContentPage.Content>
 
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="0">
@@ -10,32 +10,37 @@
                 <RowDefinition Height="5.5*" />
             </Grid.RowDefinitions>
             <Image Source="main" Grid.Row="0" Grid.RowSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill" />
-            <ImageButton Source="back" HeightRequest="20" WidthRequest="20" HorizontalOptions="StartAndExpand" Aspect="AspectFit" Margin="15,10,0,0" VerticalOptions="StartAndExpand" Clicked="OnButtonClicked" Grid.Row="0" />
+            <ImageButton Source="back" HeightRequest="20" WidthRequest="20" HorizontalOptions="StartAndExpand" Aspect="AspectFit" Margin="15,10,0,0" VerticalOptions="StartAndExpand" Clicked="OnbackClicked" Grid.Row="0" />
             <Frame Margin="0" Padding="10" Grid.Row="2" Grid.RowSpan="2" HorizontalOptions="FillAndExpand" BackgroundColor="#F2F2F9" BorderColor="Gray" VerticalOptions="FillAndExpand" CornerRadius="30">
                 <StackLayout>
 
-                  
+
 
 
                     <Label Text="Activity Status" TextColor="#3139BD" VerticalTextAlignment="Center" FontSize="Header" />
 
                     <StackLayout Orientation="Horizontal" Spacing="0">
                         <BoxView VerticalOptions="CenterAndExpand" WidthRequest="2" HeightRequest="90" BackgroundColor="red" />
-                        <controls:MyFrame HasShadow="True" Margin="0,10,0,10" BorderColor="gray" Padding="8" CornerRadius="5"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <controls:MyFrame HasShadow="True" Margin="0,10,0,10" BorderColor="gray" Padding="8" CornerRadius="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
-                            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                
+                            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
                                 <StackLayout Orientation="Horizontal">
-                                <Image Source="boy"/>
-                                <StackLayout Padding="10" Margin="10" >
-                                    <Label Text="Clining Room"  TextColor="#FC4B35" FontSize="Medium" />
-                                    <Label Text="Tousif Raza" TextColor="#263A44" FontSize="Small" />
-                                </StackLayout>
+                                    <ffimage:CachedImage x:Name="ImgChild" HeightRequest="50" WidthRequest="50">
+                                        <ffimage:CachedImage.Transformations>
+
+                                            <transform:CircleTransformation />
+                                        </ffimage:CachedImage.Transformations>
+                                    </ffimage:CachedImage>
+                                    <StackLayout Padding="10" Margin="10">
+                                        <Label x:Name="lblDescription" TextColor="#FC4B35" FontSize="Medium" />
+                                        <Label x:Name="lblName" TextColor="#263A44" FontSize="Small" />
                                     </StackLayout>
-                               
+                                </StackLayout>
+
                                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand" Orientation="Horizontal">
-                                    <Button BackgroundColor="#3AC93D" TextColor="White" Text="Done" Padding="20,0,20,0" HeightRequest="30" Command="{Binding Donebuttonclick}"/>
-                                    <Button BackgroundColor="red" TextColor="White" Text="Can't Do" Padding="10,0,10,0" HeightRequest="30" Command="{Binding NotDonebuttonclick}"  />
+                                    <Button BackgroundColor="#3AC93D" TextColor="White" Text="Done" Padding="20,0,20,0" HeightRequest="30" Command="{Binding Donebuttonclick}" />
+                                    <Button BackgroundColor="red" TextColor="White" Text="Can't Do" Padding="10,0,10,0" HeightRequest="30" Command="{Binding NotDonebuttonclick}" />
                                 </StackLayout>
                             </StackLayout>
 

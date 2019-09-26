@@ -7,7 +7,9 @@ using DoAndGet.Helpers;
 using DoAndGet.Interfaces;
 using DoAndGet.ResponceModels;
 using DoAndGet.Utils;
+using DoAndGet.Views.ChildViews;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace DoAndGet
 {
@@ -41,19 +43,23 @@ namespace DoAndGet
             try
             {
 
-                Helper.ShowLoader("Loding");
+                Helper.ShowLoader("Loading data");
                 getAllChild = await Helper.WebServices.GetAllChild("Bearer " + Global.UserDetails.Token);
-
-                if (getAllChild.data.Count > 0)
+                if (getAllChild.error == false)
                 {
+                    if (getAllChild.data.Count > 0)
+                    {
 
-                    if (getAllChild.error == false)
+                        getAllChild.data.ForEach(x => x.image = "http://14.141.50.214:5000/upload/" + x.image);
                         ChildData = new ObservableCollection<Datum>(getAllChild.data);
+
+                    }
                     else
-                        DependencyService.Get<Toasts>().Show(getAllChild.message);
+                        DependencyService.Get<Toasts>().Show("No data found");
                 }
-                else
-                    DependencyService.Get<Toasts>().Show("No data found");
+                
+                     else
+                    DependencyService.Get<Toasts>().Show(getAllChild.message);
 
 
             }
@@ -63,7 +69,7 @@ namespace DoAndGet
             }
             finally
             {
-                Helper.ShowLoader("Loding");
+                Helper.HideLoader();
             }
 
 
@@ -76,7 +82,7 @@ namespace DoAndGet
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs((propertyName)));
         }
 
-        public Command GotoNextPage
+        public Command GotoAddChildPage
         {
             get
             {
@@ -86,7 +92,7 @@ namespace DoAndGet
                     try
                     {
 
-                        await Application.Current.MainPage.Navigation.PushAsync(new AddAChildPage(true));
+                        await Application.Current.MainPage.Navigation.PushAsync(new AddSingleChildPage());
                     }
                     catch (Exception ex)
                     {

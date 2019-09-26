@@ -14,7 +14,7 @@ namespace DoAndGet
         public ActivityStatusPageModel()
         {
         }
-        // NotDonebuttonclick
+       
 
         public Command Donebuttonclick
         {
@@ -22,17 +22,32 @@ namespace DoAndGet
             {
                 return new Command(async () =>
                 {
-                    var status = "2";
-                    Helper.ShowLoader("Loding...");
-                    var request = new ChildActivityStatusRequest { id = activityId, status = status };
-                    var response = await Helper.WebServices.UpdateChildActivityStatus(("Bearer " + Global.UserDetails.Token), request);
-                    if (!response.error)
+                    try
                     {
-                        await Application.Current.MainPage.Navigation.PopAsync();
-                        DependencyService.Get<Toasts>().Show(response.message);
+                        var status = 2;
+                        Helper.ShowLoader("Please wait");
+                        var request = new ChildActivityStatusRequest { id = activityId, status = status };
+                        var response = await Helper.WebServices.UpdateChildActivityStatus(("Bearer " + Global.UserDetails.Token), request);
+                        if (!response.error)
+                        {
+                            await Application.Current.MainPage.Navigation.PopAsync();
+                            DependencyService.Get<Toasts>().Show(response.message);
+                        }
+                        else
+                        {
+                            await Application.Current.MainPage.Navigation.PopAsync();
+                            DependencyService.Get<Toasts>().Show(response.message);
+                        }
                     }
-                    else
-                        DependencyService.Get<Toasts>().Show(response.message);
+                    catch (Exception ex)
+                    {
+
+                    }
+                    finally
+                    {
+                        Helper.HideLoader();
+                    }
+                   
 
                 });
             }
@@ -45,18 +60,29 @@ namespace DoAndGet
             {
                 return new Command(async () =>
                 {
-                    var status = "5";
-                    Helper.ShowLoader("Loding...");
-                    var request = new ChildActivityStatusRequest { id = activityId, status = status };
-                    var response = await Helper.WebServices.UpdateChildActivityStatus(("Bearer " + Global.UserDetails.Token), request);
-                    if (!response.error)
+                    try
                     {
-                        await Application.Current.MainPage.Navigation.PopAsync();
-                        DependencyService.Get<Toasts>().Show(response.message);
-                    }
-                    else
-                        DependencyService.Get<Toasts>().Show(response.message);
+                        var status = 5;
+                        Helper.ShowLoader("Please wait");
+                        var request = new ChildActivityStatusRequest { id = activityId, status = status };
+                        var response = await Helper.WebServices.UpdateChildActivityStatus(("Bearer " + Global.UserDetails.Token), request);
+                        if (!response.error)
+                        {
+                            await Application.Current.MainPage.Navigation.PopAsync();
+                            DependencyService.Get<Toasts>().Show(response.message);
+                        }
+                        else
+                        {
+                            await Application.Current.MainPage.Navigation.PopAsync();
+                            DependencyService.Get<Toasts>().Show(response.message);
+                        }
 
+                    }
+                    catch (Exception ex)
+                    {
+                        Helper.HideLoader();
+                    }
+                   
                 });
             }
 

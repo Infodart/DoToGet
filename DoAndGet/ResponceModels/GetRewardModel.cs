@@ -20,6 +20,7 @@ namespace DoAndGet.ResponceModels.RewardModel
         public string parentId { get; set; }
         public object createdAt { get; set; }
         public string id { get; set; }
+        public string duration { get; set; }
     }
 
 }

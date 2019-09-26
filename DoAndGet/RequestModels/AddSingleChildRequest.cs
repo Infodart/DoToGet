@@ -8,7 +8,7 @@ namespace DoAndGet.RequestModels
         public string image { get; set; }
         public string fullName { get; set; }
         public string password { get; set; }
-       
+       public string age { set; get; }
 
     }
 }

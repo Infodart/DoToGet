@@ -1,50 +1,58 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DoAndGet.ChildMasterDetailPageMaster"
-               xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             ios:Page.UseSafeArea="True"
-             Title="Master">
-  <StackLayout>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DoAndGet.ChildMasterDetailPageMaster" xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:transform="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations" xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" ios:Page.UseSafeArea="True" Title="Master">
+    <StackLayout>
 
-       <Grid VerticalOptions="FillAndExpand">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="3*"/>
-             <RowDefinition Height="7*"/>
-        </Grid.RowDefinitions>
-        <Frame Grid.Row="0">
-           
-                 <StackLayout>
-            <Image Source="girlprofile" HeightRequest="150" WidthRequest="150"/>
-            <Label Text="Child name" HorizontalTextAlignment="Center"/>
-       
-            </StackLayout>
-        </Frame>
-        <ListView x:Name="MenuItemsListView" Grid.Row="1" BackgroundColor="#F2F2F9"  SeparatorVisibility="None"
-                    HasUnevenRows="True">
-            
-          
-       
-           
-      <ListView.ItemTemplate>
-          
-                <DataTemplate>
-                    <ViewCell>
-                        <Grid Padding="20">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="2*"/>
-                                 <ColumnDefinition Width="8*"/>
-                            </Grid.ColumnDefinitions>
-                            <Image Source="{Binding Icon}" Grid.Column="0" HorizontalOptions="Start"/>
-                            <Label Grid.Column="1" Text="{Binding Title}"  FontSize="15" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand"/>
-                        </Grid>
-                       
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </Grid>
+        <Grid VerticalOptions="FillAndExpand" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="6*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Frame Grid.Row="0">
 
-  
-  </StackLayout>
+                <StackLayout>
+                    <ffimage:CachedImage  Source="{Binding ProfileImage}" HeightRequest="150" WidthRequest="150">
+
+                        <ffimage:CachedImage.Transformations>
+
+                            <transform:CircleTransformation />
+                        </ffimage:CachedImage.Transformations>
+
+                    </ffimage:CachedImage>
+
+                    <Label Text="{Binding UserName}" HorizontalTextAlignment="Center" />
+
+                </StackLayout>
+            </Frame>
+            <ListView x:Name="MenuItemsListView" Grid.Row="1" BackgroundColor="#F2F2F9" SeparatorVisibility="None" HasUnevenRows="True">
+
+
+
+
+                <ListView.ItemTemplate>
+
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="20">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="8*" />
+                                </Grid.ColumnDefinitions>
+                                <Image Source="{Binding Icon}" Grid.Column="0" HorizontalOptions="Start" />
+                                <Label Grid.Column="1" Text="{Binding Title}" FontSize="15" HorizontalTextAlignment="Start" VerticalOptions="CenterAndExpand" />
+                            </Grid>
+
+                        </ViewCell>
+                    </DataTemplate>
+
+
+                </ListView.ItemTemplate>
+
+               
+            </ListView>
+             <Label Text="{Binding AppVersion}" Grid.Row="2" BackgroundColor="#F2F2F9" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"></Label>
+        </Grid>
+
+
+    </StackLayout>
 </ContentPage>

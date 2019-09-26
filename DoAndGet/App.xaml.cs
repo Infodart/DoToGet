@@ -29,7 +29,7 @@ namespace DoAndGet
             DependencyService.Register<MockDataStore>();
             CheckConnectivity();
             SetupMainPage();
-           
+        
             //{ BarBackgroundColor = Color.FromHex("#F4F8FA"), BarTextColor = Color.FromHex("#000000") };
             //var current = Connectivity.NetworkAccess;
             //var profiles = Connectivity.ConnectionProfiles;

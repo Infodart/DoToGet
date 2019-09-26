@@ -1,5 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="DoAndGet.ItemsPage" x:Name="BrowseItemsPage" xmlns:controls="clr-namespace:DoAndGet.Renderer" NavigationPage.HasNavigationBar="False" xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" ios:Page.UseSafeArea="True">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" x:Class="DoAndGet.ItemsPage" x:Name="BrowseItemsPage"
+             xmlns:transform="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:controls="clr-namespace:DoAndGet.Renderer" NavigationPage.HasNavigationBar="False" xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" ios:Page.UseSafeArea="True">
 
 
 
@@ -12,7 +17,7 @@
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="5.5*" />
             </Grid.RowDefinitions>
-            <Image Source="main" Grid.Row="0" Grid.RowSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill" />
+            <Image Source="img" Grid.Row="0" Grid.RowSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill" />
             <ImageButton Source="menu" HeightRequest="20" WidthRequest="20" HorizontalOptions="StartAndExpand" Aspect="AspectFit" Margin="15,10,0,0" VerticalOptions="StartAndExpand" Clicked="OnButtonClicked" Grid.Row="0" />
             <Frame Margin="0" Padding="10" Grid.Row="2" Grid.RowSpan="2" HorizontalOptions="FillAndExpand" BackgroundColor="#F2F2F9" BorderColor="Gray" VerticalOptions="FillAndExpand" CornerRadius="30">
                 <Grid>
@@ -37,9 +42,9 @@
                     <ListView x:Name="list" VerticalOptions="FillAndExpand" SelectionMode="None" BackgroundColor="#F2F2F9" HorizontalOptions="FillAndExpand" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HasUnevenRows="True" SeparatorVisibility="None" ItemsSource="{Binding Data}" VerticalScrollBarVisibility="Never">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <ViewCell>
+                                <ViewCell >
                                     <StackLayout Margin="5,0,5,10" Orientation="Horizontal" VerticalOptions="Fill" Spacing="0" IsClippedToBounds="True">
-                                        <BoxView WidthRequest="1.5" VerticalOptions="Fill" Color="Red" Margin="0,20,0,20" />
+                                        <BoxView x:Name="Boxview" WidthRequest="1.5" VerticalOptions="Fill" Color="Red" Margin="0,20,0,20" />
                                         <controls:MyFrame HasShadow="False" CornerRadius="10" Padding="10,20,0,20" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                                             <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" RowSpacing="10" ColumnSpacing="0">
                                                 <Grid.RowDefinitions>
@@ -51,9 +56,13 @@
                                                     <ColumnDefinition Width="2*" />
                                                     <ColumnDefinition Width="8*" />
                                                 </Grid.ColumnDefinitions>
-                                                <Label Text="{Binding name}" x:Name="lblActivityName" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="Medium" TextColor="#19BFB0" />
-                                                <Image Source="user" Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" HeightRequest="50" WidthRequest="50" VerticalOptions="CenterAndExpand" Aspect="AspectFit" />
-                                                <Label Text="{Binding childId.fullName}" Grid.Row="1" Grid.Column="1" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FC4B35" />
+                                                <Label Text="{Binding name}" x:Name="lblActivityName" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="Medium" TextColor="#00C8BE" />
+                                                <ffimage:CachedImage Source="{Binding childId.image}" ErrorPlaceholder="user" LoadingPlaceholder="loader" Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" HeightRequest="50" WidthRequest="50" VerticalOptions="CenterAndExpand" Aspect="AspectFit" >
+                                                    <ffimage:CachedImage.Transformations>
+                                                        <transform:CircleTransformation />
+                                                    </ffimage:CachedImage.Transformations>
+                                                </ffimage:CachedImage>
+                                                <Label Text="{Binding childId.fullName}" Grid.Row="1" Grid.Column="1" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" TextColor="#FF5533" />
                                                 <StackLayout Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Spacing="5">
                                                     <StackLayout Orientation="Horizontal" Spacing="1">
                                                         <Image Source="reward" VerticalOptions="CenterAndExpand" />
@@ -63,7 +72,7 @@
                                                     <BoxView HeightRequest="5" WidthRequest="0.3" Color="Silver" />
                                                     <StackLayout Orientation="Horizontal" Spacing="1">
                                                         <Image Source="time" VerticalOptions="CenterAndExpand" />
-                                                        <Label Text="Today" VerticalOptions="CenterAndExpand" TextColor="#545DCA" FontSize="10" />
+                                                        <Label Text="{Binding dayofweek}" VerticalOptions="CenterAndExpand" TextColor="#545DCA" FontSize="10" />
                                                         <Label Text="{Binding createdAt}" VerticalOptions="CenterAndExpand" TextColor="Black" FontSize="8" />
                                                     </StackLayout>
                                                 </StackLayout>

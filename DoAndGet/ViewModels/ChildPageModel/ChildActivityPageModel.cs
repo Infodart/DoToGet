@@ -59,16 +59,21 @@ namespace DoAndGet
                 {
                     if (getAllActivity != null && getAllActivity.data != null)
                     {
+                       
                         var baseUrl = getAllActivity.data.imageUrl;
                         if (getAllActivity.data.list.Count > 0)
                         {
-                            getAllActivity.data.list.ForEach( x => {x.childId.image = baseUrl + x.childId.image; var ct = Convert.ToInt64(x.createdAt);
+                            var listdata = getAllActivity.data.list.ToList().FindAll(a => a.status == 1);
+                            listdata.ForEach( x => {x.childId.image = baseUrl + x.childId.image; var ct = Convert.ToInt64(x.createdAt);
                                 var dt = FromUnixTime(ct);
                                 var createdTime = dt.ToString("hh:mm tt");
                                 x.dateTime = dt.DayOfWeek.ToString();
                                 x.createdAt = createdTime;
+                                
                             });
-                            Data = new ObservableCollection<ActiviyList>(getAllActivity.data.list.ToList().FindAll(a=>a.status==1).OrderByDescending(x=>x.createdAt));
+                           
+                            Data = new ObservableCollection<ActiviyList>(listdata.OrderByDescending(x => x.createdAt));
+                            
                           
                         }
                     }
@@ -88,6 +93,25 @@ namespace DoAndGet
                 Helper.HideLoader();
             }
         }
+
+        //private int _points ;
+        //public int Points
+        //{
+        //    get
+        //    {
+        //        return _points;
+        //    }
+        //    set
+        //    {
+        //        if (_points != value)
+        //        {
+        //            _points = value;
+        //            PropertyChanged?.Invoke(
+        //                this,
+        //                new PropertyChangedEventArgs(nameof(_points)));
+        //        }
+        //    }
+        //}
 
         public static DateTime FromUnixTime(long unixTime)
         {
