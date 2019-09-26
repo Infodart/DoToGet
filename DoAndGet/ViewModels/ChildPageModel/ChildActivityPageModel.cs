@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using DoAndGet.Helpers;
@@ -15,11 +16,11 @@ namespace DoAndGet
     public class ChildActivityPageModel : INotifyPropertyChanged
     {
 
-       
 
+        private static readonly DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
         public event PropertyChangedEventHandler PropertyChanged;
-        private ChildListModel _selectItem;
-        public ChildListModel SelectItem
+        private ActiviyList _selectItem;
+        public ActiviyList SelectItem
         {
             get { return _selectItem; }
             set
@@ -27,7 +28,7 @@ namespace DoAndGet
                 _selectItem = value;
                 if (_selectItem != null)
                 {
-                    Application.Current.MainPage.Navigation.PushAsync(new ActivityStatusPage(SelectItem.id));
+                    Application.Current.MainPage.Navigation.PushAsync(new ActivityStatusPage(SelectItem));
                 }
             }
         }
@@ -36,8 +37,8 @@ namespace DoAndGet
 
 
         }
-        private ObservableCollection<ChildListModel> _data;
-        public ObservableCollection<ChildListModel> Data
+        private ObservableCollection<ActiviyList> _data;
+        public ObservableCollection<ActiviyList> Data
         {
             get { return _data; }
             set
@@ -52,17 +53,31 @@ namespace DoAndGet
         {
             try
             {
-                Helper.ShowLoader("Loding");
+                Helper.ShowLoader("Loading data");
                 var getAllActivity = await Helper.WebServices.GetAllChildActivity("Bearer " + Global.UserDetails.Token);
-                if (getAllActivity.data != null)
+                if (getAllActivity.error == false)
                 {
-                    if (getAllActivity.error == false)
-                        Data = new ObservableCollection<ChildListModel>(getAllActivity.data);
+                    if (getAllActivity != null && getAllActivity.data != null)
+                    {
+                        var baseUrl = getAllActivity.data.imageUrl;
+                        if (getAllActivity.data.list.Count > 0)
+                        {
+                            getAllActivity.data.list.ForEach( x => {x.childId.image = baseUrl + x.childId.image; var ct = Convert.ToInt64(x.createdAt);
+                                var dt = FromUnixTime(ct);
+                                var createdTime = dt.ToString("hh:mm tt");
+                                x.dateTime = dt.DayOfWeek.ToString();
+                                x.createdAt = createdTime;
+                            });
+                            Data = new ObservableCollection<ActiviyList>(getAllActivity.data.list.ToList().FindAll(a=>a.status==1).OrderByDescending(x=>x.createdAt));
+                          
+                        }
+                    }
                     else
-                        DependencyService.Get<Toasts>().Show(getAllActivity.message);
+                        DependencyService.Get<Toasts>().Show("No data found");
                 }
                 else
-                    DependencyService.Get<Toasts>().Show("No data found");
+                    DependencyService.Get<Toasts>().Show(getAllActivity.message);
+
             }
             catch (Exception ex)
             {
@@ -74,7 +89,10 @@ namespace DoAndGet
             }
         }
 
-
+        public static DateTime FromUnixTime(long unixTime)
+        {
+            return epoch.AddMilliseconds(unixTime);
+        }
 
         protected virtual void OnPropertyChanged([CallerMemberName]string propertyName = null)
         {
