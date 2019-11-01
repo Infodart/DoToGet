@@ -30,6 +30,7 @@ namespace DoAndGet.ResponceModels.GetActivity
         public object createdAt { get; set; }
         public string dayofweek { get; set;}
         public string id { get; set; }
+        public DateTime DateTime { get; set; }
     }
 
     public class ChildId

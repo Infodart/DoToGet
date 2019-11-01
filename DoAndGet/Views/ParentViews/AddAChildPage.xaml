@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="DoAndGet.AddAChildPage" xmlns:controls="clr-namespace:DoAndGet.Renderer" NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <StackLayout Spacing="10" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <StackLayout Spacing="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
             <controls:GradientView StartColor="#FEBA42" EndColor="#F5881B" HeightRequest="80" Spacing="0" Orientation="Horizontal">
                 <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Grid.ColumnDefinitions>
@@ -14,7 +14,7 @@
                     <ImageButton Source="back" Command="{Binding GoBackCommand}" HeightRequest="25" Grid.Column="0" WidthRequest="25" HorizontalOptions="CenterAndExpand" Aspect="AspectFit" VerticalOptions="CenterAndExpand" Margin="0,20,0,0" />
                 </Grid>
             </controls:GradientView>
-            <ScrollView BackgroundColor="#F4F8FA" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <ScrollView BackgroundColor="#F4F8FA" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand" VerticalScrollBarVisibility="Never" Padding="0" Margin="0">
                 <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="40" Margin="0,40,0,0">
                     <controls:MyFrame CornerRadius="30" Padding="15" Margin="50,0,50,0">
                         <StackLayout Orientation="Horizontal">

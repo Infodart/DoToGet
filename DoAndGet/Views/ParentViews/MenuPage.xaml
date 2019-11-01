@@ -14,7 +14,7 @@
         <Frame Grid.Row="0">
 
             <StackLayout>
-                <ffimage:CachedImage   Source="{Binding ProfileImage}" ErrorPlaceholder="profile" LoadingPlaceholder="loader" x:Name="ProfileImage" HeightRequest="140" WidthRequest="140" Aspect="AspectFit" DownsampleToViewSize="True" DownsampleHeight="100" DownsampleUseDipUnits="false" >
+                <ffimage:CachedImage   Source="{Binding ProfileImage}" ErrorPlaceholder="profile" LoadingPlaceholder="image_loading" x:Name="ProfileImage" HeightRequest="140" WidthRequest="140" Aspect="AspectFit" DownsampleToViewSize="True" DownsampleHeight="100" DownsampleUseDipUnits="false" >
 
                     <ffimage:CachedImage.Transformations>
 
@@ -26,11 +26,7 @@
 
             </StackLayout>
         </Frame>
-        <ListView Grid.Row="1" BackgroundColor="#F2F2F9" x:Name="ListViewMenu" SeparatorVisibility="None" HasUnevenRows="True" >
-
-
-
-
+        <ListView Grid.Row="1" BackgroundColor="#F2F2F9" x:Name="ListViewMenu" SeparatorVisibility="None" HasUnevenRows="True"  VerticalScrollBarVisibility="Never">
             <ListView.ItemTemplate>
 
                 <DataTemplate>
@@ -48,7 +44,9 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-       <Label Text="{Binding AppVersion}" Grid.Row="2" BackgroundColor="#F2F2F9" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"></Label>
+        <StackLayout  Grid.Row="2" BackgroundColor="#F2F2F9" >
+       <Label Text="{Binding AppVersion}" Margin="0,0,0,3" HorizontalTextAlignment="Center" VerticalTextAlignment="End" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand"/>
+            </StackLayout>
     </Grid>
 
 </ContentPage>

@@ -7,6 +7,7 @@ using DoAndGet.Helpers;
 using DoAndGet.Interfaces;
 using DoAndGet.ResponceModels.GetActivity;
 using DoAndGet.Utils;
+using Microsoft.AppCenter.Crashes;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -55,14 +56,13 @@ namespace DoAndGet
                             x.childId.image = getAllActivity.data.imageUrl + x.childId.image;
                             var ct = Convert.ToInt64(x.createdAt);
                             var dt = FromUnixTime(ct);
+                            x.DateTime = dt;
                             var createdTime = dt.ToString("hh:mm tt");
                             x.dayofweek = dt.DayOfWeek.ToString();
                             x.createdAt = createdTime;
                         });
-
-
-
-                        Data = new ObservableCollection<ChildList>(data.OrderByDescending(x => x.createdAt));
+                        var orderedData = data.OrderByDescending(x => x.DateTime);
+                        Data = new ObservableCollection<ChildList>(orderedData);
                         Helper.HideLoader();
                     }
                     else
@@ -76,6 +76,7 @@ namespace DoAndGet
             catch (Exception ex)
             {
                 DependencyService.Get<Toasts>().Show(ex.Message);
+               // Crashes.TrackError(ex);
             }
             finally
             {

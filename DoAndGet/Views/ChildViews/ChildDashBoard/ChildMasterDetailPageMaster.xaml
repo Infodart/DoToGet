@@ -11,7 +11,7 @@
             <Frame Grid.Row="0">
 
                 <StackLayout>
-                    <ffimage:CachedImage  Source="{Binding ProfileImage}" HeightRequest="150" WidthRequest="150">
+                    <ffimage:CachedImage ErrorPlaceholder="profile" LoadingPlaceholder="loading" Source="{Binding ProfileImage}" HeightRequest="150" WidthRequest="150">
 
                         <ffimage:CachedImage.Transformations>
 

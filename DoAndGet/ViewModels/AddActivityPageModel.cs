@@ -28,7 +28,7 @@ namespace DoAndGet
         public async Task<ObservableCollection<Datum>> GetData()
         {
 
-            GetAllChild getAllChild = null;
+            GetAllChild getAllChild = new GetAllChild();
             try
             {
 

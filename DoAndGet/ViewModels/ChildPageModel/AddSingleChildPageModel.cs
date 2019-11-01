@@ -78,8 +78,18 @@ namespace DoAndGet.ViewModels.ChildPageModel
         }
 
        
+        public Command GoBackCommand
+        {
+            get
+            {
+                return new Command(async () => {
 
-      
+                   await Application.Current.MainPage.Navigation.PopAsync();
+                });
+            }
+        }
+
+
 
 
         public Command AddChild
@@ -114,7 +124,22 @@ namespace DoAndGet.ViewModels.ChildPageModel
 
                         }
                         else
-                            DependencyService.Get<Toasts>().Show("Please upload the image");
+                        {
+                            // upload without image //
+                            
+                                Helper.ShowLoader("Please wait");
+                                var imagename = Gender == "Boy" ? "boy.png" : "girl.png";
+                                var request = new AddSingleChildRequest { fullName = ChildName, gender = Gender, image = imagename, username = UserName.ToLower().Trim(), age = ChildAge, password = Password };
+                                var response = await Helper.WebServices.AddSingleChild(("Bearer " + Global.UserDetails.Token), request);
+                                if (!response.error)
+                                {
+
+                                    await Application.Current.MainPage.Navigation.PopAsync();
+                                    DependencyService.Get<Toasts>().Show(response.message);
+                                }
+                                else
+                                    DependencyService.Get<Toasts>().Show(response.message);
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -124,11 +149,6 @@ namespace DoAndGet.ViewModels.ChildPageModel
                     {
                         Helper.HideLoader();
                     }
-
-
-
-
-
                 });
             }
         }
@@ -164,7 +184,7 @@ namespace DoAndGet.ViewModels.ChildPageModel
 
                             mediaFile = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
                             {
-                                CompressionQuality = 20,
+                                 CompressionQuality = 20,
 
                             });
 
@@ -173,14 +193,8 @@ namespace DoAndGet.ViewModels.ChildPageModel
 
                             try
                             {
-                               
-                                //var a = ImageSource.FromFile(mediaFile.Path);
-                                //var stream = mediaFile.GetStream();
-                                //var bytes = GetByteArrayFromStream(stream);
-
-
-                                filename = Path.GetFileName(mediaFile.Path);
-                             
+                              
+                                filename = Path.GetFileName(mediaFile.Path);                            
                                 ImageUploadedText = "Image uploaded";
                                 ImageTextColor = Color.Blue;
                             }
@@ -191,8 +205,6 @@ namespace DoAndGet.ViewModels.ChildPageModel
                             break;
                         //Pick from Gallary
                         case "Pick from Gallary":
-
-
                             var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Plugin.Permissions.Abstractions.Permission.Storage);
                             // var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync<StoragePermission>();
 
@@ -213,16 +225,15 @@ namespace DoAndGet.ViewModels.ChildPageModel
                                     return;
                                 }
 
-                                mediaFile = await CrossMedia.Current.PickPhotoAsync();
+                                mediaFile = await CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions
+                                {
+                                    CompressionQuality = 20
+                                });
                                 if (mediaFile == null)
                                     return;
                                 try
                                 {
                                    
-                                    //var a = ImageSource.FromFile(mediaFile.Path);
-                                    //var stream = mediaFile.GetStream();
-                                    //var bytes = GetByteArrayFromStream(stream);
-
                                     filename = Path.GetFileName(mediaFile.Path);
                                     ImageUploadedText = "Image uploaded";
                                     ImageTextColor = Color.Blue;

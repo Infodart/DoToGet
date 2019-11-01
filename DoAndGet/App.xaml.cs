@@ -11,6 +11,11 @@ using DoAndGet.Utils;
 using DoAndGet.Interfaces;
 using Acr.UserDialogs;
 using DoAndGet.Models;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using DoAndGet.Views;
+using DoAndGet.Helpers;
 
 namespace DoAndGet
 {
@@ -27,36 +32,24 @@ namespace DoAndGet
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
-            CheckConnectivity();
+          
             SetupMainPage();
-        
-            //{ BarBackgroundColor = Color.FromHex("#F4F8FA"), BarTextColor = Color.FromHex("#000000") };
-            //var current = Connectivity.NetworkAccess;
-            //var profiles = Connectivity.ConnectionProfiles;
-            //if (current == NetworkAccess.Internet)
-            //{
-            //   var eee = "Network is Available";
-            //}
-            //else
-            //{
-            //    var ssss = "Network is Not Available";
-            //}
+            var density = DeviceDisplay.MainDisplayInfo.Density;
+           // ShimmerLayout.Init(density);
 
-            //if (profiles.Contains(ConnectionProfile.WiFi))
-            //{
-            //   var sed = profiles.FirstOrDefault().ToString();
-            //}
-            //else
-            //{
-            //    var sdefc = profiles.FirstOrDefault().ToString();
-            //}
+
 
         }
 
         protected override void OnStart()
         {
             // Handle when your app starts
+            AppCenter.Start("ios=58a8ae79-d85a-4700-a762-af5460cc95b1;"+"android=cd81afe1-8481-4367-9b50-ef8bbad9f767;", typeof(Analytics), typeof(Crashes));
+            AppCenter.LogLevel = Microsoft.AppCenter.LogLevel.Verbose;
+          //  CheckConnectivity();
         }
+
+
 
         protected override void OnSleep()
         {
@@ -67,28 +60,37 @@ namespace DoAndGet
         {
             // Handle when your app resumes
         }
-        //private void SetupIOc()
-        //{
-        //    var httpClient = new HttpClient(new AuthenticatedHttpClientHandler())
-        //    {
-        //        BaseAddress = new Uri(AppConst.BaseAddress),
-        //        Timeout = TimeSpan.FromSeconds(60)
-        //    };
-
-        //   // _webServices = Refit.RestService.For<IWebServices>(httpClient);
-        //   // FreshIOC.Container.Register(_webServices);
-        //    //FreshIOC.Container.Register(UserDialogs.Instance);
-
-        //}
+       
         private void CheckConnectivity()
         {
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
 
-        private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        private async void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
         {
-            if (e.NetworkAccess.Equals(NetworkAccess.None))
-                Helpers.Helper.ShowToast("No Internet");
+            try
+            {
+                if (e.NetworkAccess.Equals(NetworkAccess.None))
+                {
+                    Helpers.Helper.ShowToast("No Internet");
+                    var nointernetPage = new NoInternetPage();
+                    NavigationPage.SetHasNavigationBar(nointernetPage, false);
+                    await Helper.NavigateToPage(nointernetPage);
+                }
+                else
+                {
+                    if (Application.Current.MainPage.Navigation.NavigationStack.Count > 1)
+                    {
+                        var currentPage = Application.Current.MainPage.Navigation.NavigationStack.LastOrDefault();
+                        if (currentPage.GetType() == typeof(NoInternetPage))
+                        {
+
+                        }
+                           
+                    }
+                }
+            }
+            catch (Exception ex) { }
         }
 
         private void SetupMainPage()

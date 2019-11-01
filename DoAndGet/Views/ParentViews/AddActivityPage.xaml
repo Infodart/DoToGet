@@ -8,11 +8,11 @@
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="5.5*" />
             </Grid.RowDefinitions>
-            <Image Source="main" Grid.Row="0" Grid.RowSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill" />
+            <Image Source="img" Grid.Row="0" Grid.RowSpan="3" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Aspect="AspectFill" />
             <ImageButton Source="back" HeightRequest="20" WidthRequest="20" HorizontalOptions="StartAndExpand" Aspect="AspectFit" Margin="15,10,0,0" VerticalOptions="StartAndExpand" Grid.Row="0" Clicked="OnBackPress"/>
             <Frame Margin="0" HasShadow="True" Padding="10" Grid.Row="2" Grid.RowSpan="2" HorizontalOptions="FillAndExpand" BackgroundColor="#F2F2F9" VerticalOptions="FillAndExpand" CornerRadius="30">
                 <StackLayout>
-                      <Label Text="Activity Form" TextColor="#3139BD" VerticalTextAlignment="Center" Grid.Row="0" FontSize="Large" Grid.Column="0" FontAttributes="Bold" />
+                      <Label Text="Activity" TextColor="#3139BD" VerticalTextAlignment="Center" Grid.Row="0" FontSize="Large" Grid.Column="0" FontAttributes="Bold" />
                 <ScrollView VerticalScrollBarVisibility="Never" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                     <Grid HorizontalOptions="FillAndExpand" Padding="10" VerticalOptions="FillAndExpand" RowSpacing="20">
 
@@ -27,7 +27,10 @@
 
                       
 
-                        <controls:MyFrame Margin="0" HorizontalOptions="FillAndExpand"  VerticalOptions="CenterAndExpand" CornerRadius="30" Padding="20" Grid.Row="1">
+                        <controls:MyFrame Margin="0" HorizontalOptions="FillAndExpand"  VerticalOptions="CenterAndExpand"  Padding="20" Grid.Row="1">
+                            <controls:MyFrame.CornerRadius>
+                            <OnPlatform x:TypeArguments="x:Single" Android="60" iOS="30" />
+                        </controls:MyFrame.CornerRadius>
                             <StackLayout Orientation="Horizontal">
                                 <Image Source="download" HeightRequest="20" WidthRequest="20" />
                                 <controls:MyEntry x:Name="mailEntry" PlaceholderColor="#CCCCCC" Placeholder="Activity Name " Text="{Binding ActivityName}" HorizontalOptions="FillAndExpand" VerticalOptions="Center">
@@ -35,17 +38,23 @@
                                 </controls:MyEntry>
                             </StackLayout>
                         </controls:MyFrame>
-                        <controls:MyFrame Margin="0" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" CornerRadius="30" Padding="15" Grid.Row="2">
+                        <controls:MyFrame Margin="0" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Padding="15" Grid.Row="2">
+                            <controls:MyFrame.CornerRadius>
+                            <OnPlatform x:TypeArguments="x:Single" Android="60" iOS="30" />
+                        </controls:MyFrame.CornerRadius>
                             <StackLayout Orientation="Horizontal">
                                 <Image Source="myreward" HeightRequest="30" WidthRequest="30" />
-                                <controls:MyPicker HorizontalOptions="FillAndExpand" VerticalOptions="Center" Title="Add child" Image="down.png" ItemsSource="{Binding ChilDetails}"  SelectedItem="{Binding ChildId}"  >
+                                <controls:MyPicker HorizontalOptions="FillAndExpand" VerticalOptions="Center" Title="Add child" Image="down" ItemsSource="{Binding ChilDetails}"  SelectedItem="{Binding ChildId}" LineColor="Wheat" >
                                    
                                 </controls:MyPicker>
 
 
                             </StackLayout>
                         </controls:MyFrame>
-                        <controls:MyFrame Margin="0" CornerRadius="30" Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Grid.Row="3">
+                        <controls:MyFrame Margin="0" Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Grid.Row="3">
+                            <controls:MyFrame.CornerRadius>
+                            <OnPlatform x:TypeArguments="x:Single" Android="60" iOS="30" />
+                        </controls:MyFrame.CornerRadius>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="35">
                                 <Image Source="star" HeightRequest="30" WidthRequest="30" />
                                 <Button ImageSource="minus" Command="{Binding minusbuttonCommand}" FontSize="20" />
@@ -54,8 +63,11 @@
                             </StackLayout>
                         </controls:MyFrame>
 
-                        <Button Text="Add Activity" Margin="0" Grid.Row="4" Padding="20" VerticalOptions="CenterAndExpand" BackgroundColor="#FEBA09" TextColor="white" CornerRadius="30" FontSize="Body" Command="{Binding AddActivity}" />
-
+                        <Button Text="Add Activity" Margin="0" Grid.Row="4" Padding="20" VerticalOptions="CenterAndExpand" BackgroundColor="#FEBA09" TextColor="white"  FontSize="Body" Command="{Binding AddActivity}" >
+                         <Button.CornerRadius>
+                            <OnPlatform x:TypeArguments="x:Int32" Android="60" iOS="30" />
+                        </Button.CornerRadius>
+                            </Button>
                     </Grid>
                 </ScrollView>
                     </StackLayout>

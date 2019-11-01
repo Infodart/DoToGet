@@ -1,0 +1,85 @@
+@string/appbar_scrolling_view_behavior;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/63/jl/res/layout/flyoutcontent.xml
+@string/appbar_scrolling_view_behavior;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/63/jl/res/layout/rootlayout.xml
+@string/appbar_scrolling_view_behavior;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/63/jl/res/layout/shellcontent.xml
+adaptive-icon;obj/Release/res/mipmap-anydpi-v26/icon.xml
+adaptive-icon;obj/Release/res/mipmap-anydpi-v26/icon_round.xml
+alpha;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/63/jl/res/anim/enterfromleft.xml
+alpha;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/63/jl/res/anim/exittoleft.xml
+android.support.design.widget.AppBarLayout;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/63/jl/res/layout/flyoutcontent.xml
+android.support.design.widget.AppBarLayout;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/63/jl/res/layout/rootlayout.xml
+android.support.design.widget.AppBarLayout;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/63/jl/res/layout/shellcontent.xml
+android.support.design.widget.BottomNavigationView;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/63/jl/res/layout/bottomtablayout.xml
+android.support.design.widget.CoordinatorLayout;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/63/jl/res/layout/flyoutcontent.xml
+android.support.design.widget.CoordinatorLayout;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/63/jl/res/layout/rootlayout.xml
+android.support.design.widget.CoordinatorLayout;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/63/jl/res/layout/shellcontent.xml
+android.support.design.widget.TabLayout;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/63/jl/res/layout/rootlayout.xml
+android.support.design.widget.TabLayout;obj/Release/res/layout/tabbar.xml
+android.support.v4.widget.NestedScrollView;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/63/jl/res/layout/rootlayout.xml
+android.support.v4.widget.NestedScrollView;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/63/jl/res/layout/shellcontent.xml
+android.support.v7.widget.RecyclerView;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/63/jl/res/layout/flyoutcontent.xml
+android.support.v7.widget.Toolbar;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/63/jl/res/layout/rootlayout.xml
+android.support.v7.widget.Toolbar;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/63/jl/res/layout/shellcontent.xml
+android.support.v7.widget.Toolbar;obj/Release/res/layout/toolbar.xml
+androidhud.ProgressWheel;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/1/jl/res/layout/loadingprogress.xml
+attr;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/1/jl/res/values/attrs.xml
+attr;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/6/jl/res/values/values.xml
+background;obj/Release/res/mipmap-anydpi-v26/icon.xml
+background;obj/Release/res/mipmap-anydpi-v26/icon_round.xml
+bitmap;obj/Release/res/drawable/splashscreen.xml
+cache-path;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/62/jl/res/xml/xamarin_essentials_fileprovider_file_paths.xml
+color;obj/Release/res/values/colors.xml
+corners;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/1/jl/res/drawable/roundedbg.xml
+corners;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/1/jl/res/drawable/roundedbgdark.xml
+declare-styleable;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/1/jl/res/values/attrs.xml
+declare-styleable;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/6/jl/res/values/values.xml
+enum;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/6/jl/res/values/values.xml
+external-cache-path;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/62/jl/res/xml/xamarin_essentials_fileprovider_file_paths.xml
+external-files-path;obj/Release/res/xml/file_paths.xml
+external-path;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/62/jl/res/xml/xamarin_essentials_fileprovider_file_paths.xml
+foreground;obj/Release/res/mipmap-anydpi-v26/icon.xml
+foreground;obj/Release/res/mipmap-anydpi-v26/icon_round.xml
+FrameLayout;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/63/jl/res/layout/bottomtablayout.xml
+gradient;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/1/jl/res/drawable/roundedbg.xml
+gradient;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/1/jl/res/drawable/roundedbgdark.xml
+ImageView;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/1/jl/res/layout/loadingimage.xml
+item;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/6/jl/res/values/values.xml
+item;obj/Release/res/drawable/splashscreen.xml
+item;obj/Release/res/values/styles.xml
+layer-list;obj/Release/res/drawable/splashscreen.xml
+LinearLayout;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/63/jl/res/layout/bottomtablayout.xml
+padding;obj/Release/res/drawable/splashscreen.xml
+paths;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/62/jl/res/xml/xamarin_essentials_fileprovider_file_paths.xml
+paths;obj/Release/res/xml/file_paths.xml
+ProgressBar;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/1/jl/res/layout/loading.xml
+RelativeLayout;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/1/jl/res/layout/loading.xml
+RelativeLayout;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/1/jl/res/layout/loadingimage.xml
+RelativeLayout;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/1/jl/res/layout/loadingprogress.xml
+resources;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/1/jl/res/values/attrs.xml
+resources;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/1/jl/res/values/strings.xml
+resources;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/12/jl/res/values/strings.xml
+resources;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/13/jl/res/values/strings.xml
+resources;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/14/jl/res/values/strings.xml
+resources;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/22/jl/res/values/strings.xml
+resources;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/6/jl/res/values/values.xml
+resources;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/9/jl/res/values/strings.xml
+resources;obj/Release/res/values/colors.xml
+resources;obj/Release/res/values/styles.xml
+set;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/63/jl/res/anim/enterfromleft.xml
+set;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/63/jl/res/anim/enterfromright.xml
+set;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/63/jl/res/anim/exittoleft.xml
+set;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/63/jl/res/anim/exittoright.xml
+shape;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/1/jl/res/drawable/roundedbg.xml
+shape;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/1/jl/res/drawable/roundedbgdark.xml
+shape;obj/Release/res/drawable/splashscreen.xml
+solid;obj/Release/res/drawable/splashscreen.xml
+string;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/1/jl/res/values/strings.xml
+string;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/14/jl/res/values/strings.xml
+string;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/22/jl/res/values/strings.xml
+style;obj/Release/res/values/styles.xml
+TextView;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/1/jl/res/layout/loading.xml
+TextView;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/1/jl/res/layout/loadingimage.xml
+TextView;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/1/jl/res/layout/loadingprogress.xml
+translate;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/63/jl/res/anim/enterfromleft.xml
+translate;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/63/jl/res/anim/enterfromright.xml
+translate;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/63/jl/res/anim/exittoleft.xml
+translate;/Users/krishnakumar/Projects/DoAndGet 2/DoAndGet.Android/obj/Release/lp/63/jl/res/anim/exittoright.xml

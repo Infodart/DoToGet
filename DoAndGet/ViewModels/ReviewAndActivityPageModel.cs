@@ -18,7 +18,7 @@ using ChildList = DoAndGet.ResponceModels.GetActivity.ChildList;
 
 namespace DoAndGet
 {
-    public class ReviewAndActivityPageModel: INotifyPropertyChanged
+    public class ReviewAndActivityPageModel : INotifyPropertyChanged
     {
         private ObservableCollection<ChildList> _data;
         public ObservableCollection<ChildList> Data
@@ -32,8 +32,8 @@ namespace DoAndGet
         }
         public ReviewAndActivityPageModel()
         {
-           
-           // GetData();
+
+            // GetData();
         }
 
         public async void GetData()
@@ -45,16 +45,14 @@ namespace DoAndGet
                 if (getAllreward.error == false)
                 {
                     if (getAllreward.data.list.Count > 0)
-                {
+                    {
 
                         var reward = getAllreward.data.list.ToList().FindAll(x => x.status == 2);
                         reward.ForEach(x => x.childId.image = getAllreward.data.imageUrl + x.childId.image);
                         Data = new ObservableCollection<ChildList>(reward);
-                      
-                  
-                }
-                else
-                    DependencyService.Get<Toasts>().Show("No data found.");
+                    }
+                    else
+                        DependencyService.Get<Toasts>().Show("No data found.");
                 }
 
                 else
@@ -62,7 +60,7 @@ namespace DoAndGet
             }
             catch (Exception ex)
             {
-                var msg = ex.Message;
+                DependencyService.Get<Toasts>().Show(ex.Message);
             }
             finally
             {
@@ -97,7 +95,7 @@ namespace DoAndGet
                 return new Command(async (obj) =>
                 {
                     var data = obj as ChildList;
-                    var popuppage = new RewardpopupPage(data.id, "Are you sure to give him "+ data.points+ " Reward points?", "Child has done "+data.name, false);
+                    var popuppage = new RewardpopupPage(data.id, "Are you sure to give him " + data.points + " Reward points?", "Child has done " + data.name, false);
                     popuppage.Disappearing += Popuppage_Disappearing;
                     await PopupNavigation.Instance.PushAsync(popuppage);
                 });
@@ -116,7 +114,7 @@ namespace DoAndGet
                 return new Command(async (obj) =>
                 {
                     var data = obj as ChildList;
-                    var popuppage1 = new RewardpopupPage(data.id, "Are you sure don't want to give him"+data.points+ "Reward points?", "Child has not done"+data.name, true);
+                    var popuppage1 = new RewardpopupPage(data.id, "Are you sure don't want to give him" + data.points + "Reward points?", "Child has not done" + data.name, true);
                     popuppage1.Disappearing += Popuppage1_Disappearing;
                     await PopupNavigation.Instance.PushAsync(popuppage1);
                 });
@@ -128,10 +126,7 @@ namespace DoAndGet
             GetData();
         }
 
-        public async void OKClicked()
-        {
-           
-        }
+       
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName]string propertyName = null)

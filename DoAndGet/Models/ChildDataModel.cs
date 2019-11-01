@@ -9,7 +9,7 @@ namespace DoAndGet.Models
         public string ChildDataAge { get; set; }
         public string ChildDataUserName { get; set; }
         public string ChildDataGender { get; set; }
-        public MediaFile MediaFile { get; set; }
+        public MediaFile  MediaFile { get; set; }
         public string ChildDataPassword { get;  set; }
         public string ChildAge { get; set; }
     }

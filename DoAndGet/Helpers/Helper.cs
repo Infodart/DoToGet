@@ -69,7 +69,7 @@ namespace DoAndGet.Helpers
         {
             try
             {
-               // DB.DeleteAll<LoginCredential>();
+               
                 DB.DeleteAll<UserDetails>();
             }
             catch (Exception ex) { }
@@ -101,14 +101,19 @@ namespace DoAndGet.Helpers
 
             }
         }
-        //public static void SetMainPage()
-        //{
-        //    var page = FreshPageModelResolver.ResolvePageModel<LoginPageModel>();
-        //    var basicNavContainer = new FreshNavigationContainer(page);
-        //    Application.Current.MainPage = basicNavContainer;
-        //}
 
-       public static async void IsBackPreshed(object sender, EventArgs args)
+        public static async Task NavigateToPage(Page page)
+        {
+            try
+            {
+                var mainPage = (NavigationPage)Application.Current.MainPage;
+                await mainPage.Navigation.PushAsync(page, true);
+            }
+            catch (Exception ex)
+            { }
+        }
+
+        public static async void IsBackPreshed(object sender, EventArgs args)
         {
 
             await Application.Current.MainPage.Navigation.PopAsync(true);

@@ -45,7 +45,7 @@
                                                     <Label Text="Rewards" VerticalOptions="CenterAndExpand" TextColor="Black" FontSize="8" />
                                                 </StackLayout>
 
-                                                <ffimage:CachedImage LoadingPlaceholder="user" ErrorPlaceholder="user" Source="{Binding childId.image}" Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" HeightRequest="40" WidthRequest="40" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Aspect="AspectFill">
+                                                <ffimage:CachedImage  ErrorPlaceholder="image_error" LoadingPlaceholder="image_loading" Source="{Binding childId.image}" Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" HeightRequest="40" WidthRequest="40" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Aspect="AspectFill">
                                                     <ffimage:CachedImage.Transformations>
                                                         <transform:CircleTransformation />
                                                     </ffimage:CachedImage.Transformations>

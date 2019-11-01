@@ -1,7 +1,10 @@
 ﻿
 using FFImageLoading.Forms.Platform;
 using Foundation;
-
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+using ObjCRuntime;
 using UIKit;
 
 namespace DoAndGet.iOS
@@ -20,9 +23,21 @@ namespace DoAndGet.iOS
             UITabBar.Appearance.BarTintColor = UIColor.FromRGB(0, 130, 102);
             CachedImageRenderer.Init();
             Rg.Plugins.Popup.Popup.Init();
+            AppCenter.Start("58a8ae79-d85a-4700-a762-af5460cc95b1", typeof(Analytics), typeof(Crashes));
+          
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
+        }
+        public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations(UIApplication application, [Transient] UIWindow forWindow)
+        {
+           // return base.GetSupportedInterfaceOrientations(application, forWindow);
+            if (UIDevice.CurrentDevice.Model == "iPhone")
+            {
+                return UIInterfaceOrientationMask.Portrait;
+            }
+            else
+                return UIInterfaceOrientationMask.Portrait;
         }
     }
 }

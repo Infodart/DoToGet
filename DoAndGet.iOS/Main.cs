@@ -21,7 +21,7 @@ namespace DoAndGet.iOS
             catch (Exception ex)
             {
                 Console.WriteLine("Error in Ios App" + ex.Message);
-;            }
+           }
           
         }
     }

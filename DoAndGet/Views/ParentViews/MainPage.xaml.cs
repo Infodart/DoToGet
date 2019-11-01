@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 using DoAndGet.Models;
 using DoAndGet.Helpers;
-using DoAndGet.Utils;
 
 namespace DoAndGet
 {
@@ -44,7 +41,6 @@ namespace DoAndGet
                         MenuPages.Add(id, new NavigationPage(new ReviewAndActivityPage()));
                         SetMenu(id);
                         break;
-
                     case (int)MenuItemType.Rewards:
                         MenuPages.Add(id, new NavigationPage(new RewardsPage()));
                         SetMenu(id);
@@ -53,9 +49,7 @@ namespace DoAndGet
                         MenuPages.Add(id, new NavigationPage(new ChildrenHistoryPage()));
                         SetMenu(id);
                         break;
-
                     case (int)MenuItemType.Logout:
-
                         Logout();
                         break;
                 }

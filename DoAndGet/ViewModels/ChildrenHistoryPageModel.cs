@@ -39,13 +39,13 @@ namespace DoAndGet
         public async void GetData()
         {
 
-            GetAllChild getAllChild = null;
+            GetAllChild getAllChild = new GetAllChild();
             try
             {
 
                 Helper.ShowLoader("Loading data");
                 getAllChild = await Helper.WebServices.GetAllChild("Bearer " + Global.UserDetails.Token);
-                if (getAllChild.error == false)
+                if (getAllChild != null && getAllChild.error == false)
                 {
                     if (getAllChild.data.Count > 0)
                     {
@@ -57,8 +57,8 @@ namespace DoAndGet
                     else
                         DependencyService.Get<Toasts>().Show("No data found");
                 }
-                
-                     else
+
+                else
                     DependencyService.Get<Toasts>().Show(getAllChild.message);
 
 

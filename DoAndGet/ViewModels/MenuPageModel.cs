@@ -19,18 +19,20 @@ namespace DoAndGet.ViewModels
             try
             {
                 Helper.ShowLoader("Loading data");
+                AppVersion = "V:" + VersionTracking.CurrentVersion + "<" + VersionTracking.CurrentBuild + ">";
                 var response = await Helper.WebServices.GetParentProfile("Bearer " + Global.UserDetails.Token);
                 if (response.data != null)
                 {
 
                     UserName = response.data.fullName;
-                    ProfileImage =response.data.imageUrl+ response.data.image;//"https://www.hindisoch.com/wp-content/uploads/2016/08/Baby-Shree-Krishna-Images.jpg";
-                   AppVersion="Ver :"+ VersionTracking.CurrentVersion;
+                    ProfileImage = response.data.imageUrl + response.data.image;
                 }
+
                 else
                 {
                     UserName = "Parent Name";
                     ProfileImage = "profile";
+
                 }
             }
             catch (Exception ex)
@@ -58,9 +60,7 @@ namespace DoAndGet.ViewModels
                 if (_appVersion != value)
                 {
                     _appVersion = value;
-                    PropertyChanged?.Invoke(
-                        this,
-                        new PropertyChangedEventArgs(nameof(AppVersion)));
+                    PropertyChanged?.Invoke( this,new PropertyChangedEventArgs(nameof(AppVersion)));
                 }
             }
         }

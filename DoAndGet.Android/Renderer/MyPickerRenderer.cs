@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Linq;
+using Android.App;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Support.V4.Content;
+using Android.Widget;
 using DoAndGet.Droid.Renderer;
 using DoAndGet.Renderer;
 using Xamarin.Forms;
@@ -10,9 +13,11 @@ using Xamarin.Forms.Platform.Android;
 [assembly: ExportRenderer(typeof(MyPicker), typeof(MyPickerRenderer))]
 namespace DoAndGet.Droid.Renderer
 {
-   
+    [Obsolete]
     public class MyPickerRenderer:PickerRenderer
     {
+        private IElementController ElementController => Element as IElementController;
+        private AlertDialog _dialog;
         MyPicker element;
         protected override void OnElementChanged(ElementChangedEventArgs<Picker> e)
         {
@@ -21,17 +26,17 @@ namespace DoAndGet.Droid.Renderer
             element = (MyPicker)this.Element;
 
             if (Control != null && this.Element != null && !string.IsNullOrEmpty(element.Image))
+            {
                 Control.Background = AddPickerStyles(element.Image);
-
+            }
         }
-
         public LayerDrawable AddPickerStyles(string imagePath)
         {
             ShapeDrawable border = new ShapeDrawable();
             border.Paint.Color = Android.Graphics.Color.Gray;
             border.SetPadding(10, 10, 10, 10);
             border.Paint.SetStyle(Paint.Style.Stroke);
-
+            
             Drawable[] layers = { border, GetDrawable(imagePath) };
             LayerDrawable layerDrawable = new LayerDrawable(layers);
             layerDrawable.SetLayerInset(0, 0, 0, 0, 0);

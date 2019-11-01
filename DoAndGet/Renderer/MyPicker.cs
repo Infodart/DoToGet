@@ -7,7 +7,7 @@ namespace DoAndGet.Renderer
     {
         public MyPicker()
         {
-            this.HeightRequest = 30;
+            this.HeightRequest = 40;
         }
         public static readonly BindableProperty LineColorProperty = BindableProperty.Create(nameof(LineColor), typeof(Xamarin.Forms.Color), typeof(MyPicker), Color.Black);
 

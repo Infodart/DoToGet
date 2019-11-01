@@ -1,46 +1,39 @@
 ﻿<Properties StartupConfiguration="{566DF0D7-21CE-4202-BDF3-94733844858C}|Default">
-  <MonoDevelop.Ide.ItemProperties.DoToGet.iOS automaticSigning="False" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneDeviceTarget" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.DoToGet.iOS automaticSigning="False" PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.EBD60BA4-92C6-486F-9CEA-979433608924" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="DoAndGet/Views/ParentViews/RewardsPage.xaml">
     <Files>
-      <File FileName="DoAndGet/Views/ChildViews/ChildDashBoard/ChildMasterDetailPageDetail.xaml" Line="1" Column="1" />
-      <File FileName="DoAndGet.Android/MainActivity.cs" Line="26" Column="12" />
-      <File FileName="DoAndGet/Views/ParentViews/MenuPage.xaml.cs" Line="31" Column="83" />
-      <File FileName="DoAndGet/Views/ParentViews/ParentLoginPage.xaml" Line="1" Column="1" />
-      <File FileName="DoAndGet/ViewModels/ParentLoginPageModel.cs" Line="27" Column="13" />
+      <File FileName="DoAndGet/Views/PoupupPages/ChildRewardsPoupPage.xaml" Line="4" Column="103" />
+      <File FileName="DoAndGet/Views/ParentViews/AddRewardsPage.xaml" />
+      <File FileName="DoAndGet/Views/ParentViews/RewardsPage.xaml" Line="1" Column="1" />
+      <File FileName="DoAndGet/ViewModels/RewardsPageModel.cs" Line="76" Column="14" />
+      <File FileName="DoAndGet/Views/PoupupPages/RewardpopupPage.xaml.cs" Line="10" Column="32" />
+      <File FileName="DoAndGet/ViewModels/ReviewAndActivityPageModel.cs" Line="100" Column="73" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="DoAndGet" expanded="True">
             <Node name="DoAndGet" expanded="True">
-              <Node name="Dependencies" expanded="True" />
               <Node name="ViewModels" expanded="True" />
               <Node name="Views" expanded="True">
                 <Node name="ParentViews" expanded="True">
-                  <Node name="MenuPage.xaml" expanded="True" />
+                  <Node name="RewardsPage.xaml" selected="True" />
+                </Node>
+                <Node name="PoupupPages" expanded="True">
+                  <Node name="RewardpopupPage.xaml" expanded="True" />
                 </Node>
               </Node>
             </Node>
-            <Node name="DoToGet.Android" expanded="True">
-              <Node name="Resources" expanded="True" />
-            </Node>
-            <Node name="DoToGet.iOS" selected="True" />
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.DoToGet.Android AndroidDesignerPreferredTheme="Theme.AppCompat.Light.NoActionBar" PreferredExecutionTarget="Android.Android_Accelerated_Oreo" />
+  <MonoDevelop.Ide.ItemProperties.DoToGet.Android AndroidDesignerPreferredTheme="Theme.AppCompat.Light.NoActionBar" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|iPhone" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/krishnakumar/Projects/DoAndGet/DoAndGet/ViewModels/ParentRegistationPageModel.cs" relfile="DoAndGet/ViewModels/ParentRegistationPageModel.cs" line="285" column="1" />
-      <Breakpoint file="/Users/krishnakumar/Projects/DoAndGet/DoAndGet/ViewModels/ParentRegistationPageModel.cs" relfile="DoAndGet/ViewModels/ParentRegistationPageModel.cs" line="318" column="1" />
-      <Breakpoint file="/Users/krishnakumar/Projects/DoAndGet/DoAndGet/ViewModels/ParentRegistationPageModel.cs" relfile="DoAndGet/ViewModels/ParentRegistationPageModel.cs" line="305" column="1" />
-      <Breakpoint file="/Users/krishnakumar/Projects/DoAndGet/DoAndGet/ViewModels/PopupPageViewModel/RewardpopupPageModel.cs" relfile="DoAndGet/ViewModels/PopupPageViewModel/RewardpopupPageModel.cs" line="30" column="1" />
-      <Breakpoint file="/Users/krishnakumar/Projects/DoAndGet/DoAndGet/ViewModels/PopupPageViewModel/RewardpopupPageModel.cs" relfile="DoAndGet/ViewModels/PopupPageViewModel/RewardpopupPageModel.cs" line="54" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>

@@ -47,23 +47,23 @@ namespace DoAndGet
             try
             {
                 Helper.ShowLoader("Please wait");
+                AppVersion = "V:" + VersionTracking.CurrentVersion + "<" + VersionTracking.CurrentBuild + ">";
                 ChildGetProfileResponceModel responsedata = await Helper.WebServices.GetChildGetProfile("Bearer " + Global.UserDetails.Token);
                 if (responsedata.data != null)
                 {
 
                     UserName = responsedata.data.fullName;
                     ProfileImage = responsedata.data.imageUrl + responsedata.data.image;
-                   // Global.ChildPoints = responsedata.data.points;
-                   EarnedPoints= responsedata.data.points !=0 ? responsedata.data.points:0;
-                    AppVersion = "Ver :" + VersionTracking.CurrentVersion;
-                    // getAllActivity.data.childDetails.points != 0 ? getAllActivity.data.childDetails.points : 0;
-
-                    //response.data.image;
+                 
+                    EarnedPoints= responsedata.data.points !=0 ? responsedata.data.points:0;
+                 
+                   
                 }
                 else
                 {
-                    UserName = "Parent Name";
+                    UserName = "Child Name";
                     ProfileImage = "profile";
+                   
                 }
             }
             catch (Exception ex)

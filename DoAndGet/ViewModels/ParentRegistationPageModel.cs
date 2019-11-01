@@ -24,8 +24,8 @@ namespace DoAndGet
 {
     public class ParentRegistationPageModel : INotifyPropertyChanged
     {
-       
-       
+
+
         private string _uncheckedimage = "unselectRadio";
         private string _checkedimage = "selectRadio";
         private string _imageUploadedText = "Upload your image";
@@ -82,7 +82,7 @@ namespace DoAndGet
 
         private async void AddChildHandler(object obj)
         {
-            await Application.Current.MainPage.Navigation.PushAsync(new AddAChildPage(),true); 
+            await Application.Current.MainPage.Navigation.PushAsync(new AddAChildPage(), true);
         }
 
         public ICommand DeleteCommand
@@ -278,33 +278,53 @@ namespace DoAndGet
                         {
                             Helper.ShowLoader("Please wait");
                             var imageResponce = await UploadImage(mediaFile);
-                            if(imageResponce.error==false)
+                            if (imageResponce.error == false)
                             {
                                 var request = new ParentRegistationRequest { email = Email.ToLower().Trim(), gender = Gender, image = imageResponce.data.uploadedImageName, fullName = UserName, password = Password };
                                 var response = await Helper.WebServices.ParentRegistation(request);
-                                if (response!=null&& !response.error)
+                                if (response != null && !response.error)
                                 {
                                     var requestList = new List<AddMultipleChildRequestModel>();
-                                    foreach (var item in ChildDetailList)
+                                    if (ChildDetailList != null)
                                     {
-                                        var childImageResponse = await UploadImage(item.MediaFile);
-                                        if (!childImageResponse.error)
+                                        foreach (var item in ChildDetailList)
                                         {
-                                            requestList.Add(new AddMultipleChildRequestModel
+                                            if (item.MediaFile != null)
                                             {
-                                                username = item.ChildDataUserName,
-                                                gender = item.ChildDataGender,
-                                                image = childImageResponse.data.uploadedImageName,
-                                                fullName = item.ChildDataName,
-                                                password = item.ChildDataPassword,
-                                                age=item.ChildAge
-                                            }) ; 
+                                                var childImageResponse = await UploadImage(item.MediaFile);
+                                                if (!childImageResponse.error)
+                                                {
+                                                    requestList.Add(new AddMultipleChildRequestModel
+                                                    {
+                                                        username = item.ChildDataUserName,
+                                                        gender = item.ChildDataGender,
+                                                        image = childImageResponse.data.uploadedImageName,
+                                                        fullName = item.ChildDataName,
+                                                        password = item.ChildDataPassword,
+                                                        age = item.ChildAge
+                                                    });
+                                                }
+                                            }
+                                            else
+                                            {
+                                                requestList.Add(new AddMultipleChildRequestModel
+                                                {
+                                                    username = item.ChildDataUserName,
+                                                    gender = item.ChildDataGender,
+                                                    image = item.ChildDataGender.Equals("Boy") ? "boy.png" : "girl.png",
+                                                    fullName = item.ChildDataName,
+                                                    password = item.ChildDataPassword,
+                                                    age = item.ChildAge
+                                                });
+                                            }
                                         }
+                                        // loop end
                                     }
 
+
                                     var addMultipleChildRequest = new AddMultipleChildRequest { ChildData = requestList };
-                                    var childResponse = await Helper.WebServices.AddMultipleChild("Bearer "+response.data.token, addMultipleChildRequest);
-                                    
+                                    var childResponse = await Helper.WebServices.AddMultipleChild("Bearer " + response.data.token, addMultipleChildRequest);
+
                                     Global.UserDetails = new UserDetails
                                     {
                                         UserName = response.data.fullName.ToLower().Trim(),
@@ -325,15 +345,77 @@ namespace DoAndGet
                                 }
                                 else
                                     DependencyService.Get<Toasts>().Show(response.message);
-
-
                             }
                             else
                                 DependencyService.Get<Toasts>().Show(imageResponce.message);
                         }
                         else
                         {
-                            DependencyService.Get<Toasts>().Show("Please upload the image");
+                            Helper.ShowLoader("Please wait");
+                            filename = "profile.png";
+                            var request = new ParentRegistationRequest { email = Email.ToLower().Trim(), gender = Gender, image = filename, fullName = UserName, password = Password };
+                            var response = await Helper.WebServices.ParentRegistation(request);
+                            if (response != null && !response.error)
+                            {
+                                var requestList = new List<AddMultipleChildRequestModel>();
+                                if (ChildDetailList != null)
+                                {
+                                    foreach (var item in ChildDetailList)
+                                    {
+                                        if (item.MediaFile != null)
+                                        {
+                                            var childImageResponse = await UploadImage(item.MediaFile);
+                                            if (!childImageResponse.error)
+                                            {
+                                                requestList.Add(new AddMultipleChildRequestModel
+                                                {
+                                                    username = item.ChildDataUserName,
+                                                    gender = item.ChildDataGender,
+                                                    image = childImageResponse.data.uploadedImageName,
+                                                    fullName = item.ChildDataName,
+                                                    password = item.ChildDataPassword,
+                                                    age = item.ChildAge
+                                                });
+                                            }
+                                        }
+                                        else
+                                        {
+                                            requestList.Add(new AddMultipleChildRequestModel
+                                            {
+                                                username = item.ChildDataUserName,
+                                                gender = item.ChildDataGender,
+                                                image = item.ChildDataGender.Equals("Boy") ? "boy.png" : "girl.png",
+                                                fullName = item.ChildDataName,
+                                                password = item.ChildDataPassword,
+                                                age = item.ChildAge
+                                            });
+                                        }
+                                    }
+                                    // loop end //
+                                }
+                                var addMultipleChildRequest = new AddMultipleChildRequest { ChildData = requestList };
+                                var childResponse = await Helper.WebServices.AddMultipleChild("Bearer " + response.data.token, addMultipleChildRequest);
+
+                                Global.UserDetails = new UserDetails
+                                {
+                                    UserName = response.data.fullName.ToLower().Trim(),
+                                    Email = response.data.email,
+                                    Token = response.data.token,
+                                    Gemder = response.data.gender,
+                                    Image = response.data.image,
+                                    IsParent = true
+                                };
+
+                                DB.Insert<UserDetails>(Global.UserDetails);
+                                DependencyService.Get<Toasts>().Show(response.message);
+                                var mainPage = new MainPage();
+                                Application.Current.MainPage = new NavigationPage(mainPage);
+                                NavigationPage.SetHasNavigationBar(mainPage, false);
+                                Helper.HideLoader();
+                            }
+                            else
+                                DependencyService.Get<Toasts>().Show(response.message);
+
                         }
                     }
                     catch (Exception ex)
@@ -394,12 +476,10 @@ namespace DoAndGet
                             try
                             {
 
-                                /*var a = ImageSource.FromFile(mediaFile.Path);
-                                var stream = mediaFile.GetStream();
-                                var bytes = GetByteArrayFromStream(stream);*/
-                                filename = Path.GetFileName(mediaFile.Path);
-                               // UploadImage(mediaFile);
                                
+                                filename = Path.GetFileName(mediaFile.Path);
+                                // UploadImage(mediaFile);
+
                                 ImageUploadedText = "Image uploaded";
                                 ImageTextColor = Color.Blue;
                             }
@@ -415,7 +495,7 @@ namespace DoAndGet
 
 
                             var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Plugin.Permissions.Abstractions.Permission.Storage);
-                            // var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync<StoragePermission>();
+                           
 
                             if (storageStatus != PermissionStatus.Granted)
                             {
@@ -442,11 +522,9 @@ namespace DoAndGet
                                     return;
                                 try
                                 {
-                                    /*var a = ImageSource.FromFile(mediaFile.Path);
-                                    var stream = mediaFile.GetStream();
-                                    var bytes = GetByteArrayFromStream(stream);*/
+                                   
                                     filename = Path.GetFileName(mediaFile.Path);
-                                  //  UploadImage(mediaFile);
+                                    //  UploadImage(mediaFile);
                                     ImageUploadedText = "Image uploaded";
                                     ImageTextColor = Color.Blue;
                                 }
@@ -463,10 +541,6 @@ namespace DoAndGet
 
                     }
                 });
-
-
-
-
             }
         }
 
@@ -497,13 +571,12 @@ namespace DoAndGet
             try
             {
                 var stream = file.GetStream();
-
                 imageResponce = await Helper.WebServices.UploadProfileImage(new StreamPart(stream, filename));
                 if (imageResponce != null)
                 {
                     return imageResponce;
                 }
-              
+
             }
             catch (Exception ex)
             {
@@ -513,6 +586,6 @@ namespace DoAndGet
         }
 
 
-       
+
     }
 }

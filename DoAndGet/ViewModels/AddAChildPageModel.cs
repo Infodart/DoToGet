@@ -104,7 +104,7 @@ namespace DoAndGet
 
         private async void AddChildCommandHandler(object obj)
         {
-            if (ChildName != null && ChildAge != null && UserName != null && Password != null && filename!=null )
+            if (ChildName != null && ChildAge != null && UserName != null && Password != null)
             {
 
                 Util.Password = Password;
@@ -117,19 +117,12 @@ namespace DoAndGet
              
 
             }
-            else
-            {
-                ImageUploadedText = "Please upload the image";
-                ImageTextColor = Color.Red;
-                UserDialogs.Instance.Alert("Please fill all the required details", "Alert", "OK");
-            }
+            
         }
 
         private async void GoBackCommandHandler(object obj)
         {
             await Application.Current.MainPage.Navigation.PopAsync();
-
-
         }
 
      
@@ -198,33 +191,14 @@ namespace DoAndGet
             }
         }
 
-        //public Command GotoAddaChildPage
-        //{
-        //    get
-        //    {
-        //        return new Command(async () =>
-        //        {
-                   
-        //            await Application.Current.MainPage.Navigation.PushAsync(new NavigationPage(new AddAChildPage()));
-        //        });
-        //    }
-
-
-        //}
+       
         public Command Gotonextpage
         {
             get
             {
                 return new Command(async () =>
                 {
-                    // var parentDashboardPage = new CustomFreshMasterDetailNavigationContainer("ParentDashboardPage");
-                    //parentDashboardPage.Init("Menu");
-                    //parentDashboardPage.AddPage<ItemsPageModel>("Home", null);
-                    //parentDashboardPage.AddPage<ReviewAndActivityPageModel>("Review Activity ", null);
-                    //parentDashboardPage.AddPage<HistoryPageModel>("History", null);
-                    //parentDashboardPage.AddPage<RewardsPageModel>("Rewards", null);
-                    //Application.Current.MainPage = parentDashboardPage;
-
+                   
                     var mainPage = new MainPage();
                     Application.Current.MainPage = new NavigationPage(mainPage);
                     NavigationPage.SetHasNavigationBar(mainPage, false);
@@ -323,12 +297,7 @@ namespace DoAndGet
 
                                 try
                                 {
-                                    //Profile.Image = ImageSource.FromFile(file.Path);
-                                    //var a = ImageSource.FromFile(mediaFile.Path);
-                                    //var stream = mediaFile.GetStream();
-                                    //var bytes = GetByteArrayFromStream(stream);
-
-
+                                  
                                     filename = Path.GetFileName(mediaFile.Path);
                                     ImageUploadedText = "Image uploaded";
                                     ImageTextColor = Color.Blue;
@@ -367,11 +336,7 @@ namespace DoAndGet
                                 }
 
 
-                                //var file = await Plugin.Media.CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions
-                                //{
-                                //    PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium
-                                //});
-
+                        
 
                                 mediaFile = await CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions
                                 {
@@ -382,12 +347,7 @@ namespace DoAndGet
                                     return;
                                 try
                                 {
-                                    //Profile.Image = ImageSource.FromFile(file.Path);
-                                    /*var a = ImageSource.FromFile(mediaFile.Path);
-                                    var stream = mediaFile.GetStream();
-                                    var bytes = GetByteArrayFromStream(stream);*/
-
-                                    // objImage.ImageName = "sample";
+                                   
                                      filename = Path.GetFileName(mediaFile.Path);
                                     ImageUploadedText = "Image uploaded";
                                     ImageTextColor = Color.Blue;
@@ -410,24 +370,13 @@ namespace DoAndGet
             }
         }
 
-        public byte[] GetByteArrayFromStream(Stream input)
-        {
-            byte[] buffer = new byte[16 * 1024];
-            using (MemoryStream ms = new MemoryStream())
-            {
-                int read;
-                while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
-                {
-                    ms.Write(buffer, 0, read);
-                }
-                return ms.ToArray();
-            }
-        }
+        #region PropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName]string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs((propertyName)));
         }
+        #endregion
     }
 }

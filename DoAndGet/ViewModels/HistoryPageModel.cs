@@ -30,8 +30,9 @@ namespace DoAndGet
         public HistoryPageModel()
         {
 
-            // GetData();
+           
         }
+        #region Calltoapi 
         public async void GetData()
         {
             try
@@ -45,21 +46,17 @@ namespace DoAndGet
 
                         getData.data.list.ForEach(x => { x.childId.image = getData.data.imageUrl + x.childId.image;
                             var ct = Convert.ToInt64(x.createdAt);
-                            var dt = FromUnixTime(ct);//1568965147);
+                            var dt = FromUnixTime(ct);
                             var createdTime = dt.ToString("hh:mm tt");
+                            x.createdAt = createdTime;
+                            x.DateTime = dt;
+                           
+                            x.dayofweek = dt.DayOfWeek.ToString();
                             x.createdAt = createdTime;
                         }) ;
 
-                        var listdata = getData.data.list.ToList().FindAll(x => x.status == 3);
-                        
-                        //listdata.ForEach(x =>
-                        //{
-                        //    var ct = Convert.ToInt64(x.createdAt);
-                        //    var dt = new DateTime(ct).ToString("hh:mm tt");
-                        //    x.createdAt = dt;
-
-                        //});
-
+                        var listdata = getData.data.list.ToList().FindAll(x => x.status == 3).OrderByDescending(x=>x.DateTime);
+                       
                         Data = new ObservableCollection<ChildList>(listdata);
 
                         Helper.HideLoader();
@@ -83,6 +80,7 @@ namespace DoAndGet
                 Helper.HideLoader();
             }
         }
+        #endregion
         public static DateTime FromUnixTime(long unixTime)
         {
             return epoch.AddMilliseconds(unixTime);

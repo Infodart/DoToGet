@@ -1,0 +1,63 @@
+﻿using System;
+using DoAndGet.Droid.Renderer;
+using DoAndGet.Renderer;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android;
+using static Android.Provider.Settings;
+
+[assembly: ExportRenderer(typeof(GradientView), typeof(GradientViewRenderer))]
+
+namespace DoAndGet.Droid.Renderer
+{
+    [Obsolete]
+    public class GradientViewRenderer : VisualElementRenderer<StackLayout>
+    {
+        private Color StartColor
+        {
+            get;
+            set;
+        }
+        private Color EndColor
+        {
+            get;
+            set;
+        }
+
+        protected override void DispatchDraw(global::Android.Graphics.Canvas canvas)
+        {
+           
+            //var gradient = new Android.Graphics.LinearGradient(0, 0, 0, Height,      
+           
+           
+            var gradient =new Android.Graphics.LinearGradient(0, 0, Width, 0, this.StartColor.ToAndroid(), this.EndColor.ToAndroid(),
+            Android.Graphics.Shader.TileMode.Mirror);
+            var paint = new Android.Graphics.Paint()
+            {
+                Dither = true,
+            };
+            paint.SetShader(gradient);
+            canvas.DrawPaint(paint);
+            base.DispatchDraw(canvas);
+        }
+        protected override void OnElementChanged(ElementChangedEventArgs<StackLayout> e)
+        {
+            base.OnElementChanged(e);
+            if (e.OldElement != null || Element == null)
+            {
+                return;
+            }
+            try
+            {
+                var stack = e.NewElement as GradientView;
+                this.StartColor = stack.StartColor;
+                this.EndColor = stack.EndColor;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine( "ERROR:", ex.Message);
+            }
+        }
+
+       
+    }
+}
